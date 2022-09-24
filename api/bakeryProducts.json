@@ -1,0 +1,771 @@
+{
+  "data": {
+    "products": {
+      "items": [
+        {
+          "sku": "068859",
+          "item_title": "Gluten Free Pumpkin Bread",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 26, "name": "Sweet Stuff", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20105/68859.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20105/68859.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20105/68859.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20105/68859.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/68859.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/68859.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20105/68859.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Gluten Free Pumpkin Bread\",\"srcOriginal\":\"/content/dam/trjo/products/m20105/68859.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 16,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 4.99,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "4.99",
+          "fun_tags": [
+            "Brunch All Day",
+            "Fall Faves",
+            "Family Style",
+            "Midday Snacks",
+            "Rise & Shine",
+            "Treat Yourself"
+          ],
+          "item_characteristics": ["Gluten Free", "Kosher"],
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "074619",
+          "item_title": "Gluten Free Pumpkin Streusel Muffins",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 26, "name": "Sweet Stuff", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20105/74619.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20105/74619.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20105/74619.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20105/74619.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/74619.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/74619.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20105/74619.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Trader Joe's Gluten Free Pumpkin Streusel Muffins\",\"srcOriginal\":\"/content/dam/trjo/products/m20105/74619.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 14,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 4.99,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "4.99",
+          "fun_tags": [
+            "Brunch All Day",
+            "Fall Faves",
+            "Midday Snacks",
+            "Rise & Shine",
+            "Stuff of Dreams",
+            "Treat Yourself"
+          ],
+          "item_characteristics": ["Gluten Free"],
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "064320",
+          "item_title": "Apple Cider Donuts",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 26, "name": "Sweet Stuff", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20105/64320.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20105/64320.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20105/64320.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20105/64320.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/64320.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/64320.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20105/64320.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Trader Joe's Apple Cider Donuts\",\"srcOriginal\":\"/content/dam/trjo/products/m20105/64320.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 15.9,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 4.49,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "4.49",
+          "fun_tags": [
+            "Alfresco Dining",
+            "Brunch All Day",
+            "Fall Faves",
+            "Family Style",
+            "Stuff of Dreams",
+            "Treat Yourself"
+          ],
+          "item_characteristics": ["Kosher"],
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "094235",
+          "item_title": "Cinnamon Coffee Cake",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 26, "name": "Sweet Stuff", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20105/94235.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20105/94235.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20105/94235.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20105/94235.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/94235.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/94235.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20105/94235.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Trader Joe's Cinnamon Coffee Cake\",\"srcOriginal\":\"/content/dam/trjo/products/m20105/94235.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 16,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 5.49,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "5.49",
+          "fun_tags": [
+            "Alfresco Dining",
+            "Brunch All Day",
+            "Rise & Shine",
+            "Treat Yourself"
+          ],
+          "item_characteristics": null,
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "054292",
+          "item_title": "Gluten Free White Sandwich Bread",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 14, "name": "Sliced Bread", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20101/54292.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20101/54292.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20101/54292.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20101/54292.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20101/54292.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20101/54292.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20101/54292.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Trader Joe's Gluten Free White Sandwich Bread\",\"srcOriginal\":\"/content/dam/trjo/products/m20101/54292.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 12,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 4.49,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "4.49",
+          "fun_tags": ["Family Style", "Yes!"],
+          "item_characteristics": ["Gluten Free", "Kosher"],
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "073564",
+          "item_title": "Vegan Brioche Loaf",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 14, "name": "Sliced Bread", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20101/73564.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20101/73564.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20101/73564.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20101/73564.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20101/73564.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20101/73564.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20101/73564.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Vegan Brioche Loaf\",\"srcOriginal\":\"/content/dam/trjo/products/m20101/73564.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 15,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 3.99,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "3.99",
+          "fun_tags": ["Brunch All Day", "Picnic", "Put An Egg On It"],
+          "item_characteristics": ["Vegan"],
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "095317",
+          "item_title": "Classic Hamburger Buns",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            {
+              "id": 17,
+              "name": "Loaves, Rolls, Buns",
+              "__typename": "CategoryTree"
+            }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20102/95317.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20102/95317.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20102/95317.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20102/95317.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20102/95317.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20102/95317.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20102/95317.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Trader Joe's Classic Hamburger Buns\",\"srcOriginal\":\"/content/dam/trjo/products/m20102/95317.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 16,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 2.79,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "2.49",
+          "fun_tags": ["Alfresco Dining", "Crack a Beer", "Fire Up The Grill"],
+          "item_characteristics": null,
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "061281",
+          "item_title": "Brookie",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 26, "name": "Sweet Stuff", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20105/61281.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20105/61281.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20105/61281.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20105/61281.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/61281.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/61281.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20105/61281.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Trader Joe's Brookie\",\"srcOriginal\":\"/content/dam/trjo/products/m20105/61281.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 11,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 4.49,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "4.49",
+          "fun_tags": ["Treat Yourself", "Yes!"],
+          "item_characteristics": ["Kosher"],
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "066433",
+          "item_title": "Brioche Hot Dog Buns",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            {
+              "id": 17,
+              "name": "Loaves, Rolls, Buns",
+              "__typename": "CategoryTree"
+            }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20102/66433.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20102/66433.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20102/66433.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20102/66433.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20102/66433.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20102/66433.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20102/66433.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Trader Joe's Brioche Hot Dog Buns\",\"srcOriginal\":\"/content/dam/trjo/products/m20102/66433.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 16,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 2.99,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "2.99",
+          "fun_tags": ["Alfresco Dining", "Fire Up The Grill", "Picnic"],
+          "item_characteristics": ["Kosher"],
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "061752",
+          "item_title": "Brioche Buns",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            {
+              "id": 17,
+              "name": "Loaves, Rolls, Buns",
+              "__typename": "CategoryTree"
+            }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20102/61752.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20102/61752.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20102/61752.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20102/61752.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20102/61752.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20102/61752.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20102/61752.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Trader Joe's Brioche Buns\",\"srcOriginal\":\"/content/dam/trjo/products/m20102/61752.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 9.45,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 3.99,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "3.99",
+          "fun_tags": ["Alfresco Dining", "Fire Up The Grill", "Picnic"],
+          "item_characteristics": null,
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "074143",
+          "item_title": "Sea Salt Brownie Bites",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 26, "name": "Sweet Stuff", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20105/74143.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20105/74143.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20105/74143.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20105/74143.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/74143.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/74143.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20105/74143.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Trader Joe's Sea Salt Brownies\",\"srcOriginal\":\"/content/dam/trjo/products/m20105/74143.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 6,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 2.99,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "2.99",
+          "fun_tags": ["Stuff of Dreams", "Treat Yourself"],
+          "item_characteristics": null,
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "074110",
+          "item_title": "Gluten Free Double Chocolate Muffins",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 26, "name": "Sweet Stuff", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20105/74110.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20105/74110.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20105/74110.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20105/74110.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/74110.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/74110.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20105/74110.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Trader Joe's Gluten Free Double Chocolate Muffins\",\"srcOriginal\":\"/content/dam/trjo/products/m20105/74110.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 14,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 4.99,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "4.99",
+          "fun_tags": [
+            "Alfresco Dining",
+            "Brunch All Day",
+            "Midday Snacks",
+            "Rise & Shine"
+          ],
+          "item_characteristics": ["Gluten Free"],
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "063164",
+          "item_title": "Gluten Free Everything Bagels",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 20, "name": "Bagels", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20103/63164.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20103/63164.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20103/63164.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20103/63164.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20103/63164.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20103/63164.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20103/63164.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Trader Joe's Gluten Fee Everything Bagels\",\"srcOriginal\":\"/content/dam/trjo/products/m20103/63164.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 14,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 4.49,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "4.49",
+          "fun_tags": ["Brunch All Day", "Put An Egg On It", "Rise & Shine"],
+          "item_characteristics": ["Gluten Free", "Kosher"],
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "070524",
+          "item_title": "Gluten Free Cinnamon Coffee Cake Muffins",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 26, "name": "Sweet Stuff", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20105/70524.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20105/70524.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20105/70524.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20105/70524.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/70524.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/70524.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20105/70524.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Gluten Free Cinnamon Coffee Cake Muffins\",\"srcOriginal\":\"/content/dam/trjo/products/m20105/70524.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 14,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 4.99,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "4.99",
+          "fun_tags": ["Brunch All Day", "Stuff of Dreams"],
+          "item_characteristics": ["Gluten Free"],
+          "__typename": "SimpleProduct"
+        },
+        {
+          "sku": "066144",
+          "item_title": "Gluten Free Pumpkin Bagels",
+          "category_hierarchy": [
+            { "id": 2, "name": "Products", "__typename": "CategoryTree" },
+            { "id": 8, "name": "Food", "__typename": "CategoryTree" },
+            { "id": 11, "name": "Bakery", "__typename": "CategoryTree" },
+            { "id": 20, "name": "Bagels", "__typename": "CategoryTree" }
+          ],
+          "primary_image": "/content/dam/trjo/products/m20103/66144.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20103/66144.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20103/66144.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20103/66144.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20103/66144.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20103/66144.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20103/66144.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Gluten Free Pumpkin Bagels\",\"srcOriginal\":\"/content/dam/trjo/products/m20103/66144.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "sales_size": 13,
+          "sales_uom_description": "Oz",
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 4.49,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "4.49",
+          "fun_tags": ["Brunch All Day", "Put An Egg On It", "Rise & Shine"],
+          "item_characteristics": ["Gluten Free", "Kosher"],
+          "__typename": "SimpleProduct"
+        }
+      ],
+      "total_count": 37,
+      "pageInfo": {
+        "currentPage": 1,
+        "totalPages": 3,
+        "__typename": "SearchResultPageInfo"
+      },
+      "aggregations": [
+        {
+          "attribute_code": "category_id",
+          "label": "Categories",
+          "count": 5,
+          "options": [
+            {
+              "label": "Sliced Bread",
+              "value": "14",
+              "count": 4,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Loaves, Rolls, Buns",
+              "value": "17",
+              "count": 11,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Bagels",
+              "value": "20",
+              "count": 3,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Tortillas & Flatbreads",
+              "value": "23",
+              "count": 3,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Sweet Stuff",
+              "value": "26",
+              "count": 16,
+              "__typename": "AggregationOption"
+            }
+          ],
+          "__typename": "Aggregation"
+        },
+        {
+          "attribute_code": "fun_tags",
+          "label": "fun_tags",
+          "count": 23,
+          "options": [
+            {
+              "label": "Brunch All Day",
+              "value": "Brunch All Day",
+              "count": 13,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Rise & Shine",
+              "value": "Rise & Shine",
+              "count": 11,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Treat Yourself",
+              "value": "Treat Yourself",
+              "count": 10,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Alfresco Dining",
+              "value": "Alfresco Dining",
+              "count": 8,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Family Style",
+              "value": "Family Style",
+              "count": 7,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Stuff of Dreams",
+              "value": "Stuff of Dreams",
+              "count": 6,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Put An Egg On It",
+              "value": "Put An Egg On It",
+              "count": 5,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Fall Faves",
+              "value": "Fall Faves",
+              "count": 4,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Fire Up The Grill",
+              "value": "Fire Up The Grill",
+              "count": 4,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Picnic",
+              "value": "Picnic",
+              "count": 4,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Cut The Mustard",
+              "value": "Cut The Mustard",
+              "count": 3,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Effortless Entertaining",
+              "value": "Effortless Entertaining",
+              "count": 3,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Midday Snacks",
+              "value": "Midday Snacks",
+              "count": 3,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Rain or Shine",
+              "value": "Rain or Shine",
+              "count": 3,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Desk Drawer",
+              "value": "Desk Drawer",
+              "count": 2,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Gild The Lily",
+              "value": "Gild The Lily",
+              "count": 2,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Yes!",
+              "value": "Yes!",
+              "count": 2,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Crack a Beer",
+              "value": "Crack a Beer",
+              "count": 1,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Feeling Fancy",
+              "value": "Feeling Fancy",
+              "count": 1,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Finger Food",
+              "value": "Finger Food",
+              "count": 1,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "In Lieu of Pizza",
+              "value": "In Lieu of Pizza",
+              "count": 1,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Merry-making",
+              "value": "Merry-making",
+              "count": 1,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Welcoming",
+              "value": "Welcoming",
+              "count": 1,
+              "__typename": "AggregationOption"
+            }
+          ],
+          "__typename": "Aggregation"
+        },
+        {
+          "attribute_code": "item_characteristics",
+          "label": "item_characteristics",
+          "count": 4,
+          "options": [
+            {
+              "label": "Kosher",
+              "value": "Kosher",
+              "count": 22,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Gluten Free",
+              "value": "Gluten Free",
+              "count": 9,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Organic",
+              "value": "Organic",
+              "count": 2,
+              "__typename": "AggregationOption"
+            },
+            {
+              "label": "Vegan",
+              "value": "Vegan",
+              "count": 2,
+              "__typename": "AggregationOption"
+            }
+          ],
+          "__typename": "Aggregation"
+        }
+      ],
+      "__typename": "Products"
+    }
+  }
+}

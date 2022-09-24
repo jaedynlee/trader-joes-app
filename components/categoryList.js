@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import categoryList from "../api/foodCategoryList.json";
 import { colors } from "../style.js";
+import { apiSettings } from "../config.js";
+import { getAllProducts } from "../client/client";
 
 const styles = StyleSheet.create({
   container: {
@@ -32,53 +34,62 @@ const styles = StyleSheet.create({
   },
 });
 
-const Item = ({ title }) => (
-  <Pressable
-    onPress={() => console.log("press")}
-    style={({ pressed }) => [
-      {
-        backgroundColor: pressed ? colors.GRAY : colors.WHITE,
-      },
-    ]}
-  >
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
-  </Pressable>
-);
+const Item = ({ id, title, navigation }) => {
+  return (
+    <Pressable
+      onPress={() => {
+        console.log(`press ${id}`);
+        navigation.navigate("Subcategory Grid", {
+          name: title,
+          categoryId: id,
+        });
+      }}
+      style={({ pressed }) => [
+        {
+          backgroundColor: pressed ? colors.GRAY : colors.WHITE,
+        },
+      ]}
+    >
+      <View style={styles.item}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+    </Pressable>
+  );
+};
 
-const CategoryList = () => {
-  // const categoryListResponse = fetch('https://www.traderjoes.com/api/graphql', {
-  //     method: 'POST',
-  //     headers: {
-  //         'Accept': 'application/json',
-  //         'Accept-Language': 'en-US,en;q=0.5',
-  //         'Accept-Encoding': 'gzip, deflate, br',
-  //         'content-type': 'application/json',
-  //         'TE': 'trailers'
-  //     },
-  //     body: JSON.stringify({
-  //         'variables': {},
-  //         'query': '{\n  categoryList(filters: {ids: {in: ["2"]}}) {\n    id\n    level\n    name\n    path\n    url_key\n    product_count\n    children {\n      id\n      level\n      name\n      path\n      url_key\n      product_count\n      children {\n        id\n        level\n        name\n        path\n        url_key\n        product_count\n        children {\n          id\n          level\n          name\n          path\n          url_key\n          product_count\n          children {\n            id\n            level\n            name\n            path\n            url_key\n            product_count\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n'
-  //     })
-  // })
-  // .then((response) => response.json())
-  // .then((jsonResponse) => {
-  //     console.log(jsonResponse)
-  //     return jsonResponse
-  // });
+const CategoryList = ({ navigation }) => {
+  const [products, setProducts] = useState([]);
 
-  const productCategories = categoryList.data.categoryList[0].children;
-  const sections = productCategories.map((category) => ({
-    title: category.name,
-    data: category.children,
-  }));
+  useEffect(() => {
+    if (apiSettings.DISABLE_TJ_API_REQUESTS) {
+      console.log("TJ API requests disabled-- using static resource");
+      const productCategories = categoryList.data.categoryList[0].children;
+      const sections = productCategories.map((category) => ({
+        title: category.name,
+        data: category.children,
+      }));
+      setProducts(sections);
+      return;
+    }
+
+    getAllProducts().then((response) => {
+      const productCategories = response.data.categoryList[0].children;
+      const sections = productCategories.map((category) => ({
+        title: category.name,
+        data: category.children,
+      }));
+      setProducts(sections);
+    });
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <SectionList
-        sections={sections}
+        sections={products}
         keyExtractor={({ id }) => id}
-        renderItem={({ item }) => <Item title={item.name} />}
+        renderItem={({ item }) => (
+          <Item id={item.id} title={item.name} navigation={navigation} />
+        )}
         renderSectionHeader={({ section: { title } }) => (
           <Text style={styles.header}>{title}</Text>
         )}
