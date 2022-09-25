@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   SafeAreaView,
   SectionList,
@@ -12,6 +11,7 @@ import categoryList from "../api/foodCategoryList.json";
 import { colors } from "../style.js";
 import { apiSettings } from "../config.js";
 import { getAllProducts } from "../client/client";
+import { BodyText, Header } from "./common/typography";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,14 +23,9 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   header: {
-    fontSize: 24,
-    fontWeight: "bold",
     backgroundColor: colors.GRAY,
     padding: 10,
     paddingLeft: 20,
-  },
-  title: {
-    fontSize: 18,
   },
 });
 
@@ -38,7 +33,6 @@ const Item = ({ id, title, navigation }) => {
   return (
     <Pressable
       onPress={() => {
-        console.log(`press ${id}`);
         navigation.navigate("Subcategory Grid", {
           name: title,
           categoryId: id,
@@ -51,7 +45,7 @@ const Item = ({ id, title, navigation }) => {
       ]}
     >
       <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
+        <BodyText>{title}</BodyText>
       </View>
     </Pressable>
   );
@@ -91,7 +85,7 @@ const CategoryList = ({ navigation }) => {
           <Item id={item.id} title={item.name} navigation={navigation} />
         )}
         renderSectionHeader={({ section: { title } }) => (
-          <Text style={styles.header}>{title}</Text>
+          <Header style={styles.header}>{title}</Header>
         )}
       />
     </SafeAreaView>

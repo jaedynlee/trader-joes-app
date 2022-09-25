@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   SafeAreaView,
   FlatList,
@@ -13,6 +12,7 @@ import { colors } from "../style.js";
 import { apiSettings } from "../config.js";
 import bakeryProducts from "../api/bakeryProducts.json";
 import { getProductsByCategory } from "../client/client";
+import { BodyText } from "./common/typography.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Item = ({ item }) => {
+const Item = ({ item, navigation }) => {
   const uri = `https://www.traderjoes.com${item.primary_image}`;
   const price = item.retail_price;
 
@@ -60,7 +60,12 @@ const Item = ({ item }) => {
 
   return (
     <Pressable
-      onPress={() => console.log("press")}
+      onPress={() =>
+        navigation.navigate("Product Details", {
+          name: item.item_title,
+          sku: item.sku,
+        })
+      }
       style={({ pressed }) => [
         {
           backgroundColor: pressed ? colors.GRAY : colors.WHITE,
@@ -79,10 +84,10 @@ const Item = ({ item }) => {
           />
         </View>
         <View style={styles.labelWrapper}>
-          <Text style={styles.nameLabel}>{item.item_title}</Text>
+          <BodyText style={styles.nameLabel}>{item.item_title}</BodyText>
           <View style={styles.pricePerLabelWrapper}>
-            <Text style={styles.priceLabel}>${price}</Text>
-            <Text style={styles.label}> / {amount}</Text>
+            <BodyText style={styles.priceLabel}>${price}</BodyText>
+            <BodyText style={styles.label}> / {amount}</BodyText>
           </View>
         </View>
       </View>
@@ -90,7 +95,7 @@ const Item = ({ item }) => {
   );
 };
 
-const SubcategoryGrid = ({ route }) => {
+const SubcategoryGrid = ({ route, navigation }) => {
   const { categoryId } = route.params;
 
   [products, setProducts] = useState([]);
@@ -119,7 +124,7 @@ const SubcategoryGrid = ({ route }) => {
               margin: 1,
             }}
           >
-            <Item item={item} />
+            <Item item={item} navigation={navigation} />
           </View>
         )}
         numColumns={2}

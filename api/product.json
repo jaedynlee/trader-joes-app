@@ -1,0 +1,307 @@
+{
+  "data": {
+    "products": {
+      "items": [
+        {
+          "category_hierarchy": [
+            {
+              "id": 2,
+              "url_key": "default-category",
+              "description": null,
+              "name": "Products",
+              "position": 1,
+              "level": 1,
+              "created_at": "2020-11-17 20:49:52",
+              "updated_at": "2021-02-18 08:22:08",
+              "product_count": 9,
+              "__typename": "CategoryTree"
+            },
+            {
+              "id": 8,
+              "url_key": "food",
+              "description": null,
+              "name": "Food",
+              "position": 2,
+              "level": 2,
+              "created_at": "2021-02-18 08:22:02",
+              "updated_at": "2021-02-25 09:03:46",
+              "product_count": 2,
+              "__typename": "CategoryTree"
+            },
+            {
+              "id": 11,
+              "url_key": "bakery",
+              "description": null,
+              "name": "Bakery",
+              "position": 1,
+              "level": 3,
+              "created_at": "2021-02-18 08:22:02",
+              "updated_at": "2021-02-19 16:20:10",
+              "product_count": 0,
+              "__typename": "CategoryTree"
+            },
+            {
+              "id": 26,
+              "url_key": "sweet-stuff",
+              "description": null,
+              "name": "Sweet Stuff",
+              "position": 5,
+              "level": 4,
+              "created_at": "2021-02-18 08:22:03",
+              "updated_at": "2021-12-23 23:55:46",
+              "product_count": 29,
+              "__typename": "CategoryTree"
+            }
+          ],
+          "item_story_marketing": "<p>Among the standard suite of seasonal fall treats, pumpkin bread is practically legendary. Usually prepared as a quick bread (meaning it uses a leavening agent other than yeast), a classic pumpkin bread is moist, slightly dense, and full of warm, homey spice to conjure the feelings of fall. This year, we\u2019re paying homage to this icon of caf\u00e9s and autumn bake sales with Trader Joe\u2019s Gluten Free Pumpkin Bread, a sweet, hearty loaf made with plenty of pumpkin (it\u2019s the first ingredient, in fact) and plenty of pumpkin spice, which just also happens to be gluten free, too.</p>\r\n<p>With its slightly cake-y texture and delightfully spiced flavor profile, this Gluten Free Pumpkin Bread makes for a great sweet snack any time of day, but we particularly like in a crisp autumn or winter morning with a cup of coffee or tea. Try it warmed, or even lightly toasted, with a pat of butter, some sweetened cream cheese, or a fall-inspired spread, like our Pumpkin Butter.</p>",
+          "product_label": "LIMITED",
+          "fun_tags": [
+            "Brunch All Day",
+            "Fall Faves",
+            "Family Style",
+            "Midday Snacks",
+            "Rise & Shine",
+            "Treat Yourself"
+          ],
+          "primary_image": "/content/dam/trjo/products/m20105/68859.png",
+          "primary_image_meta": {
+            "url": "/content/dam/trjo/products/m20105/68859.png",
+            "metadata": "{\"src\":\"/content/dam/trjo/products/m20105/68859.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"srcSet\":[{\"src\":\"/content/dam/trjo/products/m20105/68859.png/jcr:content/renditions/webp-640.webp\",\"media\":\"(max-width: 847px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/68859.png/jcr:content/renditions/webp-1280.webp\",\"media\":\"(min-width: 848px)\",\"type\":\"image/webp\"},{\"src\":\"/content/dam/trjo/products/m20105/68859.png/jcr:content/renditions/cq5dam.web.640.640\",\"media\":\"(max-width: 847px)\",\"type\":\"image/png\"},{\"src\":\"/content/dam/trjo/products/m20105/68859.png/jcr:content/renditions/cq5dam.web.1280.1280\",\"media\":\"(min-width: 848px)\",\"type\":\"image/png\"}],\"alt\":\"Gluten Free Pumpkin Bread\",\"srcOriginal\":\"/content/dam/trjo/products/m20105/68859.png\"}",
+            "__typename": "ImageWithMeta"
+          },
+          "other_images": [],
+          "other_images_meta": [],
+          "context_image": null,
+          "context_image_meta": null,
+          "published": 1,
+          "sku": "068859",
+          "url_key": "068859-hol-pastry-loaf-gluten-free-pumpkin",
+          "name": "HOL PASTRY LOAF GLUTEN FREE PUMPKIN",
+          "item_description": null,
+          "item_title": "Gluten Free Pumpkin Bread",
+          "item_characteristics": ["Gluten Free", "Kosher"],
+          "item_story_qil": "Among the standard suite of seasonal fall treats, pumpkin bread is practically legendary. Usually prepared as \na quick bread (meaning it uses a leavening agent other than yeast), a classic pumpkin bread is moist, slightly \ndense, and full of warm, homey spice to conjure the feelings of fall. This year, we're paying homage to this icon \nof caf\u00e9s and autumn bake sales with Trader Joe's Gluten Free Pumpkin Bread, a sweet, hearty loaf made with \nplenty of pumpkin (it's the first ingredient, in fact) and plenty of pumpkin spice, which just also happens to be \ngluten free, too.\n\nWith its slightly cake-y texture and delightfully spiced flavor profile, this Gluten Free Pumpkin Bread makes \nfor a great sweet snack any time of day, but we particularly like in a crisp autumn or winter morning with a cup \nof coffee or tea. Try it warmed, or even lightly toasted, with a pat of butter, some sweetened cream cheese, or \na fall-inspired spread, like our Pumpkin Butter [sku 06372]. Like the season itself, this Gluten Free Pumpkin \nBread won't be around forever, but while supplies last, you can find a 16-ounce loaf at Trader Joe's for $4.99*. \nLook for it on our bakery table. \n\n *Please check QIL to confirm current pricing.\n\nGluten Free Pumpkin Bread",
+          "use_and_demo": "serve with coffee or tea; lightly toast and spread with a little Pumpkin Butter",
+          "sales_size": 16,
+          "sales_uom_code": "179",
+          "sales_uom_description": "Oz",
+          "country_of_origin": "Product of USA",
+          "availability": "1",
+          "new_product": "0",
+          "promotion": null,
+          "price_range": {
+            "minimum_price": {
+              "final_price": {
+                "currency": "USD",
+                "value": 4.99,
+                "__typename": "Money"
+              },
+              "__typename": "ProductPrice"
+            },
+            "__typename": "PriceRange"
+          },
+          "retail_price": "4.99",
+          "nutrition": [
+            {
+              "display_sequence": 0,
+              "panel_id": 1,
+              "panel_title": "",
+              "serving_size": "2 oz (57g/ 1/8 loaf)",
+              "calories_per_serving": "190 ",
+              "servings_per_container": "Serves about 8",
+              "details": [
+                {
+                  "display_seq": 1,
+                  "nutritional_item": "Total Fat",
+                  "amount": "6 g",
+                  "percent_dv": ".08",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 2,
+                  "nutritional_item": "Saturated Fat",
+                  "amount": "0.5 g",
+                  "percent_dv": ".03",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 3,
+                  "nutritional_item": "Trans Fat",
+                  "amount": "0 g",
+                  "percent_dv": "",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 4,
+                  "nutritional_item": "Cholesterol",
+                  "amount": "40 mg",
+                  "percent_dv": ".13",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 5,
+                  "nutritional_item": "Sodium",
+                  "amount": "140 mg",
+                  "percent_dv": ".06",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 6,
+                  "nutritional_item": "Total Carbohydrate",
+                  "amount": "32 g",
+                  "percent_dv": ".12",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 7,
+                  "nutritional_item": "Dietary Fiber",
+                  "amount": "1 g",
+                  "percent_dv": ".04",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 8,
+                  "nutritional_item": "Total Sugars",
+                  "amount": "18 g",
+                  "percent_dv": "",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 9,
+                  "nutritional_item": "Includes",
+                  "amount": "17 g Added Sugars",
+                  "percent_dv": ".34",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 10,
+                  "nutritional_item": "Protein",
+                  "amount": "3 g",
+                  "percent_dv": "",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 11,
+                  "nutritional_item": "Vitamin D",
+                  "amount": "0.0 mcg",
+                  "percent_dv": "0",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 12,
+                  "nutritional_item": "Calcium",
+                  "amount": "20 mg",
+                  "percent_dv": ".02",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 13,
+                  "nutritional_item": "Iron",
+                  "amount": "0.9 mg",
+                  "percent_dv": ".06",
+                  "__typename": "NutritionDetails"
+                },
+                {
+                  "display_seq": 14,
+                  "nutritional_item": "Potassium",
+                  "amount": "200 mg",
+                  "percent_dv": ".04",
+                  "__typename": "NutritionDetails"
+                }
+              ],
+              "__typename": "NutritionAttribute"
+            }
+          ],
+          "ingredients": [
+            {
+              "display_sequence": 1,
+              "ingredient": "PUMPKIN PUREE",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 2,
+              "ingredient": "CANE SUGAR",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 3,
+              "ingredient": "EGGS",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 4,
+              "ingredient": "CHICKPEA FLOUR",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 5,
+              "ingredient": "STARCH AND FLOUR BLEND (MODIFIED TAPIOCA STARCH, RICE FLOUR, RICE STARCH)",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 6,
+              "ingredient": "CANOLA OIL",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 7,
+              "ingredient": "BROWN SUGAR",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 8,
+              "ingredient": "SPICES  (CINNAMON, NUTMEG, GINGER, ALLSPICE)",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 9,
+              "ingredient": "BAKING SODA",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 10,
+              "ingredient": "XANTHAN GUM",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 11,
+              "ingredient": "BAKING POWDER (SODIUM ACID PYROPHOSPHATE, SODIUM BICARBONATE, CORNSTARCH, MONOCALCIUM PHOSPHATE)",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 12,
+              "ingredient": "SALT",
+              "__typename": "IngredientsAttribute"
+            },
+            {
+              "display_sequence": 13,
+              "ingredient": "NATURAL FLAVORS.",
+              "__typename": "IngredientsAttribute"
+            }
+          ],
+          "allergens": [
+            {
+              "display_sequence": 1,
+              "ingredient": "CONTAINS EGG.",
+              "__typename": "IngredientsAttribute"
+            }
+          ],
+          "created_at": "2021-08-24 00:44:42",
+          "first_published_date": "2022-09-13 23:18:00",
+          "last_published_date": "2022-09-13 23:18:00",
+          "updated_at": "2022-09-20 11:16:41",
+          "related_products": [],
+          "__typename": "SimpleProduct"
+        }
+      ],
+      "total_count": 1,
+      "page_info": {
+        "current_page": 1,
+        "page_size": 20,
+        "total_pages": 1,
+        "__typename": "SearchResultPageInfo"
+      },
+      "__typename": "Products"
+    }
+  }
+}
