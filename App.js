@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import CategoryList from "./components/categoryList";
-import SubcategoryGrid from "./components/subcategoryGrid";
+import CategoryList from "./components/ProductsList/allProductsList";
+import SubcategoryGrid from "./components/ProductsList/subcategoryGrid";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { colors } from "./style";

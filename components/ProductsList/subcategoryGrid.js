@@ -8,11 +8,11 @@ import {
   StatusBar,
   Pressable,
 } from "react-native";
-import { colors } from "../style.js";
-import { apiSettings } from "../config.js";
-import bakeryProducts from "../api/bakeryProducts.json";
-import { getProductsByCategory } from "../client/client";
-import { BodyText } from "./common/typography.js";
+import { colors } from "../../style.js";
+import { apiSettings } from "../../config.js";
+import bakeryProducts from "../../api/bakeryProducts.json";
+import { getProductsByCategory } from "../../client/client";
+import { BodyText } from "../common/typography.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -98,7 +98,7 @@ const Item = ({ item, navigation }) => {
 const SubcategoryGrid = ({ route, navigation }) => {
   const { categoryId } = route.params;
 
-  [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     if (apiSettings.DISABLE_TJ_API_REQUESTS) {

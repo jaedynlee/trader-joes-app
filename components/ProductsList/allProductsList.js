@@ -7,11 +7,11 @@ import {
   StatusBar,
   Pressable,
 } from "react-native";
-import categoryList from "../api/foodCategoryList.json";
-import { colors } from "../style.js";
-import { apiSettings } from "../config.js";
-import { getAllProducts } from "../client/client";
-import { BodyText, Header } from "./common/typography";
+import categoryList from "../../api/foodCategoryList.json";
+import { colors } from "../../style.js";
+import { apiSettings } from "../../config.js";
+import { getAllProducts } from "../../client/client";
+import { BodyText, Header } from "../common/typography";
 
 const styles = StyleSheet.create({
   container: {
@@ -51,7 +51,7 @@ const Item = ({ id, title, navigation }) => {
   );
 };
 
-const CategoryList = ({ navigation }) => {
+const AllProductsList = ({ navigation }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -92,4 +92,4 @@ const CategoryList = ({ navigation }) => {
   );
 };
 
-export default CategoryList;
+export default AllProductsList;
