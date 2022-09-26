@@ -96,7 +96,7 @@ const ProductDetails = ({ route }) => {
             }}
           />
           <LegalText style={{ paddingTop: 10 }}>
-            NOTE: Since posting, the details of this item may have changed.
+            NOTE: The details of this item may have changed since posting.
             Contact your local Trader Joe's for current price and availability.
           </LegalText>
         </View>

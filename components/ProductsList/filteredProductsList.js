@@ -11,7 +11,7 @@ import {
 import { colors } from "../../style.js";
 import { apiSettings } from "../../config.js";
 import bakeryProducts from "../../api/bakeryProducts.json";
-import { getProductsByCategory } from "../../client/client";
+import { getProductsByCategory, searchProducts } from "../../client/client";
 import { BodyText } from "../common/typography.js";
 
 const styles = StyleSheet.create({
@@ -95,8 +95,8 @@ const Item = ({ item, navigation }) => {
   );
 };
 
-const SubcategoryGrid = ({ route, navigation }) => {
-  const { categoryId } = route.params;
+const FilteredProductsList = ({ route, navigation }) => {
+  const { searchTerm, categoryId } = route.params;
 
   const [products, setProducts] = useState([]);
 
@@ -107,9 +107,15 @@ const SubcategoryGrid = ({ route, navigation }) => {
       return;
     }
 
-    getProductsByCategory(categoryId).then((response) => {
-      setProducts(response.data.products.items);
-    });
+    if (searchTerm) {
+      searchProducts(searchTerm).then((response) =>
+        setProducts(response.data.products.items)
+      );
+    } else {
+      getProductsByCategory(categoryId).then((response) =>
+        setProducts(response.data.products.items)
+      );
+    }
   }, []);
 
   return (
@@ -134,4 +140,4 @@ const SubcategoryGrid = ({ route, navigation }) => {
   );
 };
 
-export default SubcategoryGrid;
+export default FilteredProductsList;

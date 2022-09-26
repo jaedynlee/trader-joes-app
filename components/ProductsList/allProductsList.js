@@ -12,11 +12,13 @@ import { colors } from "../../style.js";
 import { apiSettings } from "../../config.js";
 import { getAllProducts } from "../../client/client";
 import { BodyText, Header } from "../common/typography";
+import SearchBar from "./searchBar";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
+    backgroundColor: colors.WHITE,
   },
   item: {
     paddingVertical: 10,
@@ -33,7 +35,7 @@ const Item = ({ id, title, navigation }) => {
   return (
     <Pressable
       onPress={() => {
-        navigation.navigate("Subcategory Grid", {
+        navigation.navigate("Filtered Products List", {
           name: title,
           categoryId: id,
         });
@@ -78,6 +80,7 @@ const AllProductsList = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <SearchBar navigation={navigation} />
       <SectionList
         sections={products}
         keyExtractor={({ id }) => id}
