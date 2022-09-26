@@ -62,7 +62,7 @@ const AllProductsList = ({ navigation }) => {
       const productCategories = categoryList.data.categoryList[0].children;
       const sections = productCategories.map((category) => ({
         title: category.name,
-        data: category.children,
+        data: category.children.length ? category.children : [category],
       }));
       setProducts(sections);
       return;
@@ -72,7 +72,7 @@ const AllProductsList = ({ navigation }) => {
       const productCategories = response.data.categoryList[0].children;
       const sections = productCategories.map((category) => ({
         title: category.name,
-        data: category.children,
+        data: category.children.length ? category.children : [category],
       }));
       setProducts(sections);
     });

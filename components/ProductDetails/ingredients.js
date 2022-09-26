@@ -14,7 +14,7 @@ const Ingredients = ({ ingredients, allergens }) => {
     <View style={styles.container}>
       <CollapsibleDetails label="Ingredients">
         <BodyText>
-          {ingredients.map((i) => i.ingredient).join(", ")}
+          {ingredients.map((i) => i.ingredient).join(", ")}.
           <BodyText style={{ fontWeight: "bold" }}>
             {" "}
             {allergens && allergens.map((a) => a.ingredient.trim()).join("")}

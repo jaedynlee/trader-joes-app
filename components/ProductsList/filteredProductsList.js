@@ -105,11 +105,11 @@ const FilteredProductsList = ({ route, navigation }) => {
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [categoryOptions, setCategoryOptions] = useState([]);
 
-  const [characteristic, setCharacteristic] = useState([]);
+  const [characteristic, setCharacteristic] = useState(null);
   const [characteristicOpen, setCharacteristicOpen] = useState(false);
   const [characteristicOptions, setCharacteristicOptions] = useState([]);
 
-  const [funTag, setFunTag] = useState([]);
+  const [funTag, setFunTag] = useState(null);
   const [funTagOpen, setFunTagOpen] = useState(false);
   const [funTagOptions, setFunTagOptions] = useState([]);
 
@@ -143,7 +143,7 @@ const FilteredProductsList = ({ route, navigation }) => {
     cateoryAggregation &&
       setCategoryOptions([
         {
-          label: `All Categories (${products.total_count})`,
+          label: `All ${route.params.name} (${products.total_count})`,
           value: categoryId,
         },
         ...cateoryAggregation.options.map((o) =>
@@ -156,22 +156,30 @@ const FilteredProductsList = ({ route, navigation }) => {
     );
 
     characteristicAggregation &&
-      setCharacteristicOptions(
-        characteristicAggregation.options.map((o) =>
+      setCharacteristicOptions([
+        {
+          label: `All Characteristics`,
+          value: undefined,
+        },
+        ...characteristicAggregation.options.map((o) =>
           aggregationOptionToDropdownOption(o)
-        )
-      );
+        ),
+      ]);
 
     const funTagAggregation = aggregations.find(
       (a) => a.attribute_code === "fun_tags"
     );
 
     funTagAggregation &&
-      setFunTagOptions(
-        funTagAggregation.options.map((o) =>
+      setFunTagOptions([
+        {
+          label: `All Tags`,
+          value: undefined,
+        },
+        ...funTagAggregation.options.map((o) =>
           aggregationOptionToDropdownOption(o)
-        )
-      );
+        ),
+      ]);
   };
 
   useEffect(() => {
@@ -189,51 +197,90 @@ const FilteredProductsList = ({ route, navigation }) => {
       console.log(characteristic);
       getProducts(
         category,
-        characteristic.length ? characteristic : undefined,
-        funTag.length ? funTag : undefined
+        characteristic ? [characteristic] : undefined,
+        funTag ? [funTag] : undefined
       ).then((response) => setStates(response.data.products));
     }
   }, [category, characteristic, funTag]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <DropDownPicker
-        open={categoryOpen}
-        value={category}
-        items={categoryOptions}
-        setOpen={setCategoryOpen}
-        setValue={setCategory}
-        setItems={setCategoryOptions}
-        onOpen={onCategoryOpen}
-        zIndex={3000}
-        zIndexInverse={1000}
-      />
-      <DropDownPicker
-        multiple={true}
-        placeholder="Filter Characteristics"
-        open={characteristicOpen}
-        value={characteristic}
-        items={characteristicOptions}
-        setOpen={setCharacteristicOpen}
-        setValue={setCharacteristic}
-        setItems={setCharacteristicOptions}
-        onOpen={onCharacteristicOpen}
-        zIndex={2000}
-        zIndexInverse={2000}
-      />
-      <DropDownPicker
-        multiple={true}
-        placeholder="Filter Tags"
-        open={funTagOpen}
-        value={funTag}
-        items={funTagOptions}
-        setOpen={setFunTagOpen}
-        setValue={setFunTag}
-        setItems={setFunTagOptions}
-        onOpen={onFunTagOpen}
-        zIndex={1000}
-        zIndexInverse={3000}
-      />
+      {categoryOptions.length > 1 && (
+        <DropDownPicker
+          closeAfterSelecting={true}
+          open={categoryOpen}
+          value={category}
+          items={categoryOptions}
+          setOpen={setCategoryOpen}
+          setValue={setCategory}
+          setItems={setCategoryOptions}
+          onOpen={onCategoryOpen}
+          zIndex={3000}
+          zIndexInverse={1000}
+          labelStyle={{
+            fontSize: 16,
+          }}
+          listItemLabelStyle={{
+            fontSize: 16,
+          }}
+          style={{
+            borderWidth: 0,
+            borderBottomWidth: 1,
+          }}
+        />
+      )}
+      {(characteristic || characteristicOptions.length > 1) && (
+        <DropDownPicker
+          closeAfterSelecting={true}
+          placeholder="All Characteristics"
+          open={characteristicOpen}
+          value={characteristic}
+          items={characteristicOptions}
+          setOpen={setCharacteristicOpen}
+          setValue={setCharacteristic}
+          setItems={setCharacteristicOptions}
+          onOpen={onCharacteristicOpen}
+          zIndex={2000}
+          zIndexInverse={2000}
+          labelStyle={{
+            fontSize: 16,
+          }}
+          listItemLabelStyle={{
+            fontSize: 16,
+          }}
+          placeholderStyle={{ fontSize: 16 }}
+          style={{
+            borderWidth: 0,
+            borderBottomWidth: 1,
+          }}
+        />
+      )}
+      {(funTag || funTagOptions.length > 1) && (
+        <DropDownPicker
+          closeAfterSelecting={true}
+          placeholder="All Tags"
+          open={funTagOpen}
+          value={funTag}
+          items={funTagOptions}
+          setOpen={setFunTagOpen}
+          setValue={setFunTag}
+          setItems={setFunTagOptions}
+          onOpen={onFunTagOpen}
+          zIndex={1000}
+          zIndexInverse={3000}
+          labelStyle={{
+            fontSize: 16,
+          }}
+          listItemLabelStyle={{
+            fontSize: 16,
+          }}
+          placeholderStyle={{ fontSize: 16 }}
+          style={{
+            borderWidth: 0,
+            borderBottomWidth: 1,
+          }}
+        />
+      )}
       <FlatList
         data={products}
         renderItem={({ item }) => (
