@@ -17,15 +17,22 @@ const styles = StyleSheet.create({
     minHeight: 24,
     alignItems: "center",
   },
+  bold: {
+    fontWeight: "bold",
+  },
 });
 
 const Nutrition = ({ nutrition }) => {
   return (
     <View style={styles.container}>
       <CollapsibleDetails label="Nutrition Facts">
-        <BodyText>Serving size: {nutrition.serving_size}</BodyText>
         <BodyText>
-          Calories per serving: {nutrition.calories_per_serving}
+          <BodyText style={styles.bold}>Serving size:</BodyText>{" "}
+          {nutrition.serving_size}
+        </BodyText>
+        <BodyText>
+          <BodyText style={styles.bold}>Calories per serving:</BodyText>{" "}
+          {nutrition.calories_per_serving}
         </BodyText>
 
         <View style={styles.tableWrapper}>

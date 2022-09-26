@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -11,8 +11,9 @@ import {
 import { colors } from "../../style.js";
 import { apiSettings } from "../../config.js";
 import bakeryProducts from "../../api/bakeryProducts.json";
-import { getProductsByCategory, searchProducts } from "../../client/client";
+import { getProducts, searchProducts } from "../../client/client";
 import { BodyText } from "../common/typography.js";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const styles = StyleSheet.create({
   container: {
@@ -100,26 +101,139 @@ const FilteredProductsList = ({ route, navigation }) => {
 
   const [products, setProducts] = useState([]);
 
+  const [category, setCategory] = useState(categoryId);
+  const [categoryOpen, setCategoryOpen] = useState(false);
+  const [categoryOptions, setCategoryOptions] = useState([]);
+
+  const [characteristic, setCharacteristic] = useState([]);
+  const [characteristicOpen, setCharacteristicOpen] = useState(false);
+  const [characteristicOptions, setCharacteristicOptions] = useState([]);
+
+  const [funTag, setFunTag] = useState([]);
+  const [funTagOpen, setFunTagOpen] = useState(false);
+  const [funTagOptions, setFunTagOptions] = useState([]);
+
+  const onCategoryOpen = useCallback(() => {
+    setCharacteristicOpen(false);
+    setFunTagOpen(false);
+  }, []);
+
+  const onCharacteristicOpen = useCallback(() => {
+    setCategoryOpen(false);
+    setFunTagOpen(false);
+  }, []);
+
+  const onFunTagOpen = useCallback(() => {
+    setCategoryOpen(false);
+    setCharacteristicOpen(false);
+  }, []);
+
+  const aggregationOptionToDropdownOption = (o) => ({
+    label: `${o.label} (${o.count})`,
+    value: o.value,
+  });
+
+  const setStates = (products) => {
+    setProducts(products.items);
+    const aggregations = products.aggregations;
+
+    const cateoryAggregation = aggregations.find(
+      (a) => a.attribute_code === "category_id"
+    );
+    cateoryAggregation &&
+      setCategoryOptions([
+        {
+          label: `All Categories (${products.total_count})`,
+          value: categoryId,
+        },
+        ...cateoryAggregation.options.map((o) =>
+          aggregationOptionToDropdownOption(o)
+        ),
+      ]);
+
+    const characteristicAggregation = aggregations.find(
+      (a) => a.attribute_code === "item_characteristics"
+    );
+
+    characteristicAggregation &&
+      setCharacteristicOptions(
+        characteristicAggregation.options.map((o) =>
+          aggregationOptionToDropdownOption(o)
+        )
+      );
+
+    const funTagAggregation = aggregations.find(
+      (a) => a.attribute_code === "fun_tags"
+    );
+
+    funTagAggregation &&
+      setFunTagOptions(
+        funTagAggregation.options.map((o) =>
+          aggregationOptionToDropdownOption(o)
+        )
+      );
+  };
+
   useEffect(() => {
     if (apiSettings.DISABLE_TJ_API_REQUESTS) {
       console.log("TJ API requests disabled-- using static resource");
-      setProducts(bakeryProducts.data.products.items);
+      setStates(bakeryProducts.data.products);
       return;
     }
 
     if (searchTerm) {
       searchProducts(searchTerm).then((response) =>
-        setProducts(response.data.products.items)
+        setStates(response.data.products)
       );
     } else {
-      getProductsByCategory(categoryId).then((response) =>
-        setProducts(response.data.products.items)
-      );
+      console.log(characteristic);
+      getProducts(
+        category,
+        characteristic.length ? characteristic : undefined,
+        funTag.length ? funTag : undefined
+      ).then((response) => setStates(response.data.products));
     }
-  }, []);
+  }, [category, characteristic, funTag]);
 
   return (
     <SafeAreaView style={styles.container}>
+      <DropDownPicker
+        open={categoryOpen}
+        value={category}
+        items={categoryOptions}
+        setOpen={setCategoryOpen}
+        setValue={setCategory}
+        setItems={setCategoryOptions}
+        onOpen={onCategoryOpen}
+        zIndex={3000}
+        zIndexInverse={1000}
+      />
+      <DropDownPicker
+        multiple={true}
+        placeholder="Filter Characteristics"
+        open={characteristicOpen}
+        value={characteristic}
+        items={characteristicOptions}
+        setOpen={setCharacteristicOpen}
+        setValue={setCharacteristic}
+        setItems={setCharacteristicOptions}
+        onOpen={onCharacteristicOpen}
+        zIndex={2000}
+        zIndexInverse={2000}
+      />
+      <DropDownPicker
+        multiple={true}
+        placeholder="Filter Tags"
+        open={funTagOpen}
+        value={funTag}
+        items={funTagOptions}
+        setOpen={setFunTagOpen}
+        setValue={setFunTag}
+        setItems={setFunTagOptions}
+        onOpen={onFunTagOpen}
+        zIndex={1000}
+        zIndexInverse={3000}
+      />
       <FlatList
         data={products}
         renderItem={({ item }) => (
