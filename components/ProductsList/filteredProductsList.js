@@ -131,6 +131,7 @@ const FilteredProductsList = ({ route, navigation }) => {
   const aggregationOptionToDropdownOption = (o) => ({
     label: `${o.label} (${o.count})`,
     value: o.value,
+    key: o.label,
   });
 
   const setStates = (products) => {
@@ -145,6 +146,7 @@ const FilteredProductsList = ({ route, navigation }) => {
         {
           label: `All ${route.params.name} (${products.total_count})`,
           value: categoryId,
+          key: "all",
         },
         ...cateoryAggregation.options.map((o) =>
           aggregationOptionToDropdownOption(o)
@@ -160,6 +162,7 @@ const FilteredProductsList = ({ route, navigation }) => {
         {
           label: `All Characteristics`,
           value: undefined,
+          key: "all",
         },
         ...characteristicAggregation.options.map((o) =>
           aggregationOptionToDropdownOption(o)
@@ -175,6 +178,7 @@ const FilteredProductsList = ({ route, navigation }) => {
         {
           label: `All Tags`,
           value: undefined,
+          key: "all",
         },
         ...funTagAggregation.options.map((o) =>
           aggregationOptionToDropdownOption(o)
