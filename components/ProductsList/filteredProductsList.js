@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import {
   StyleSheet,
   View,
@@ -99,6 +99,10 @@ const Item = ({ item, navigation }) => {
 const FilteredProductsList = ({ route, navigation }) => {
   const { searchTerm, categoryId } = route.params;
 
+  const [shouldFetch, setShouldFetch] = useState(true);
+  const page = useRef(1);
+  const totalPages = useRef(undefined);
+
   const [products, setProducts] = useState([]);
 
   const [category, setCategory] = useState(categoryId);
@@ -129,13 +133,18 @@ const FilteredProductsList = ({ route, navigation }) => {
   }, []);
 
   const aggregationOptionToDropdownOption = (o) => ({
-    label: `${o.label} (${o.count})`,
+    label: o.label,
     value: o.value,
     key: o.label,
   });
 
   const setStates = (products) => {
+    console.log(`resetting products: ${products.items.length}`);
     setProducts(products.items);
+    console.log(`Setting total pages to ${products.pageInfo.totalPages}`);
+    totalPages.current = products.pageInfo.totalPages;
+    console.log("shouldfetch is false");
+    setShouldFetch(false);
     const aggregations = products.aggregations;
 
     const cateoryAggregation = aggregations.find(
@@ -144,7 +153,7 @@ const FilteredProductsList = ({ route, navigation }) => {
     cateoryAggregation &&
       setCategoryOptions([
         {
-          label: `All ${route.params.name} (${products.total_count})`,
+          label: `All ${route.params.name}`,
           value: categoryId,
           key: "all",
         },
@@ -193,20 +202,59 @@ const FilteredProductsList = ({ route, navigation }) => {
       return;
     }
 
+    // Start at first page when new filter is applied
+    page.current = 1;
+
     if (searchTerm) {
       searchProducts(searchTerm).then((response) =>
         setStates(response.data.products)
       );
     } else {
-      console.log(characteristic);
       getProducts(
         category,
+        page.current,
         characteristic ? [characteristic] : undefined,
         funTag ? [funTag] : undefined
       ).then((response) => setStates(response.data.products));
     }
   }, [category, characteristic, funTag]);
 
+  useEffect(() => {
+    console.log("shouldFetch changed states");
+    if (!shouldFetch || page.current === totalPages.current) {
+      console.log("not fetching any more");
+      return;
+    }
+
+    // Fetch the next page
+    page.current = page.current + 1;
+
+    console.log(`fetching page ${page.current}`);
+    if (searchTerm) {
+      searchProducts(searchTerm).then((response) =>
+        setProducts((oldProducts) => [
+          ...oldProducts.at,
+          ...response.data.products.items,
+        ])
+      );
+    } else {
+      getProducts(
+        category,
+        page.current,
+        characteristic ? [characteristic] : undefined,
+        funTag ? [funTag] : undefined
+      ).then((response) =>
+        setProducts((oldProducts) => [
+          ...oldProducts,
+          ...response.data.products.items,
+        ])
+      );
+    }
+    console.log("shouldFetch is false");
+    setShouldFetch(false);
+  }, [shouldFetch]);
+
+  console.log("RERENDER");
   return (
     <SafeAreaView style={styles.container}>
       {categoryOptions.length > 1 && (
@@ -299,7 +347,12 @@ const FilteredProductsList = ({ route, navigation }) => {
           </View>
         )}
         numColumns={2}
-        keyExtractor={(item) => item.sku}
+        keyExtractor={(item, index) => `${item.sku}-${index}`}
+        onEndReachedThreshold={0.5}
+        onEndReached={() => {
+          console.log("shouldFetch is true");
+          setShouldFetch(true);
+        }}
       />
     </SafeAreaView>
   );
