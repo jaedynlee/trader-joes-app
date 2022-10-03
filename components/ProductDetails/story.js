@@ -20,7 +20,10 @@ const ProductSummary = ({ summary }) => {
     .replace(/<p>/g, "")
     .replace(/<strong>/g, "")
     .replace(/<\/strong>/g, "")
+    .replace(/<em>/g, "")
+    .replace(/<\/em>/g, "")
     .replace(/&amp;/g, "&")
+    .replace(/&deg;/g, "º")
     .replace(/<\/p>/g, "\n")
     .replace(/<br \/>/g, "\n")
     .trim();
