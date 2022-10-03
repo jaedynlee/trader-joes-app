@@ -7,6 +7,7 @@ import {
   Image,
   StatusBar,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 import { colors } from "../../style.js";
 import { apiSettings } from "../../config.js";
@@ -102,6 +103,7 @@ const FilteredProductsList = ({ route, navigation }) => {
   const flatListRef = useRef();
 
   const [shouldFetch, setShouldFetch] = useState(true);
+  const [fetchedAllPages, setFetchedAllPages] = useState(false);
   const page = useRef(1);
   const totalPages = useRef(undefined);
 
@@ -201,6 +203,7 @@ const FilteredProductsList = ({ route, navigation }) => {
 
   useEffect(() => {
     setLoading(true);
+    setProducts([]);
     if (apiSettings.DISABLE_TJ_API_REQUESTS) {
       console.log("TJ API requests disabled-- using static resource");
       setStates(bakeryProducts.data.products);
@@ -225,7 +228,11 @@ const FilteredProductsList = ({ route, navigation }) => {
   }, [category, characteristic, funTag]);
 
   useEffect(() => {
-    if (!shouldFetch || page.current === totalPages.current) {
+    if (!shouldFetch || fetchedAllPages) {
+      return;
+    }
+    if (page.current === totalPages.current) {
+      setFetchedAllPages(true);
       return;
     }
 
@@ -349,14 +356,37 @@ const FilteredProductsList = ({ route, navigation }) => {
         )}
         numColumns={2}
         keyExtractor={(item, index) => `${item.sku}-${index}`}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={1}
         onEndReached={() => {
           setShouldFetch(true);
         }}
         ListEmptyComponent={() => (
-          <BodyText>
-            {loading ? "Loading..." : "There's nothing here!"}
-          </BodyText>
+          <View
+            style={{
+              flex: 1,
+              marginTop: 240,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {loading ? (
+              <ActivityIndicator
+                size="large"
+                animating={true}
+                style={{ flex: 1, alignSelf: "center" }}
+              />
+            ) : (
+              <BodyText style={{ flex: 1, alignSelf: "center" }}>
+                "There's nothing here!"
+              </BodyText>
+            )}
+          </View>
+        )}
+        ListFooterComponent={() => (
+          <ActivityIndicator
+            size="large"
+            animating={products.length && !fetchedAllPages}
+          />
         )}
       />
     </SafeAreaView>
