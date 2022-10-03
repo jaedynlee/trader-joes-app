@@ -99,11 +99,14 @@ const Item = ({ item, navigation }) => {
 const FilteredProductsList = ({ route, navigation }) => {
   const { searchTerm, categoryId } = route.params;
 
+  const flatListRef = useRef();
+
   const [shouldFetch, setShouldFetch] = useState(true);
   const page = useRef(1);
   const totalPages = useRef(undefined);
 
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [category, setCategory] = useState(categoryId);
   const [categoryOpen, setCategoryOpen] = useState(false);
@@ -139,11 +142,8 @@ const FilteredProductsList = ({ route, navigation }) => {
   });
 
   const setStates = (products) => {
-    console.log(`resetting products: ${products.items.length}`);
     setProducts(products.items);
-    console.log(`Setting total pages to ${products.pageInfo.totalPages}`);
     totalPages.current = products.pageInfo.totalPages;
-    console.log("shouldfetch is false");
     setShouldFetch(false);
     const aggregations = products.aggregations;
 
@@ -193,9 +193,14 @@ const FilteredProductsList = ({ route, navigation }) => {
           aggregationOptionToDropdownOption(o)
         ),
       ]);
+
+    //   Go to beginning of list
+    flatListRef.current.scrollToIndex({ animated: true, index: 0 });
+    setLoading(false);
   };
 
   useEffect(() => {
+    setLoading(true);
     if (apiSettings.DISABLE_TJ_API_REQUESTS) {
       console.log("TJ API requests disabled-- using static resource");
       setStates(bakeryProducts.data.products);
@@ -220,16 +225,13 @@ const FilteredProductsList = ({ route, navigation }) => {
   }, [category, characteristic, funTag]);
 
   useEffect(() => {
-    console.log("shouldFetch changed states");
     if (!shouldFetch || page.current === totalPages.current) {
-      console.log("not fetching any more");
       return;
     }
 
     // Fetch the next page
     page.current = page.current + 1;
 
-    console.log(`fetching page ${page.current}`);
     if (searchTerm) {
       searchProducts(searchTerm).then((response) =>
         setProducts((oldProducts) => [
@@ -250,11 +252,9 @@ const FilteredProductsList = ({ route, navigation }) => {
         ])
       );
     }
-    console.log("shouldFetch is false");
     setShouldFetch(false);
   }, [shouldFetch]);
 
-  console.log("RERENDER");
   return (
     <SafeAreaView style={styles.container}>
       {categoryOptions.length > 1 && (
@@ -334,6 +334,7 @@ const FilteredProductsList = ({ route, navigation }) => {
         />
       )}
       <FlatList
+        ref={flatListRef}
         data={products}
         renderItem={({ item }) => (
           <View
@@ -350,9 +351,13 @@ const FilteredProductsList = ({ route, navigation }) => {
         keyExtractor={(item, index) => `${item.sku}-${index}`}
         onEndReachedThreshold={0.5}
         onEndReached={() => {
-          console.log("shouldFetch is true");
           setShouldFetch(true);
         }}
+        ListEmptyComponent={() => (
+          <BodyText>
+            {loading ? "Loading..." : "There's nothing here!"}
+          </BodyText>
+        )}
       />
     </SafeAreaView>
   );
