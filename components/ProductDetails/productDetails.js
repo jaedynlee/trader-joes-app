@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Image,
-  Text,
+  ActivityIndicator,
   SafeAreaView,
   View,
   ScrollView,
@@ -54,7 +54,13 @@ const ProductDetails = ({ route }) => {
   }, []);
 
   if (!product) {
-    return <Text>Loading...</Text>;
+    return (
+      <ActivityIndicator
+        size="large"
+        animating={true}
+        style={{ flex: 1, alignSelf: "center" }}
+      />
+    );
   }
 
   return (

@@ -7,6 +7,11 @@ import {
   View,
 } from "react-native";
 import { Header } from "../common/typography.js";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import {
+  faChevronDown,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 if (
   Platform.OS === "android" &&
@@ -26,9 +31,22 @@ const CollapsibleDetails = ({ label, children }) => {
           setExpanded(!expanded);
         }}
       >
-        <Header>
-          {label} {expanded ? "v" : ">"}
-        </Header>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Header>{label}</Header>
+          {expanded ? (
+            <FontAwesomeIcon
+              icon={faChevronDown}
+              size={20}
+              style={{ paddingLeft: 30 }}
+            />
+          ) : (
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              size={20}
+              style={{ paddingLeft: 30 }}
+            />
+          )}
+        </View>
       </Pressable>
       {expanded && children}
     </View>
