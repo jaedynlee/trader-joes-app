@@ -12,7 +12,7 @@ import {
 import { colors } from "../../style.js";
 import { apiSettings } from "../../config.js";
 import bakeryProducts from "../../api/bakeryProducts.json";
-import { getProducts, searchProducts } from "../../client/client";
+import { getProducts } from "../../client/client";
 import { BodyText } from "../common/typography.js";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -110,7 +110,7 @@ const FilteredProductsList = ({ route, navigation }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [category, setCategory] = useState(categoryId);
+  const [category, setCategory] = useState(categoryId ?? "all");
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [categoryOptions, setCategoryOptions] = useState([]);
 
@@ -144,8 +144,8 @@ const FilteredProductsList = ({ route, navigation }) => {
   });
 
   const setStates = (products) => {
-    setProducts(products.items);
-    totalPages.current = products.pageInfo.totalPages;
+    setProducts(products.items ?? []);
+    totalPages.current = products.page_info.total_pages;
     setShouldFetch(false);
     const aggregations = products.aggregations;
 
@@ -155,8 +155,8 @@ const FilteredProductsList = ({ route, navigation }) => {
     cateoryAggregation &&
       setCategoryOptions([
         {
-          label: `All ${route.params.name}`,
-          value: categoryId,
+          label: categoryId ? `All ${route.params.name}` : "All Categories",
+          value: categoryId ?? "all",
           key: "all",
         },
         ...cateoryAggregation.options.map((o) =>
@@ -213,18 +213,13 @@ const FilteredProductsList = ({ route, navigation }) => {
     // Start at first page when new filter is applied
     page.current = 1;
 
-    if (searchTerm) {
-      searchProducts(searchTerm).then((response) =>
-        setStates(response.data.products)
-      );
-    } else {
-      getProducts(
-        category,
-        page.current,
-        characteristic ? [characteristic] : undefined,
-        funTag ? [funTag] : undefined
-      ).then((response) => setStates(response.data.products));
-    }
+    getProducts(
+      category === "all" ? undefined : category,
+      page.current,
+      searchTerm,
+      characteristic ? [characteristic] : undefined,
+      funTag ? [funTag] : undefined
+    ).then((response) => setStates(response.data.products));
   }, [category, characteristic, funTag]);
 
   useEffect(() => {
@@ -239,26 +234,18 @@ const FilteredProductsList = ({ route, navigation }) => {
     // Fetch the next page
     page.current = page.current + 1;
 
-    if (searchTerm) {
-      searchProducts(searchTerm).then((response) =>
-        setProducts((oldProducts) => [
-          ...oldProducts.at,
-          ...response.data.products.items,
-        ])
-      );
-    } else {
-      getProducts(
-        category,
-        page.current,
-        characteristic ? [characteristic] : undefined,
-        funTag ? [funTag] : undefined
-      ).then((response) =>
-        setProducts((oldProducts) => [
-          ...oldProducts,
-          ...response.data.products.items,
-        ])
-      );
-    }
+    getProducts(
+      category === "all" ? undefined : category,
+      page.current,
+      searchTerm,
+      characteristic ? [characteristic] : undefined,
+      funTag ? [funTag] : undefined
+    ).then((response) =>
+      setProducts((oldProducts) => [
+        ...oldProducts,
+        ...response.data.products.items,
+      ])
+    );
     setShouldFetch(false);
   }, [shouldFetch]);
 
@@ -267,6 +254,7 @@ const FilteredProductsList = ({ route, navigation }) => {
       {categoryOptions.length > 1 && (
         <DropDownPicker
           closeAfterSelecting={true}
+          placeholder="All Categories"
           open={categoryOpen}
           value={category}
           items={categoryOptions}
