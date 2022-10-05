@@ -56,9 +56,54 @@ const productListItems = `
   }\n
 `;
 
-const searchProductsQuery = () => `
-
-`;
+export const getNearbyStores = (zipCode) =>
+  fetch("https://alphaapi.brandify.com/rest/locatorsearch", {
+    method: "POST",
+    headers: {
+      // "User-Agent":
+      //   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0",
+      Accept: "application/json, text/plain, */*",
+      "Accept-Language": "en-US,en;q=0.5",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Content-Type": "application/json;charset=utf-8",
+      // Origin: "https://www.traderjoes.com",
+      // Connection: "keep-alive",
+      // Referer: "https://www.traderjoes.com/",
+      // "Sec-Fetch-Dest": "empty",
+      // "Sec-Fetch-Mode": "cors",
+      // "Sec-Fetch-Site": "cross-site",
+      // TE: "trailers",
+    },
+    body: JSON.stringify({
+      request: {
+        appkey: "8BC3433A-60FC-11E3-991D-B2EE0C70A832",
+        formdata: {
+          geoip: false,
+          dataview: "store_default",
+          limit: 4,
+          geolocs: {
+            geoloc: [
+              {
+                addressline: zipCode,
+                country: "US",
+                latitude: "",
+                longitude: "",
+              },
+            ],
+          },
+          searchradius: "500",
+          where: {
+            warehouse: {
+              distinctfrom: "1",
+            },
+          },
+          false: "0",
+        },
+      },
+    }),
+  })
+    .then((response) => response.json())
+    .then((jsonResponse) => jsonResponse.response);
 
 export const getAllProducts = () =>
   fetch("https://www.traderjoes.com/api/graphql", {

@@ -13,6 +13,10 @@ import { apiSettings } from "../../config.js";
 import { getAllProducts } from "../../client/client";
 import { BodyText, Header } from "../common/typography";
 import SearchBar from "./searchBar";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { getLocation } from "../../storage";
+import StoreSelectorModal from "./storeSelectorModal";
 
 const styles = StyleSheet.create({
   container: {
@@ -55,6 +59,9 @@ const Item = ({ id, title, navigation }) => {
 
 const AllProductsList = ({ navigation }) => {
   const [products, setProducts] = useState([]);
+  const [location, setLocation] = useState();
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     if (apiSettings.DISABLE_TJ_API_REQUESTS) {
@@ -76,11 +83,25 @@ const AllProductsList = ({ navigation }) => {
       }));
       setProducts(sections);
     });
+
+    getLocation().then((location) => setLocation(location));
   }, []);
+
+  useEffect(() => {
+    if (modalVisible) {
+      return;
+    }
+
+    getLocation().then((location) => setLocation(location));
+  }, [modalVisible]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBar navigation={navigation} />
+      <StoreSelectorModal
+        visible={modalVisible}
+        setModalVisible={setModalVisible}
+        selectedLocation={location}
+      />
       <SectionList
         sections={products}
         keyExtractor={({ id }) => id}
@@ -89,6 +110,34 @@ const AllProductsList = ({ navigation }) => {
         )}
         renderSectionHeader={({ section: { title } }) => (
           <Header style={styles.header}>{title}</Header>
+        )}
+        ListHeaderComponent={() => (
+          <View style={{ padding: 10 }}>
+            <Pressable
+              onPress={() => setModalVisible(true)}
+              style={{
+                flexDirection: "row",
+                color: colors.RED,
+                marginBottom: 10,
+              }}
+            >
+              <FontAwesomeIcon icon={faLocationDot} color={colors.RED} />
+              <BodyText style={{ color: colors.RED }}>
+                {" "}
+                {location ? location.name : "Set your store"}
+              </BodyText>
+            </Pressable>
+            <SearchBar
+              placeholder="Search all products"
+              onEndEditing={(text) =>
+                text &&
+                navigation.navigate("Filtered Products List", {
+                  name: `Results for "${text.trim()}"`,
+                  searchTerm: text.trim(),
+                })
+              }
+            />
+          </View>
         )}
       />
     </SafeAreaView>

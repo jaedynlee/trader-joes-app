@@ -1,25 +1,36 @@
+import { faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React from "react";
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { colors } from "../../style";
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     borderWidth: 1,
     borderRadius: 10,
-    margin: 10,
+    // margin: 10,
   },
   input: {
-    width: "90%",
+    // width: "90%",
     fontSize: 16,
     padding: 15,
     lineHeight: 20,
   },
+  clearButton: {
+    padding: 15,
+  },
 });
 
-const SearchBar = ({ navigation }) => {
-  const [text, setText] = React.useState(undefined);
+const SearchBar = ({
+  initialText,
+  placeholder,
+  onEndEditing,
+  keyboardType,
+}) => {
+  const [text, setText] = React.useState(initialText);
 
   return (
     <View style={styles.container}>
@@ -27,22 +38,20 @@ const SearchBar = ({ navigation }) => {
         style={styles.input}
         onChangeText={setText}
         value={text}
-        placeholder="Search all products"
-        onEndEditing={() =>
-          text &&
-          navigation.navigate("Filtered Products List", {
-            name: `Results for "${text.trim()}"`,
-            searchTerm: text.trim(),
-          })
-        }
+        placeholder={placeholder}
+        placeholderTextColor={colors.DARK_GRAY}
+        keyboardType={keyboardType}
+        onSubmitEditing={() => onEndEditing(text)}
+        returnKeyType="search"
       />
       {text && (
-        <Button
+        <Pressable
           style={styles.clearButton}
           color={colors.RED}
-          title="X"
           onPress={() => setText(undefined)}
-        />
+        >
+          <FontAwesomeIcon icon={faXmark} size={20} color={colors.RED} />
+        </Pressable>
       )}
     </View>
   );
