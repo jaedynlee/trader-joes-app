@@ -105,7 +105,7 @@ export const getNearbyStores = (zipCode) =>
     .then((response) => response.json())
     .then((jsonResponse) => jsonResponse.response);
 
-export const getAllProducts = () =>
+export const getProductCategories = () =>
   fetch("https://www.traderjoes.com/api/graphql", {
     method: "POST",
     headers: {
@@ -116,12 +116,59 @@ export const getAllProducts = () =>
     },
     body: JSON.stringify({
       variables: {},
-      query:
-        '{\n  categoryList(filters: {ids: {in: ["2"]}}) {\n    id\n    level\n    name\n    path\n    url_key\n    product_count\n    children {\n      id\n      level\n      name\n      path\n      url_key\n      product_count\n      children {\n        id\n        level\n        name\n        path\n        url_key\n        product_count\n        children {\n          id\n          level\n          name\n          path\n          url_key\n          product_count\n          children {\n            id\n            level\n            name\n            path\n            url_key\n            product_count\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n',
+      query: `{\n
+          categoryList(filters: {ids: {in: ["2"]}})
+          {\n
+            id\n
+            level\n
+            name\n
+            path\n
+            url_key\n
+            product_count\n
+            children {\n
+              id\n
+              level\n
+              name\n
+              path\n
+              url_key\n
+              product_count\n
+              children {\n
+                id\n
+                level\n
+                name\n
+                path\n
+                url_key\n
+                product_count\n
+                children {\n
+                  id\n
+                  level\n
+                  name\n
+                  path\n
+                  url_key\n
+                  product_count\n
+                  children {\n
+                    id\n
+                    level\n
+                    name\n
+                    path\n
+                    url_key\n
+                    product_count\n
+                    __typename\n
+                  }\n
+                  __typename\n
+                }\n
+                __typename\n
+              }\n
+              __typename\n
+            }\n
+            __typename\n
+          }\n
+        }\n`,
     }),
   }).then((response) => response.json());
 
 export const getProducts = async (
+  storeCode,
   categoryId,
   currentPage,
   search = undefined,
@@ -130,7 +177,7 @@ export const getProducts = async (
   pageSize = 16
 ) => {
   const variables = {
-    storeCode: "561",
+    storeCode: storeCode,
     availability: "1",
     published: "1",
     categoryId: categoryId,
@@ -154,7 +201,7 @@ export const getProducts = async (
       ${search ? "$search: String," : ""}
       ${characteristics ? "$characteristics: [String], " : ""}
       ${funTags ? "$funTags: [String], " : ""}
-      $storeCode: String = "561",
+      $storeCode: String,
       $availability: String = "1",
       $published: String = "1"
     ) {\n
@@ -201,7 +248,7 @@ export const getProducts = async (
   }).then((response) => response.json());
 };
 
-export const getProductBySku = async (sku) =>
+export const getProductBySku = async (storeCode, sku) =>
   fetch("https://www.traderjoes.com/api/graphql", {
     method: "POST",
     headers: {
@@ -214,11 +261,11 @@ export const getProductBySku = async (sku) =>
     body: JSON.stringify({
       operationName: "SearchProduct",
       variables: {
-        storeCode: "561",
+        storeCode: storeCode,
         published: "1",
         sku: sku,
       },
       query:
-        'query SearchProduct($sku: String, $storeCode: String = "561", $published: String = "1") {\n  products(\n    filter: {sku: {eq: $sku}, store_code: {eq: $storeCode}, published: {eq: $published}}\n  ) {\n    items {\n      category_hierarchy {\n        id\n        url_key\n        description\n        name\n        position\n        level\n        created_at\n        updated_at\n        product_count\n        __typename\n      }\n      item_story_marketing\n      product_label\n      fun_tags\n      primary_image\n      primary_image_meta {\n        url\n        metadata\n        __typename\n      }\n      other_images\n      other_images_meta {\n        url\n        metadata\n        __typename\n      }\n      context_image\n      context_image_meta {\n        url\n        metadata\n        __typename\n      }\n      published\n      sku\n      url_key\n      name\n      item_description\n      item_title\n      item_characteristics\n      item_story_qil\n      use_and_demo\n      sales_size\n      sales_uom_code\n      sales_uom_description\n      country_of_origin\n      availability\n      new_product\n      promotion\n      price_range {\n        minimum_price {\n          final_price {\n            currency\n            value\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      retail_price\n      nutrition {\n        display_sequence\n        panel_id\n        panel_title\n        serving_size\n        calories_per_serving\n        servings_per_container\n        details {\n          display_seq\n          nutritional_item\n          amount\n          percent_dv\n          __typename\n        }\n        __typename\n      }\n      ingredients {\n        display_sequence\n        ingredient\n        __typename\n      }\n      allergens {\n        display_sequence\n        ingredient\n        __typename\n      }\n      created_at\n      first_published_date\n      last_published_date\n      updated_at\n      related_products {\n        sku\n        item_title\n        primary_image\n        primary_image_meta {\n          url\n          metadata\n          __typename\n        }\n        price_range {\n          minimum_price {\n            final_price {\n              currency\n              value\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        retail_price\n        sales_size\n        sales_uom_description\n        category_hierarchy {\n          id\n          name\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    total_count\n    page_info {\n      current_page\n      page_size\n      total_pages\n      __typename\n    }\n    __typename\n  }\n}\n',
+        'query SearchProduct($sku: String, $storeCode: String, $published: String = "1") {\n  products(\n    filter: {sku: {eq: $sku}, store_code: {eq: $storeCode}, published: {eq: $published}}\n  ) {\n    items {\n      category_hierarchy {\n        id\n        url_key\n        description\n        name\n        position\n        level\n        created_at\n        updated_at\n        product_count\n        __typename\n      }\n      item_story_marketing\n      product_label\n      fun_tags\n      primary_image\n      primary_image_meta {\n        url\n        metadata\n        __typename\n      }\n      other_images\n      other_images_meta {\n        url\n        metadata\n        __typename\n      }\n      context_image\n      context_image_meta {\n        url\n        metadata\n        __typename\n      }\n      published\n      sku\n      url_key\n      name\n      item_description\n      item_title\n      item_characteristics\n      item_story_qil\n      use_and_demo\n      sales_size\n      sales_uom_code\n      sales_uom_description\n      country_of_origin\n      availability\n      new_product\n      promotion\n      price_range {\n        minimum_price {\n          final_price {\n            currency\n            value\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      retail_price\n      nutrition {\n        display_sequence\n        panel_id\n        panel_title\n        serving_size\n        calories_per_serving\n        servings_per_container\n        details {\n          display_seq\n          nutritional_item\n          amount\n          percent_dv\n          __typename\n        }\n        __typename\n      }\n      ingredients {\n        display_sequence\n        ingredient\n        __typename\n      }\n      allergens {\n        display_sequence\n        ingredient\n        __typename\n      }\n      created_at\n      first_published_date\n      last_published_date\n      updated_at\n      related_products {\n        sku\n        item_title\n        primary_image\n        primary_image_meta {\n          url\n          metadata\n          __typename\n        }\n        price_range {\n          minimum_price {\n            final_price {\n              currency\n              value\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        retail_price\n        sales_size\n        sales_uom_description\n        category_hierarchy {\n          id\n          name\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    total_count\n    page_info {\n      current_page\n      page_size\n      total_pages\n      __typename\n    }\n    __typename\n  }\n}\n',
     }),
   }).then((response) => response.json());

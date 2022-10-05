@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Item = ({ item, navigation }) => {
+const Item = ({ item, navigation, storeCode }) => {
   const uri = `https://www.traderjoes.com${item.primary_image}`;
   const price = item.retail_price;
 
@@ -66,6 +66,7 @@ const Item = ({ item, navigation }) => {
         navigation.navigate("Product Details", {
           name: item.item_title,
           sku: item.sku,
+          storeCode: storeCode,
         })
       }
       style={({ pressed }) => [
@@ -98,7 +99,7 @@ const Item = ({ item, navigation }) => {
 };
 
 const FilteredProductsList = ({ route, navigation }) => {
-  const { searchTerm, categoryId } = route.params;
+  const { searchTerm, categoryId, storeCode } = route.params;
 
   const flatListRef = useRef();
 
@@ -214,6 +215,7 @@ const FilteredProductsList = ({ route, navigation }) => {
     page.current = 1;
 
     getProducts(
+      storeCode,
       category === "all" ? undefined : category,
       page.current,
       searchTerm,
@@ -235,6 +237,7 @@ const FilteredProductsList = ({ route, navigation }) => {
     page.current = page.current + 1;
 
     getProducts(
+      storeCode,
       category === "all" ? undefined : category,
       page.current,
       searchTerm,
@@ -339,7 +342,7 @@ const FilteredProductsList = ({ route, navigation }) => {
               margin: 1,
             }}
           >
-            <Item item={item} navigation={navigation} />
+            <Item item={item} navigation={navigation} storeCode={storeCode} />
           </View>
         )}
         numColumns={2}

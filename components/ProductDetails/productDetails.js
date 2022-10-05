@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 });
 
 const ProductDetails = ({ route }) => {
-  const { sku } = route.params;
+  const { sku, storeCode } = route.params;
 
   const [product, setProduct] = useState(undefined);
   useEffect(() => {
@@ -48,7 +48,7 @@ const ProductDetails = ({ route }) => {
       return;
     }
 
-    getProductBySku(sku).then((response) =>
+    getProductBySku(storeCode, sku).then((response) =>
       setProduct(response.data.products.items[0])
     );
   }, []);

@@ -14,7 +14,7 @@ export const SmallHeader = (props) => (
 );
 
 export const Header = (props) => (
-  <Text {...props} style={{ ...props.style, fontSize: 24, fontWeight: "bold" }}>
+  <Text {...props} style={{ ...props.style, fontSize: 20, fontWeight: "bold" }}>
     {props.children}
   </Text>
 );

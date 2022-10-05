@@ -6,11 +6,12 @@ import {
   SectionList,
   StatusBar,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 import categoryList from "../../api/foodCategoryList.json";
 import { colors } from "../../style.js";
 import { apiSettings } from "../../config.js";
-import { getAllProducts } from "../../client/client";
+import { getProductCategories } from "../../client/client";
 import { BodyText, Header } from "../common/typography";
 import SearchBar from "./searchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -75,16 +76,22 @@ const AllProductsList = ({ navigation }) => {
       return;
     }
 
-    getAllProducts().then((response) => {
-      const productCategories = response.data.categoryList[0].children;
-      const sections = productCategories.map((category) => ({
-        title: category.name,
-        data: category.children.length ? category.children : [category],
-      }));
-      setProducts(sections);
-    });
+    getLocation().then((location) => {
+      setLocation(location);
 
-    getLocation().then((location) => setLocation(location));
+      if (!location) {
+        return;
+      }
+
+      getProductCategories().then((response) => {
+        const productCategories = response.data.categoryList[0].children;
+        const sections = productCategories.map((category) => ({
+          title: category.name,
+          data: category.children.length ? category.children : [category],
+        }));
+        setProducts(sections);
+      });
+    });
   }, []);
 
   useEffect(() => {
@@ -111,6 +118,18 @@ const AllProductsList = ({ navigation }) => {
         renderSectionHeader={({ section: { title } }) => (
           <Header style={styles.header}>{title}</Header>
         )}
+        ListEmptyComponent={() => {
+          if (!location) {
+            return <BodyText>Please set a store to view products</BodyText>;
+          }
+          return (
+            <ActivityIndicator
+              size="large"
+              animating={true}
+              style={{ flex: 1, alignSelf: "center" }}
+            />
+          );
+        }}
         ListHeaderComponent={() => (
           <View style={{ padding: 10 }}>
             <Pressable
@@ -134,6 +153,7 @@ const AllProductsList = ({ navigation }) => {
                 navigation.navigate("Filtered Products List", {
                   name: `Results for "${text.trim()}"`,
                   searchTerm: text.trim(),
+                  storeCode: location.clientkey,
                 })
               }
             />
