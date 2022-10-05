@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     alignItems: "center",
+    zIndex: 0,
   },
   imageWrapper: {
     width: "100%",
@@ -73,7 +74,6 @@ const Item = ({ item, navigation, storeCode }) => {
         {
           backgroundColor: pressed ? colors.GRAY : colors.WHITE,
         },
-        styles.pressable,
       ]}
     >
       <View style={styles.item}>
@@ -147,6 +147,9 @@ const FilteredProductsList = ({ route, navigation }) => {
   const setStates = (products) => {
     setProducts(products.items ?? []);
     totalPages.current = products.page_info.total_pages;
+    if (products.page_info.total_pages === 1) {
+      setFetchedAllPages(true);
+    }
     setShouldFetch(false);
     const aggregations = products.aggregations;
 
@@ -198,7 +201,9 @@ const FilteredProductsList = ({ route, navigation }) => {
       ]);
 
     //   Go to beginning of list
-    flatListRef.current.scrollToIndex({ animated: true, index: 0 });
+    if (products.total_count) {
+      flatListRef.current.scrollToIndex({ animated: true, index: 0 });
+    }
     setLoading(false);
   };
 
@@ -252,8 +257,8 @@ const FilteredProductsList = ({ route, navigation }) => {
     setShouldFetch(false);
   }, [shouldFetch]);
 
-  return (
-    <SafeAreaView style={styles.container}>
+  const filters = (
+    <View style={{ zIndex: 1000 }}>
       {categoryOptions.length > 1 && (
         <DropDownPicker
           closeAfterSelecting={true}
@@ -331,6 +336,11 @@ const FilteredProductsList = ({ route, navigation }) => {
           }}
         />
       )}
+    </View>
+  );
+  return (
+    <SafeAreaView style={styles.container}>
+      {filters}
       <FlatList
         ref={flatListRef}
         data={products}
@@ -368,7 +378,7 @@ const FilteredProductsList = ({ route, navigation }) => {
               />
             ) : (
               <BodyText style={{ flex: 1, alignSelf: "center" }}>
-                "There's nothing here!"
+                Couldn't find any results.
               </BodyText>
             )}
           </View>
