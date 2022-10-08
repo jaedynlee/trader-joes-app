@@ -88,10 +88,16 @@ const Item = ({ item, navigation, storeCode }) => {
         </View>
         <View style={styles.labelWrapper}>
           <BodyText style={styles.nameLabel}>{item.item_title}</BodyText>
-          <View style={styles.pricePerLabelWrapper}>
-            <BodyText style={styles.priceLabel}>${price}</BodyText>
-            <BodyText style={styles.label}> / {amount}</BodyText>
-          </View>
+          {Number(price) ? (
+            <View style={styles.pricePerLabelWrapper}>
+              <BodyText style={styles.priceLabel}>${price}</BodyText>
+              <BodyText style={styles.label}> / {amount}</BodyText>
+            </View>
+          ) : (
+            <BodyText style={{ fontStyle: "italic" }}>
+              Price unavailable
+            </BodyText>
+          )}
         </View>
       </View>
     </Pressable>

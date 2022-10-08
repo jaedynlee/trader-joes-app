@@ -20,11 +20,15 @@ const PriceDetails = ({ product }) => {
     amount = `${product.sales_size} ${product.sales_uom_description}`;
   }
 
-  return (
+  return Number(product.retail_price) ? (
     <Header style={styles.amount}>
       ${product.retail_price}
       <BodyText style={styles.perUnit}> / {amount}</BodyText>
     </Header>
+  ) : (
+    <BodyText style={{ paddingTop: 10, fontStyle: "italic" }}>
+      Price unavailable.
+    </BodyText>
   );
 };
 

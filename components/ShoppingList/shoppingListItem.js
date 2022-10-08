@@ -39,7 +39,7 @@ const ShoppingListItem = ({ item }) => {
         </BodyText>
       </View>
       <BodyText style={{ ...styles.price, ...(checked ? styles.checked : {}) }}>
-        ${Number(item.price) * item.count}
+        {Number(item.price) ? `$${Number(item.price) * item.count}` : ""}
       </BodyText>
     </View>
   );
