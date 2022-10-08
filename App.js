@@ -13,6 +13,7 @@ import {
   faGear,
   faListCheck,
 } from "@fortawesome/free-solid-svg-icons";
+import ShoppingList from "./components/ShoppingList/shoppingList";
 
 const ProductStack = createNativeStackNavigator();
 
@@ -55,7 +56,7 @@ export default App = () => (
         />
         <Tab.Screen
           name="Shopping List"
-          component={Settings}
+          component={ShoppingList}
           options={{
             tabBarIcon: ({ color, size }) => (
               <FontAwesomeIcon icon={faListCheck} color={color} size={size} />

@@ -11,10 +11,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderWidth: 1,
     borderRadius: 10,
-    // margin: 10,
   },
   input: {
-    // width: "90%",
     fontSize: 16,
     padding: 15,
     lineHeight: 20,

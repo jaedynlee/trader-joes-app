@@ -69,7 +69,6 @@ const StoreSelectorModal = ({ visible, setModalVisible, selectedLocation }) => {
       if (response.collection) {
         setErrorMessage(undefined);
         setResults(response.collection);
-        console.log(response.collection[0].name);
       } else {
         setErrorMessage(
           "Couldn't locate any stores near there! Please try again with a different ZIP code."

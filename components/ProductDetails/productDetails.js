@@ -18,6 +18,7 @@ import productDetails from "../../api/product.json";
 import { LegalText } from "../common/typography";
 import Nutrition from "./nutrition.js";
 import { getProductBySku } from "../../client/client";
+import ShoppingListButton from "./shoppingListButton.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -41,6 +42,7 @@ const ProductDetails = ({ route }) => {
   const { sku, storeCode } = route.params;
 
   const [product, setProduct] = useState(undefined);
+
   useEffect(() => {
     if (apiSettings.DISABLE_TJ_API_REQUESTS) {
       console.log("TJ API requests disabled-- using static resource");
@@ -101,12 +103,13 @@ const ProductDetails = ({ route }) => {
               paddingTop: 30,
             }}
           />
-          <LegalText style={{ paddingTop: 10 }}>
+          <LegalText style={{ paddingTop: 10, paddingBottom: 60 }}>
             NOTE: The details of this item may have changed since posting.
             Contact your local Trader Joe's for current price and availability.
           </LegalText>
         </View>
       </ScrollView>
+      <ShoppingListButton product={product} />
     </SafeAreaView>
   );
 };

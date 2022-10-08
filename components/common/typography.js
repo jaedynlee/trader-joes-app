@@ -1,4 +1,4 @@
-import { Button, Text } from "react-native";
+import { Button, Pressable, Text } from "react-native";
 import { colors } from "../../style";
 
 export const BodyText = (props) => (
@@ -29,4 +29,26 @@ export const TertiaryButton = (props) => (
   <Button {...props} style={{ ...props.style }} color={colors.RED}>
     {props.children}
   </Button>
+);
+
+export const PrimaryButton = (props) => (
+  <Pressable
+    {...props}
+    style={[
+      {
+        ...props.style,
+        backgroundColor: colors.RED,
+        borderRadius: 10,
+        alignContent: "center",
+        justifyContent: "center",
+      },
+      props.disabled && { backgroundColor: colors.DARK_GRAY },
+    ]}
+  >
+    <BodyText
+      style={{ textAlign: "center", color: colors.WHITE, fontWeight: "bold" }}
+    >
+      {props.name}
+    </BodyText>
+  </Pressable>
 );
