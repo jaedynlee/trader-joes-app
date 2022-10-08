@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import {
+  ActivityIndicator,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -9,7 +10,12 @@ import {
 } from "react-native";
 import { clearShoppingList, getShoppingList } from "../../storage";
 import { colors } from "../../style";
-import { Header, PrimaryButton, SmallHeader } from "../common/typography";
+import {
+  BodyText,
+  Header,
+  PrimaryButton,
+  SmallHeader,
+} from "../common/typography";
 import ShoppingListItem from "./shoppingListItem";
 
 const shoppingListToSections = (shoppingList) => {
@@ -66,12 +72,38 @@ const ShoppingList = ({ navigation }) => {
     });
   }, [isFocused]);
 
+  if (!listSections.length) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <BodyText style={{ textAlign: "center", padding: 20 }}>
+          You have not added any items to your shopping list yet. The great news
+          is you can start it now!
+        </BodyText>
+        <PrimaryButton
+          name="Browse products"
+          onPress={() =>
+            navigation.navigate("Products", { screen: "All Products List" })
+          }
+          style={{
+            paddingVertical: 14,
+            paddingHorizontal: 20,
+          }}
+        />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <PrimaryButton
           name="Clear list"
-          disabled={!listSections.length}
           onPress={() => clearShoppingList().then(() => setListSections([]))}
           style={{ margin: 10, padding: 10 }}
         />

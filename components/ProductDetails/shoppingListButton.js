@@ -43,11 +43,12 @@ const ShoppingListButton = ({ product }) => {
       </Pressable>
     </View>
   ) : (
-    <View style={styles.buttonContainer}>
-      <Pressable onPress={onAddToList} style={{ textAlign: "center" }}>
-        <BodyText style={styles.buttonText}>Add to list</BodyText>
-      </Pressable>
-    </View>
+    <Pressable
+      onPress={onAddToList}
+      style={[styles.buttonContainer, { textAlign: "center" }]}
+    >
+      <BodyText style={styles.buttonText}>Add to list</BodyText>
+    </Pressable>
   );
 };
 
