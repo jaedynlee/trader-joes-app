@@ -39,7 +39,9 @@ const ShoppingListItem = ({ item }) => {
         </BodyText>
       </View>
       <BodyText style={{ ...styles.price, ...(checked ? styles.checked : {}) }}>
-        {Number(item.price) ? `$${Number(item.price) * item.count}` : ""}
+        {Number(item.price)
+          ? `$${(parseFloat(item.price) * item.count).toFixed(2)}`
+          : ""}
       </BodyText>
     </View>
   );

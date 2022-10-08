@@ -15,6 +15,8 @@ import bakeryProducts from "../../api/bakeryProducts.json";
 import { getProducts } from "../../client/client";
 import { BodyText } from "../common/typography.js";
 import DropDownPicker from "react-native-dropdown-picker";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const styles = StyleSheet.create({
   container: {
@@ -128,6 +130,8 @@ const FilteredProductsList = ({ route, navigation }) => {
   const [funTag, setFunTag] = useState(null);
   const [funTagOpen, setFunTagOpen] = useState(false);
   const [funTagOptions, setFunTagOptions] = useState([]);
+
+  const [filtersExpanded, setFiltersExpanded] = useState(false);
 
   const onCategoryOpen = useCallback(() => {
     setCharacteristicOpen(false);
@@ -346,10 +350,21 @@ const FilteredProductsList = ({ route, navigation }) => {
   );
   return (
     <SafeAreaView style={styles.container}>
-      {filters}
+      {filtersExpanded && filters}
       <FlatList
         ref={flatListRef}
         data={products}
+        ListHeaderComponent={() => (
+          <Pressable
+            style={{ flexDirection: "row", padding: 15 }}
+            onPress={() => setFiltersExpanded(!filtersExpanded)}
+          >
+            <FontAwesomeIcon icon={faFilter} style={{ marginRight: 8 }} />
+            <BodyText style={{ fontWeight: "bold" }}>
+              {filtersExpanded ? "Hide" : "Show"} filters
+            </BodyText>
+          </Pressable>
+        )}
         renderItem={({ item }) => (
           <View
             style={{

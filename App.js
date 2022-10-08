@@ -6,13 +6,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { colors } from "./style";
 import ProductDetails from "./components/ProductDetails/productDetails.js";
 import FilteredProductsList from "./components/ProductsList/filteredProductsList";
-import Settings from "./components/Settings/settings";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-  faAppleWhole,
-  faGear,
-  faListCheck,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAppleWhole, faListCheck } from "@fortawesome/free-solid-svg-icons";
 import ShoppingList from "./components/ShoppingList/shoppingList";
 
 const ProductStack = createNativeStackNavigator();
