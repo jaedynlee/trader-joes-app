@@ -15,15 +15,20 @@ const styles = StyleSheet.create({
 });
 
 const PriceDetails = ({ product }) => {
-  let amount = product.sales_uom_description;
+  let amount = product.sales_uom_description.toLowerCase();
   if (product.sales_size && product.sales_size > 1) {
-    amount = `${product.sales_size} ${product.sales_uom_description}`;
+    amount = `${
+      product.sales_size
+    } ${product.sales_uom_description.toLowerCase()}`;
   }
 
   return Number(product.retail_price) ? (
     <Header style={styles.amount}>
       ${product.retail_price}
-      <BodyText style={styles.perUnit}> / {amount}</BodyText>
+      <BodyText style={styles.perUnit}>
+        {" "}
+        {amount === "each" ? amount : `/ ${amount}`}
+      </BodyText>
     </Header>
   ) : (
     <BodyText style={{ paddingTop: 10, fontStyle: "italic" }}>

@@ -96,13 +96,13 @@ const AddRemoveListButton = ({ item, initialCount }) => {
   );
 };
 
-const Item = ({ item, count, navigation, storeCode }) => {
+const Item = ({ item, count, navigation }) => {
   const uri = `https://www.traderjoes.com${item.primary_image}`;
   const price = item.retail_price;
 
-  let amount = item.sales_uom_description;
+  let amount = item.sales_uom_description.toLowerCase();
   if (item.sales_size && item.sales_size > 1) {
-    amount = `${item.sales_size} ${item.sales_uom_description}`;
+    amount = `${item.sales_size} ${item.sales_uom_description.toLowerCase()}`;
   }
 
   return (
@@ -135,7 +135,10 @@ const Item = ({ item, count, navigation, storeCode }) => {
           {Number(price) ? (
             <View style={styles.pricePerLabelWrapper}>
               <BodyText style={styles.priceLabel}>${price}</BodyText>
-              <BodyText style={styles.label}> / {amount}</BodyText>
+              <BodyText style={styles.label}>
+                {" "}
+                {amount === "each" ? amount : `/ ${amount}`}
+              </BodyText>
             </View>
           ) : (
             <BodyText style={{ fontStyle: "italic" }}>

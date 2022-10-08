@@ -314,7 +314,6 @@ const FilteredProductsList = ({ route, navigation }) => {
               item={item}
               count={shoppingListCounts[item.sku] ?? 0}
               navigation={navigation}
-              storeCode={storeCode}
             />
           </View>
         )}
