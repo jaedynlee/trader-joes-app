@@ -53,14 +53,13 @@ const ShoppingListSection = ({ products, subsections }) => {
 
 const ShoppingList = () => {
   const [listSections, setListSections] = useState([]);
-  const isFocused = useIsFocused();
 
   useEffect(() => {
     getShoppingList().then((shoppingList) => {
       const sections = shoppingListToSections(shoppingList);
       setListSections(sections);
     });
-  }, [isFocused]);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

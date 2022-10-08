@@ -56,6 +56,7 @@ export default App = () => (
             tabBarIcon: ({ color, size }) => (
               <FontAwesomeIcon icon={faListCheck} color={color} size={size} />
             ),
+            unmountOnBlur: true,
           }}
         />
       </Tab.Navigator>

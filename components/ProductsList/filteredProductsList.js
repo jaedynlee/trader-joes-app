@@ -4,7 +4,6 @@ import {
   View,
   SafeAreaView,
   FlatList,
-  Image,
   StatusBar,
   Pressable,
   ActivityIndicator,
@@ -17,6 +16,13 @@ import { BodyText } from "../common/typography.js";
 import DropDownPicker from "react-native-dropdown-picker";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import {
+  getShoppingList,
+  getShoppingListCount,
+  getShoppingListCounts,
+} from "../../storage.js";
+import Item from "./productItem.js";
+import { useIsFocused } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   container: {
@@ -24,92 +30,15 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
     backgroundColor: colors.WHITE,
   },
-  item: {
-    width: "100%",
-    padding: 10,
-    alignItems: "center",
-    zIndex: 0,
-  },
-  imageWrapper: {
-    width: "100%",
-    maxHeight: 100,
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-  },
-  labelWrapper: {
-    fontSize: 16,
-    alignItems: "center",
-  },
-  nameLabel: {
-    textAlign: "center",
-  },
-  priceLabel: {
-    fontWeight: "bold",
-  },
-  pricePerLabelWrapper: {
-    flexDirection: "row",
-    textAlign: "center",
-  },
 });
-
-const Item = ({ item, navigation, storeCode }) => {
-  const uri = `https://www.traderjoes.com${item.primary_image}`;
-  const price = item.retail_price;
-
-  let amount = item.sales_uom_description;
-  if (item.sales_size && item.sales_size > 1) {
-    amount = `${item.sales_size} ${item.sales_uom_description}`;
-  }
-
-  return (
-    <Pressable
-      onPress={() =>
-        navigation.navigate("Product Details", {
-          name: item.item_title,
-          sku: item.sku,
-          storeCode: storeCode,
-        })
-      }
-      style={({ pressed }) => [
-        {
-          backgroundColor: pressed ? colors.GRAY : colors.WHITE,
-        },
-      ]}
-    >
-      <View style={styles.item}>
-        <View style={styles.imageWrapper}>
-          <Image
-            style={styles.image}
-            resizeMode="contain"
-            source={{
-              uri: uri,
-            }}
-          />
-        </View>
-        <View style={styles.labelWrapper}>
-          <BodyText style={styles.nameLabel}>{item.item_title}</BodyText>
-          {Number(price) ? (
-            <View style={styles.pricePerLabelWrapper}>
-              <BodyText style={styles.priceLabel}>${price}</BodyText>
-              <BodyText style={styles.label}> / {amount}</BodyText>
-            </View>
-          ) : (
-            <BodyText style={{ fontStyle: "italic" }}>
-              Price unavailable
-            </BodyText>
-          )}
-        </View>
-      </View>
-    </Pressable>
-  );
-};
 
 const FilteredProductsList = ({ route, navigation }) => {
   const { searchTerm, categoryId, storeCode } = route.params;
 
   const flatListRef = useRef();
+
+  const isFocused = useIsFocused();
+  const [shoppingListCounts, setShoppingListCounts] = useState({});
 
   const [shouldFetch, setShouldFetch] = useState(true);
   const [fetchedAllPages, setFetchedAllPages] = useState(false);
@@ -153,6 +82,14 @@ const FilteredProductsList = ({ route, navigation }) => {
     value: o.value,
     key: o.label,
   });
+
+  // Refetch counts when coming back to the page
+  useEffect(() => {
+    getShoppingListCounts().then((shoppingListCounts) => {
+      setShoppingListCounts(shoppingListCounts);
+      console.log(JSON.stringify(shoppingListCounts));
+    });
+  }, [isFocused]);
 
   const setStates = (products) => {
     setProducts(products.items ?? []);
@@ -348,6 +285,7 @@ const FilteredProductsList = ({ route, navigation }) => {
       )}
     </View>
   );
+
   return (
     <SafeAreaView style={styles.container}>
       {filtersExpanded && filters}
@@ -373,7 +311,12 @@ const FilteredProductsList = ({ route, navigation }) => {
               margin: 1,
             }}
           >
-            <Item item={item} navigation={navigation} storeCode={storeCode} />
+            <Item
+              item={item}
+              count={shoppingListCounts[item.sku] ?? 0}
+              navigation={navigation}
+              storeCode={storeCode}
+            />
           </View>
         )}
         numColumns={2}

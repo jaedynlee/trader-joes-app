@@ -128,6 +128,7 @@ export const getShoppingList = async () => {
   }
 };
 
+// GET COUNT OF SINGLE PRODUCT
 export const getShoppingListCount = async (product) => {
   try {
     const shoppingList = await getShoppingList();
@@ -161,4 +162,30 @@ const getShoppingListCountHelper = (
     category_hierarchy,
     shoppingList[category.name] ?? {}
   );
+};
+
+// GET COUNTS OF ALL PRODUCTS
+export const getShoppingListCounts = async () => {
+  try {
+    const shoppingList = await getShoppingList();
+    return getShoppingListCountsHelper(shoppingList);
+  } catch (e) {
+    throw e;
+  }
+};
+
+const getShoppingListCountsHelper = (shoppingList) => {
+  let counts = {};
+
+  for (const [key, value] of Object.entries(shoppingList)) {
+    if (key === "products") {
+      for (const [sku, product] of Object.entries(value)) {
+        counts[sku] = product.count;
+      }
+    } else {
+      counts = { ...counts, ...getShoppingListCountsHelper(value) };
+    }
+  }
+
+  return counts;
 };
