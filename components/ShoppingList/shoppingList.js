@@ -9,12 +9,7 @@ import {
 } from "react-native";
 import { clearShoppingList, getShoppingList } from "../../storage";
 import { colors } from "../../style";
-import {
-  BodyText,
-  Header,
-  PrimaryButton,
-  SmallHeader,
-} from "../common/typography";
+import { Header, PrimaryButton, SmallHeader } from "../common/typography";
 import ShoppingListItem from "./shoppingListItem";
 
 const shoppingListToSections = (shoppingList) => {

@@ -63,15 +63,6 @@ export default App = () => (
             ),
           }}
         />
-        <Tab.Screen
-          name="Settings"
-          component={Settings}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <FontAwesomeIcon icon={faGear} color={color} size={size} />
-            ),
-          }}
-        />
       </Tab.Navigator>
     </SafeAreaView>
   </NavigationContainer>
