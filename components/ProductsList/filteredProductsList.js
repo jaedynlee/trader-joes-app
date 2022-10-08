@@ -85,10 +85,9 @@ const FilteredProductsList = ({ route, navigation }) => {
 
   // Refetch counts when coming back to the page
   useEffect(() => {
-    getShoppingListCounts().then((shoppingListCounts) => {
-      setShoppingListCounts(shoppingListCounts);
-      console.log(JSON.stringify(shoppingListCounts));
-    });
+    getShoppingListCounts().then((shoppingListCounts) =>
+      setShoppingListCounts(shoppingListCounts)
+    );
   }, [isFocused]);
 
   const setStates = (products) => {

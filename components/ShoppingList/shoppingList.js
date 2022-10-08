@@ -35,11 +35,11 @@ const ShoppingListSection = ({ products, subsections }) => {
     <View>
       {products &&
         Object.entries(products).map(([sku, item]) => (
-          <ShoppingListItem item={item} />
+          <ShoppingListItem key={sku} item={item} />
         ))}
       {subsections &&
         subsections.map((s) => (
-          <View s={s.name}>
+          <View key={s.name}>
             <SmallHeader style={styles.header}>{s.name}</SmallHeader>
             <ShoppingListSection
               products={s.products}
