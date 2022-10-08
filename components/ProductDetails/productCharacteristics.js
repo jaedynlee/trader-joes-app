@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   tagsWrapper: {
     flexWrap: "wrap",
     flexDirection: "row",
-    paddingTop: 20,
+    paddingVertical: 10,
   },
 });
 

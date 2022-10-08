@@ -1,12 +1,11 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Header, BodyText } from "../common/typography";
 
 const styles = StyleSheet.create({
   amount: {
-    paddingTop: 10,
     fontWeight: "bold",
-    fontSize: 24,
+    textAlign: "right",
   },
   perUnit: {
     fontWeight: "normal",
@@ -22,18 +21,34 @@ const PriceDetails = ({ product }) => {
     } ${product.sales_uom_description.toLowerCase()}`;
   }
 
-  return Number(product.retail_price) ? (
-    <Header style={styles.amount}>
-      ${product.retail_price}
-      <BodyText style={styles.perUnit}>
-        {" "}
-        {amount === "each" ? amount : `/ ${amount}`}
-      </BodyText>
-    </Header>
-  ) : (
-    <BodyText style={{ paddingTop: 10, fontStyle: "italic" }}>
-      Price unavailable.
-    </BodyText>
+  return (
+    <View>
+      <View
+        style={{
+          borderBottomColor: "black",
+          borderBottomWidth: StyleSheet.hairlineWidth,
+          marginVertical: 6,
+        }}
+      />
+      {Number(product.retail_price) ? (
+        <Header style={styles.amount}>
+          ${product.retail_price}
+          <BodyText style={styles.perUnit}>
+            {" "}
+            {amount === "each" ? amount : `/ ${amount}`}
+          </BodyText>
+        </Header>
+      ) : (
+        <BodyText style={{ fontStyle: "italic" }}>Price unavailable.</BodyText>
+      )}
+      <View
+        style={{
+          borderBottomColor: "black",
+          borderBottomWidth: StyleSheet.hairlineWidth,
+          marginVertical: 6,
+        }}
+      />
+    </View>
   );
 };
 

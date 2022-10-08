@@ -15,7 +15,7 @@ import ProductCharacteristics from "./productCharacteristics.js";
 import Story from "./story.js";
 import { apiSettings } from "../../config.js";
 import productDetails from "../../api/product.json";
-import { LegalText } from "../common/typography";
+import { Header, LegalText } from "../common/typography";
 import Nutrition from "./nutrition.js";
 import { getProductBySku } from "../../client/client";
 import ShoppingListButton from "./shoppingListButton.js";
@@ -72,6 +72,13 @@ const ProductDetails = ({ route }) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.paddedContainer}>
+          <Header>{product.item_title}</Header>
+          <PriceDetails product={product} />
+          {product.item_characteristics && (
+            <ProductCharacteristics
+              characteristics={product.item_characteristics}
+            />
+          )}
           <View style={styles.imageWrapper}>
             <Image
               style={styles.image}
@@ -81,12 +88,7 @@ const ProductDetails = ({ route }) => {
               }}
             />
           </View>
-          <PriceDetails product={product} />
-          {product.item_characteristics && (
-            <ProductCharacteristics
-              characteristics={product.item_characteristics}
-            />
-          )}
+
           {product.item_story_marketing && (
             <Story summary={product.item_story_marketing} />
           )}
