@@ -34,6 +34,24 @@ const ProductStackNavigator = () => (
   </ProductStack.Navigator>
 );
 
+const ShoppingListStackNavigator = () => (
+  <ProductStack.Navigator>
+    <ProductStack.Screen
+      name="List"
+      component={ShoppingList}
+      options={{
+        unmountOnBlur: true,
+        title: "Shopping List",
+      }}
+    />
+    <ProductStack.Screen
+      name="List Product Details"
+      component={ProductDetails}
+      options={({ route }) => ({ title: route.params.name })}
+    />
+  </ProductStack.Navigator>
+);
+
 export default App = () => (
   <NavigationContainer>
     <SafeAreaView style={styles.container}>
@@ -51,12 +69,13 @@ export default App = () => (
         />
         <Tab.Screen
           name="Shopping List"
-          component={ShoppingList}
+          component={ShoppingListStackNavigator}
           options={{
+            headerShown: false,
+            unmountOnBlur: true,
             tabBarIcon: ({ color, size }) => (
               <FontAwesomeIcon icon={faListCheck} color={color} size={size} />
             ),
-            unmountOnBlur: true,
           }}
         />
       </Tab.Navigator>

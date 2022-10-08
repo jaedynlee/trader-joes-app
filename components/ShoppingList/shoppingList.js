@@ -30,28 +30,33 @@ const shoppingListToSections = (shoppingList) => {
   return sections;
 };
 
-const ShoppingListSection = ({ products, subsections }) => {
-  return (
-    <View>
-      {products &&
-        Object.entries(products).map(([sku, item]) => (
-          <ShoppingListItem key={sku} item={item} />
-        ))}
-      {subsections &&
-        subsections.map((s) => (
-          <View key={s.name}>
-            <SmallHeader style={styles.header}>{s.name}</SmallHeader>
-            <ShoppingListSection
-              products={s.products}
-              subsections={s.subsections}
-            />
-          </View>
-        ))}
-    </View>
-  );
-};
+const ShoppingListSection = ({ products, subsections, navigation }) => (
+  <View>
+    {products &&
+      Object.entries(products).map(([sku, item]) => (
+        <ShoppingListItem
+          key={sku}
+          sku={sku}
+          item={item}
+          navigation={navigation}
+        />
+      ))}
+    {subsections &&
+      subsections.map((s) => (
+        <View key={s.name}>
+          <SmallHeader style={styles.header}>{s.name}</SmallHeader>
+          <ShoppingListSection
+            products={s.products}
+            subsections={s.subsections}
+            navigation={navigation}
+          />
+        </View>
+      ))}
+  </View>
+);
 
-const ShoppingList = () => {
+const ShoppingList = ({ navigation }) => {
+  const isFocused = useIsFocused();
   const [listSections, setListSections] = useState([]);
 
   useEffect(() => {
@@ -59,7 +64,7 @@ const ShoppingList = () => {
       const sections = shoppingListToSections(shoppingList);
       setListSections(sections);
     });
-  }, []);
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -76,6 +81,7 @@ const ShoppingList = () => {
             <ShoppingListSection
               products={s.products}
               subsections={s.subsections}
+              navigation={navigation}
             />
           </View>
         ))}

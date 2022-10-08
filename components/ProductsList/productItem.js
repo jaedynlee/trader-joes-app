@@ -111,7 +111,6 @@ const Item = ({ item, count, navigation, storeCode }) => {
         navigation.navigate("Product Details", {
           name: item.item_title,
           sku: item.sku,
-          storeCode: storeCode,
         })
       }
       style={({ pressed }) => [

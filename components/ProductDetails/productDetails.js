@@ -19,6 +19,7 @@ import { LegalText } from "../common/typography";
 import Nutrition from "./nutrition.js";
 import { getProductBySku } from "../../client/client";
 import ShoppingListButton from "./shoppingListButton.js";
+import { getLocation } from "../../storage.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
 });
 
 const ProductDetails = ({ route }) => {
-  const { sku, storeCode } = route.params;
+  const { sku } = route.params;
 
   const [product, setProduct] = useState(undefined);
 
@@ -50,8 +51,10 @@ const ProductDetails = ({ route }) => {
       return;
     }
 
-    getProductBySku(storeCode, sku).then((response) =>
-      setProduct(response.data.products.items[0])
+    getLocation().then((location) =>
+      getProductBySku(location.clientkey, sku).then((response) =>
+        setProduct(response.data.products.items[0])
+      )
     );
   }, []);
 
