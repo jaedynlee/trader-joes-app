@@ -9,9 +9,21 @@ import { updateShoppingListCount } from "../../storage.js";
 const styles = StyleSheet.create({
   item: {
     width: "100%",
-    padding: 10,
+    padding: 6,
+    borderRadius: 6,
     alignItems: "center",
     zIndex: 0,
+
+    // background color must be set for shadow
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5, // for Android
   },
   imageWrapper: {
     width: "100%",
@@ -59,11 +71,12 @@ const AddRemoveListButton = ({ item, initialCount }) => {
         position: "absolute",
         top: 0,
         right: 0,
-        marginRight: 15,
+        marginRight: 6,
+        marginTop: 6,
         zIndex: 1000,
         alignContent: "center",
         justifyContent: "center",
-        borderRadius: 5,
+        borderRadius: 6,
       }}
     >
       {count ? (
@@ -110,20 +123,21 @@ const Item = ({ item, count, navigation }) => {
   }
 
   return (
-    <Pressable
-      onPress={() =>
-        navigation.navigate("Product Details", {
-          name: item.item_title,
-          sku: item.sku,
-        })
-      }
-      style={({ pressed }) => [
-        {
-          backgroundColor: pressed ? colors.GRAY : colors.WHITE,
-        },
-      ]}
-    >
-      <View style={styles.item}>
+    <View style={{ padding: 4 }}>
+      <Pressable
+        onPress={() =>
+          navigation.navigate("Product Details", {
+            name: item.item_title,
+            sku: item.sku,
+          })
+        }
+        style={({ pressed }) => [
+          styles.item,
+          {
+            backgroundColor: pressed ? colors.GRAY : colors.WHITE,
+          },
+        ]}
+      >
         <AddRemoveListButton item={item} initialCount={count} />
         <View style={styles.imageWrapper}>
           <Image
@@ -150,8 +164,8 @@ const Item = ({ item, count, navigation }) => {
             </BodyText>
           )}
         </View>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 };
 
