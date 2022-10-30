@@ -7,7 +7,7 @@ import { colors } from "./style";
 import ProductDetails from "./components/ProductDetails/productDetails.js";
 import FilteredProductsList from "./components/ProductsList/filteredProductsList";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faAppleWhole, faListCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCarrot, faListCheck } from "@fortawesome/free-solid-svg-icons";
 import ShoppingList from "./components/ShoppingList/shoppingList";
 
 const ProductStack = createNativeStackNavigator();
@@ -63,7 +63,7 @@ export default App = () => (
           options={{
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
-              <FontAwesomeIcon icon={faAppleWhole} color={color} size={size} />
+              <FontAwesomeIcon icon={faCarrot} color={color} size={size} />
             ),
           }}
         />
