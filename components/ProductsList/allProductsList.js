@@ -110,7 +110,13 @@ const AllProductsList = ({ navigation }) => {
           selectedLocation={location}
           setLocation={setLocation}
         />
-        <View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <SetStoreButton
             setModalVisible={setModalVisible}
             label="Set your store"
