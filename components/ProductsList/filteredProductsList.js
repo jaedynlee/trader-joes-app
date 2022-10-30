@@ -203,6 +203,14 @@ const FilteredProductsList = ({ route, navigation }) => {
     setShouldFetch(false);
   }, [shouldFetch]);
 
+  useEffect(() => {
+    // If necessary, add blank product to even out the number of elements
+    if (products.length % 2 === 0) {
+      return;
+    }
+    setProducts([...products, {}]);
+  }, [products]);
+
   const filters = (
     <View style={{ zIndex: 1000 }}>
       {categoryOptions.length > 1 && (

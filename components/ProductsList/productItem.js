@@ -97,6 +97,10 @@ const AddRemoveListButton = ({ item, initialCount }) => {
 };
 
 const Item = ({ item, count, navigation }) => {
+  if (!item.__typename) {
+    return <View></View>;
+  }
+
   const uri = `https://www.traderjoes.com${item.primary_image}`;
   const price = item.retail_price;
 
