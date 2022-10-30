@@ -2,10 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const setLocation = async (clientkey, name) => {
   try {
-    await AsyncStorage.setItem(
-      "@location",
-      JSON.stringify({ clientkey: clientkey, name: name })
-    );
+    const location = { clientkey: clientkey, name: name };
+    await AsyncStorage.setItem("@location", JSON.stringify(location));
+    return location;
   } catch (e) {
     throw e;
   }

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React, { useRef, useState } from "react";
 import { FlatList, Modal, Pressable, StyleSheet, View } from "react-native";
 import { getNearbyStores } from "../../client/client";
-import { setLocation } from "../../storage";
+import { setLocation as updateLocationInStorage } from "../../storage";
 import { colors } from "../../style";
 import { BodyText, SmallHeader, TertiaryButton } from "../common/typography";
 import SearchBar from "./searchBar";
@@ -46,7 +46,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const StoreSelectorModal = ({ visible, setModalVisible, selectedLocation }) => {
+const StoreSelectorModal = ({
+  visible,
+  setModalVisible,
+  selectedLocation,
+  setLocation,
+}) => {
   const text = useRef();
   const [results, setResults] = useState([]);
   const [errorMessage, setErrorMessage] = useState();
@@ -169,9 +174,14 @@ const StoreSelectorModal = ({ visible, setModalVisible, selectedLocation }) => {
                     }
                     disabled={isSelected || isComingSoon}
                     onPress={() =>
-                      setLocation(clientkey, name)
-                        .then(() => setModalVisible(false))
-                        .catch((e) => console.log("Failed to set store"))
+                      updateLocationInStorage(clientkey, name)
+                        .then((location) => {
+                          setLocation(location);
+                          setModalVisible(false);
+                        })
+                        .catch((e) =>
+                          console.log(`Failed to set store with error: ${e}`)
+                        )
                     }
                   />
                 </View>

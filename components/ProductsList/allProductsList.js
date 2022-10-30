@@ -36,6 +36,20 @@ const styles = StyleSheet.create({
   },
 });
 
+const SetStoreButton = ({ setModalVisible, label }) => (
+  <Pressable
+    onPress={() => setModalVisible(true)}
+    style={{
+      flexDirection: "row",
+      color: colors.RED,
+      marginBottom: 10,
+    }}
+  >
+    <FontAwesomeIcon icon={faLocationDot} color={colors.RED} />
+    <BodyText style={{ color: colors.RED }}> {label}</BodyText>
+  </Pressable>
+);
+
 const Item = ({ id, title, navigation }) => {
   return (
     <Pressable
@@ -65,42 +79,46 @@ const AllProductsList = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    if (apiSettings.DISABLE_TJ_API_REQUESTS) {
-      console.log("TJ API requests disabled-- using static resource");
-      const productCategories = categoryList.data.categoryList[0].children;
+    // On initial screen load, set location from database
+    getLocation().then((location) => {
+      setLocation(location);
+    });
+  }, []);
+
+  useEffect(() => {
+    // Fetch product list when location is set or changes
+    if (!location) {
+      return;
+    }
+
+    getProductCategories().then((response) => {
+      const productCategories = response.data.categoryList[0].children;
       const sections = productCategories.map((category) => ({
         title: category.name,
         data: category.children.length ? category.children : [category],
       }));
       setProducts(sections);
-      return;
-    }
-
-    getLocation().then((location) => {
-      setLocation(location);
-
-      if (!location) {
-        return;
-      }
-
-      getProductCategories().then((response) => {
-        const productCategories = response.data.categoryList[0].children;
-        const sections = productCategories.map((category) => ({
-          title: category.name,
-          data: category.children.length ? category.children : [category],
-        }));
-        setProducts(sections);
-      });
     });
-  }, []);
+  }, [location]);
 
-  useEffect(() => {
-    if (modalVisible) {
-      return;
-    }
-
-    getLocation().then((location) => setLocation(location));
-  }, [modalVisible]);
+  if (!location) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <StoreSelectorModal
+          visible={modalVisible}
+          setModalVisible={setModalVisible}
+          selectedLocation={location}
+          setLocation={setLocation}
+        />
+        <View>
+          <SetStoreButton
+            setModalVisible={setModalVisible}
+            label="Set your store"
+          />
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -108,6 +126,7 @@ const AllProductsList = ({ navigation }) => {
         visible={modalVisible}
         setModalVisible={setModalVisible}
         selectedLocation={location}
+        setLocation={setLocation}
       />
       <SectionList
         sections={products}
@@ -132,20 +151,10 @@ const AllProductsList = ({ navigation }) => {
         }}
         ListHeaderComponent={() => (
           <View style={{ padding: 10 }}>
-            <Pressable
-              onPress={() => setModalVisible(true)}
-              style={{
-                flexDirection: "row",
-                color: colors.RED,
-                marginBottom: 10,
-              }}
-            >
-              <FontAwesomeIcon icon={faLocationDot} color={colors.RED} />
-              <BodyText style={{ color: colors.RED }}>
-                {" "}
-                {location ? location.name : "Set your store"}
-              </BodyText>
-            </Pressable>
+            <SetStoreButton
+              setModalVisible={setModalVisible}
+              label={!!location && location.name}
+            />
             <SearchBar
               placeholder="Search all products"
               onEndEditing={(text) =>
