@@ -187,5 +187,5 @@ const getShoppingListCountsHelper = (shoppingList) => {
     }
   }
 
-  return counts;
+  return { ...counts };
 };

@@ -5,16 +5,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React, { useRef, useState } from "react";
-import {
-  Button,
-  FlatList,
-  Linking,
-  Modal,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import { FlatList, Modal, Pressable, StyleSheet, View } from "react-native";
 import { getNearbyStores } from "../../client/client";
 import { setLocation } from "../../storage";
 import { colors } from "../../style";
@@ -89,10 +80,17 @@ const StoreSelectorModal = ({ visible, setModalVisible, selectedLocation }) => {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Pressable
-            style={{ alignSelf: "flex-end" }}
+            style={{
+              flexDirection: "row",
+              alignSelf: "flex-end",
+              alignItems: "center",
+            }}
             onPress={() => setModalVisible(false)}
           >
-            <FontAwesomeIcon icon={faXmark} size={20} color={colors.RED} />
+            <FontAwesomeIcon icon={faXmark} size={16} color={colors.RED} />
+            <BodyText style={{ color: colors.RED, paddingLeft: 3 }}>
+              Close
+            </BodyText>
           </Pressable>
           <FlatList
             style={styles.list}
