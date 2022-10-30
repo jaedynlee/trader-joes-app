@@ -304,8 +304,12 @@ const FilteredProductsList = ({ route, navigation }) => {
             style={{ flexDirection: "row", padding: 15 }}
             onPress={() => setFiltersExpanded(!filtersExpanded)}
           >
-            <FontAwesomeIcon icon={faFilter} style={{ marginRight: 8 }} />
-            <BodyText style={{ fontWeight: "bold" }}>
+            <FontAwesomeIcon
+              icon={faFilter}
+              color={colors.RED}
+              style={{ marginRight: 8 }}
+            />
+            <BodyText style={{ fontWeight: "bold", color: colors.RED }}>
               {filtersExpanded ? "Hide" : "Show"} filters
             </BodyText>
           </Pressable>
