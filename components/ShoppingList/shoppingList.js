@@ -50,7 +50,7 @@ const ShoppingListSection = ({ products, subsections, navigation }) => (
     {subsections &&
       subsections.map((s) => (
         <View key={s.name}>
-          <SmallHeader style={styles.header}>{s.name}</SmallHeader>
+          <SmallHeader style={styles.subHeader}>{s.name}</SmallHeader>
           <ShoppingListSection
             products={s.products}
             subsections={s.subsections}
@@ -109,7 +109,7 @@ const ShoppingList = ({ navigation }) => {
         />
         {listSections.map((s) => (
           <View key={s.name}>
-            <Header style={styles.shadedHeader}>{s.name}</Header>
+            <Header style={styles.header}>{s.name}</Header>
             <ShoppingListSection
               products={s.products}
               subsections={s.subsections}
@@ -128,11 +128,12 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
     backgroundColor: colors.WHITE,
   },
-  header: {
+  subHeader: {
     padding: 10,
     paddingLeft: 20,
+    backgroundColor: colors.LIGHT_GRAY,
   },
-  shadedHeader: {
+  header: {
     backgroundColor: colors.GRAY,
     padding: 10,
     paddingLeft: 20,
