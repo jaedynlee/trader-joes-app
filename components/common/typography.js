@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { Button, Pressable, Text } from "react-native";
 import { colors } from "../../style";
 
@@ -31,24 +32,60 @@ export const TertiaryButton = (props) => (
   </Button>
 );
 
-export const PrimaryButton = (props) => (
+const ButtonBase = (props) => (
   <Pressable
     {...props}
     style={[
       {
         ...props.style,
-        backgroundColor: colors.RED,
-        borderRadius: 10,
         alignContent: "center",
+        alignItems: "center",
+        borderRadius: 10,
+        flexDirection: "row",
         justifyContent: "center",
+        padding: 10,
       },
-      props.disabled && { backgroundColor: colors.DARK_GRAY },
+      props.disabled && props.disabledProps,
     ]}
   >
-    <BodyText
-      style={{ textAlign: "center", color: colors.WHITE, fontWeight: "bold" }}
-    >
-      {props.name}
-    </BodyText>
+    {props.icon ? (
+      <FontAwesomeIcon
+        icon={props.icon}
+        style={{ ...props.iconProps, marginRight: 8 }}
+      />
+    ) : null}
+    <BodyText style={props.labelProps}>{props.name}</BodyText>
   </Pressable>
+);
+
+export const SecondaryButton = (props) => (
+  <ButtonBase
+    {...props}
+    disabledProps={{ borderColor: colors.DARK_GRAY }}
+    iconProps={{ color: colors.RED }}
+    labelProps={{ textAlign: "center", color: colors.RED, fontWeight: "bold" }}
+    style={{
+      ...props.style,
+      backgroundColor: colors.WHITE,
+      borderColor: colors.RED,
+      borderWidth: 2,
+    }}
+  />
+);
+
+export const PrimaryButton = (props) => (
+  <ButtonBase
+    {...props}
+    disabledProps={{ backgroundColor: colors.DARK_GRAY }}
+    iconProps={{ color: colors.WHITE }}
+    labelProps={{
+      textAlign: "center",
+      color: colors.WHITE,
+      fontWeight: "bold",
+    }}
+    style={{
+      ...props.style,
+      backgroundColor: colors.RED,
+    }}
+  />
 );

@@ -4,6 +4,7 @@ import {
   ActivityIndicator,
   SafeAreaView,
   ScrollView,
+  Share,
   StatusBar,
   StyleSheet,
   View,
@@ -14,9 +15,43 @@ import {
   BodyText,
   Header,
   PrimaryButton,
+  SecondaryButton,
   SmallHeader,
 } from "../common/typography";
 import ShoppingListItem from "./shoppingListItem";
+import {
+  faArrowUpFromBracket,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
+
+const getShareableProducts = (section) => {
+  let ret = "";
+
+  const products = Object.entries(section.products);
+  if (products.length > 0) {
+    products.forEach(
+      ([, item]) => (ret += `${item.count}x ${item.item_title}\n`)
+    );
+  }
+  if (section.subsections) {
+    section.subsections.forEach(
+      (subsection) => (ret += getShareableProducts(subsection))
+    );
+  }
+
+  return ret;
+};
+
+const getShareableListSections = (listSections) => {
+  let ret = "";
+
+  listSections.forEach((section) => {
+    ret += `--- ${section.name.toUpperCase()} ---\n`;
+    ret += getShareableProducts(section);
+  });
+
+  return ret;
+};
 
 const shoppingListToSections = (shoppingList) => {
   const sections = [];
@@ -27,7 +62,7 @@ const shoppingListToSections = (shoppingList) => {
 
     const item = {};
     item.name = key;
-    item.products = value.products ?? [];
+    item.products = value.products ?? {};
     item.subsections = shoppingListToSections(value);
 
     sections.push(item);
@@ -113,14 +148,49 @@ const ShoppingList = ({ navigation }) => {
     );
   }
 
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: getShareableListSections(listSections),
+        title: "Trader Joe's shopping list",
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <PrimaryButton
-          name="Clear list"
-          onPress={() => clearShoppingList().then(() => setListSections([]))}
-          style={{ margin: 10, padding: 10 }}
-        />
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <SecondaryButton
+            icon={faTrashCan}
+            name="Clear"
+            onPress={() => clearShoppingList().then(() => setListSections([]))}
+            style={{ flex: 1, margin: 10 }}
+          />
+          <PrimaryButton
+            icon={faArrowUpFromBracket}
+            name="Share"
+            onPress={onShare}
+            style={{ flex: 1, margin: 10, marginLeft: 0 }}
+          />
+        </View>
         {listSections.map((s) => (
           <View key={s.name}>
             <Header style={styles.header}>{s.name}</Header>
