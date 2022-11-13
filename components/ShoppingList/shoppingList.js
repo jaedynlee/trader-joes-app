@@ -63,7 +63,7 @@ const ShoppingListSection = ({ products, subsections, navigation }) => (
 
 const ShoppingList = ({ navigation }) => {
   const isFocused = useIsFocused();
-  const [listSections, setListSections] = useState([]);
+  const [listSections, setListSections] = useState();
 
   useEffect(() => {
     getShoppingList().then((shoppingList) => {
@@ -71,6 +71,20 @@ const ShoppingList = ({ navigation }) => {
       setListSections(sections);
     });
   }, [isFocused]);
+
+  if (listSections === undefined) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator size="large" animating={true} />
+      </View>
+    );
+  }
 
   if (!listSections.length) {
     return (
