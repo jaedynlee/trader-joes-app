@@ -27,13 +27,11 @@ export const clearShoppingList = async () => {
   }
 };
 
-export const removeProductFromShoppingList = async (product) => {
+export const removeProductFromShoppingList = async (product) =>
   await updateShoppingListCount(product, -1);
-};
 
-export const addProductToShoppingList = async (product) => {
+export const addProductToShoppingList = async (product) =>
   await updateShoppingListCount(product, 1);
-};
 
 /**
  * @shoppingList = {
@@ -66,6 +64,7 @@ export const updateShoppingListCount = async (product, delta) => {
       "@shoppingList",
       JSON.stringify(newShoppingList)
     );
+    return newShoppingList;
   } catch (e) {
     throw e;
   }

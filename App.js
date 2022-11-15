@@ -9,6 +9,13 @@ import FilteredProductsList from "./components/ProductsList/filteredProductsList
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCarrot, faListCheck } from "@fortawesome/free-solid-svg-icons";
 import ShoppingList from "./components/ShoppingList/shoppingList";
+import { ShoppingListContext } from "./shoppingListContext";
+import { useEffect, useState } from "react";
+import {
+  addProductToShoppingList,
+  getShoppingList,
+  removeProductFromShoppingList,
+} from "./storage";
 
 const ProductStack = createNativeStackNavigator();
 
@@ -52,36 +59,59 @@ const ShoppingListStackNavigator = () => (
   </ProductStack.Navigator>
 );
 
-export default App = () => (
-  <NavigationContainer>
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" />
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Products"
-          component={ProductStackNavigator}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ color, size }) => (
-              <FontAwesomeIcon icon={faCarrot} color={color} size={size} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Shopping List"
-          component={ShoppingListStackNavigator}
-          options={{
-            headerShown: false,
-            unmountOnBlur: true,
-            tabBarIcon: ({ color, size }) => (
-              <FontAwesomeIcon icon={faListCheck} color={color} size={size} />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    </SafeAreaView>
-  </NavigationContainer>
-);
+export default App = () => {
+  const [shoppingList, setShoppingList] = useState({});
+  useEffect(() => {
+    getShoppingList().then((shoppingList) => setShoppingList(shoppingList));
+  }, []);
+
+  const addProductToList = (product) => {
+    addProductToShoppingList(product).then(setShoppingList);
+  };
+
+  const removeProductFromList = (product) => {
+    removeProductFromShoppingList(product).then(setShoppingList);
+  };
+
+  return (
+    <ShoppingListContext.Provider
+      value={{ addProductToList, removeProductFromList, shoppingList }}
+    >
+      <NavigationContainer>
+        <SafeAreaView style={styles.container}>
+          <StatusBar barStyle="dark-content" />
+          <Tab.Navigator>
+            <Tab.Screen
+              name="Products"
+              component={ProductStackNavigator}
+              options={{
+                headerShown: false,
+                tabBarIcon: ({ color, size }) => (
+                  <FontAwesomeIcon icon={faCarrot} color={color} size={size} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Shopping List"
+              component={ShoppingListStackNavigator}
+              options={{
+                headerShown: false,
+                unmountOnBlur: true,
+                tabBarIcon: ({ color, size }) => (
+                  <FontAwesomeIcon
+                    icon={faListCheck}
+                    color={color}
+                    size={size}
+                  />
+                ),
+              }}
+            />
+          </Tab.Navigator>
+        </SafeAreaView>
+      </NavigationContainer>
+    </ShoppingListContext.Provider>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

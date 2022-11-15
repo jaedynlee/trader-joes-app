@@ -1,50 +1,40 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { BodyText } from "../common/typography";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import {
-  addProductToShoppingList,
-  getShoppingListCount,
-  removeProductFromShoppingList,
-} from "../../storage.js";
 
 import { StyleSheet, View, Pressable } from "react-native";
 import { colors } from "../../style";
+import { ShoppingListContext } from "../../shoppingListContext";
+import { getShoppingListCount } from "../../util";
 
 const ShoppingListButton = ({ product }) => {
-  const [listCount, setListCount] = useState(undefined);
+  const { addProductToList, removeProductFromList, shoppingList } =
+    useContext(ShoppingListContext);
 
-  useEffect(() => {
-    getShoppingListCount(product).then((listCount) => setListCount(listCount));
-  }, []);
-
-  const onAddToList = () =>
-    addProductToShoppingList(product).then(() => setListCount(listCount + 1));
-
-  const onRemoveFromList = () =>
-    removeProductFromShoppingList(product).then(() =>
-      setListCount(listCount - 1)
-    );
-
-  if (listCount === undefined) {
-    return null;
-  }
+  const listCount = getShoppingListCount(shoppingList, product);
 
   return listCount ? (
     <View style={[styles.buttonContainer, { justifyContent: "space-between" }]}>
-      <Pressable style={styles.plusMinusButton} onPress={onRemoveFromList}>
+      <Pressable
+        style={styles.plusMinusButton}
+        onPress={() => removeProductFromList(product)}
+      >
         <FontAwesomeIcon icon={faMinus} color={colors.WHITE} />
       </Pressable>
       <View style={{ flex: 1, backgroundColor: colors.DARK_RED }}>
         <BodyText style={styles.buttonText}>{listCount}</BodyText>
       </View>
-      <Pressable style={styles.plusMinusButton} onPress={onAddToList}>
+      <Pressable
+        style={styles.plusMinusButton}
+        onPress={() => addProductToList(product)}
+      >
         <FontAwesomeIcon icon={faPlus} color={colors.WHITE} />
       </Pressable>
     </View>
   ) : (
     <Pressable
-      onPress={onAddToList}
+      onPress={() => addProductToList(product)}
       style={[styles.buttonContainer, { textAlign: "center" }]}
     >
       <BodyText style={styles.buttonText}>Add to list</BodyText>
