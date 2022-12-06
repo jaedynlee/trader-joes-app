@@ -16,6 +16,7 @@ import {
   getShoppingList,
   removeProductFromShoppingList,
 } from "./storage";
+import { getShoppingListItemCount } from "./util";
 
 const ProductStack = createNativeStackNavigator();
 
@@ -61,9 +62,6 @@ const ShoppingListStackNavigator = () => (
 
 export default App = () => {
   const [shoppingList, setShoppingList] = useState({});
-  useEffect(() => {
-    getShoppingList().then((shoppingList) => setShoppingList(shoppingList));
-  }, []);
 
   const addProductToList = (product) => {
     addProductToShoppingList(product).then(setShoppingList);
@@ -73,9 +71,20 @@ export default App = () => {
     removeProductFromShoppingList(product).then(setShoppingList);
   };
 
+  const shoppingListItemCount = getShoppingListItemCount(shoppingList);
+
+  useEffect(() => {
+    getShoppingList().then((shoppingList) => setShoppingList(shoppingList));
+  }, []);
+
   return (
     <ShoppingListContext.Provider
-      value={{ addProductToList, removeProductFromList, shoppingList }}
+      value={{
+        addProductToList,
+        removeProductFromList,
+        shoppingList,
+        shoppingListItemCount,
+      }}
     >
       <NavigationContainer>
         <SafeAreaView style={styles.container}>
@@ -104,6 +113,7 @@ export default App = () => {
                     size={size}
                   />
                 ),
+                tabBarBadge: shoppingListItemCount,
               }}
             />
           </Tab.Navigator>

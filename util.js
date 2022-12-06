@@ -27,3 +27,20 @@ export const getShoppingListCount = (shoppingList, product) =>
     ), // Cut off "Product" category
     shoppingList
   );
+
+// GET COUNT OF ALL PRODUCTS
+const getShoppingListItemCount = (shoppingList) => {
+  const entries = Object.entries(shoppingList);
+
+  let count = 0;
+  for (const [key, value] of entries) {
+    if (key === "products") {
+      count += Object.values(value).reduce((acc, { count }) => acc + count, 0);
+      continue;
+    }
+
+    count += getShoppingListItemCount(value);
+  }
+
+  return count;
+};
