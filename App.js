@@ -13,6 +13,7 @@ import { ShoppingListContext } from "./shoppingListContext";
 import { useEffect, useState } from "react";
 import {
   addProductToShoppingList,
+  clearShoppingList,
   getShoppingList,
   removeProductFromShoppingList,
 } from "./storage";
@@ -67,6 +68,10 @@ export default App = () => {
     addProductToShoppingList(product).then(setShoppingList);
   };
 
+  const clearList = () => {
+    clearShoppingList().then(setShoppingList);
+  };
+
   const removeProductFromList = (product) => {
     removeProductFromShoppingList(product).then(setShoppingList);
   };
@@ -81,6 +86,7 @@ export default App = () => {
     <ShoppingListContext.Provider
       value={{
         addProductToList,
+        clearList,
         removeProductFromList,
         shoppingList,
         shoppingListItemCount,

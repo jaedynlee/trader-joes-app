@@ -95,7 +95,7 @@ const ShoppingListSection = ({ products, subsections, navigation }) => (
 );
 
 const ShoppingList = ({ navigation }) => {
-  const { shoppingList, shoppingListItemCount } =
+  const { clearList, shoppingList, shoppingListItemCount } =
     useContext(ShoppingListContext);
 
   if (shoppingListItemCount === 0) {
@@ -160,7 +160,7 @@ const ShoppingList = ({ navigation }) => {
           <SecondaryButton
             icon={faTrashCan}
             name="Clear"
-            onPress={() => clearShoppingList().then(() => setListSections([]))}
+            onPress={clearList}
             style={{ flex: 1, margin: 10 }}
           />
           <PrimaryButton

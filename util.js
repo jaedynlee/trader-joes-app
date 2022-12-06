@@ -29,7 +29,7 @@ export const getShoppingListCount = (shoppingList, product) =>
   );
 
 // GET COUNT OF ALL PRODUCTS
-const getShoppingListItemCount = (shoppingList) => {
+export const getShoppingListItemCount = (shoppingList) => {
   const entries = Object.entries(shoppingList);
 
   let count = 0;

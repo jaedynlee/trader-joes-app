@@ -22,6 +22,7 @@ export const getLocation = async () => {
 export const clearShoppingList = async () => {
   try {
     await AsyncStorage.setItem("@shoppingList", JSON.stringify({}));
+    return {};
   } catch (e) {
     throw e;
   }
