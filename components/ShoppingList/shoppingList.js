@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import { useIsFocused } from "@react-navigation/native";
+import { useContext } from "react";
 import {
-  ActivityIndicator,
   SafeAreaView,
   ScrollView,
   Share,
@@ -9,7 +7,6 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { clearShoppingList, getShoppingList } from "../../storage";
 import { colors } from "../../style";
 import {
   BodyText,
@@ -23,6 +20,7 @@ import {
   faArrowUpFromBracket,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
+import { ShoppingListContext } from "../../shoppingListContext";
 
 const getShareableProducts = (section) => {
   let ret = "";
@@ -97,31 +95,10 @@ const ShoppingListSection = ({ products, subsections, navigation }) => (
 );
 
 const ShoppingList = ({ navigation }) => {
-  const isFocused = useIsFocused();
-  const [listSections, setListSections] = useState();
+  const { shoppingList, shoppingListItemCount } =
+    useContext(ShoppingListContext);
 
-  useEffect(() => {
-    getShoppingList().then((shoppingList) => {
-      const sections = shoppingListToSections(shoppingList);
-      setListSections(sections);
-    });
-  }, [isFocused]);
-
-  if (listSections === undefined) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <ActivityIndicator size="large" animating={true} />
-      </View>
-    );
-  }
-
-  if (!listSections.length) {
+  if (shoppingListItemCount === 0) {
     return (
       <View
         style={{
@@ -147,6 +124,8 @@ const ShoppingList = ({ navigation }) => {
       </View>
     );
   }
+
+  const listSections = shoppingListToSections(shoppingList);
 
   const onShare = async () => {
     try {
