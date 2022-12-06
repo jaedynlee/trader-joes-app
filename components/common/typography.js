@@ -54,13 +54,21 @@ const ButtonBase = (props) => (
         style={{ ...props.iconProps, marginRight: 8 }}
       />
     ) : null}
-    <BodyText style={props.labelProps}>{props.name}</BodyText>
+    <BodyText
+      style={{
+        ...props.labelProps,
+        ...(props.disabled ? props.disabledLabelProps : {}),
+      }}
+    >
+      {props.name}
+    </BodyText>
   </Pressable>
 );
 
 export const SecondaryButton = (props) => (
   <ButtonBase
     {...props}
+    disabledLabelProps={{ color: colors.DARK_GRAY }}
     disabledProps={{ borderColor: colors.DARK_GRAY }}
     iconProps={{ color: colors.RED }}
     labelProps={{ textAlign: "center", color: colors.RED, fontWeight: "bold" }}

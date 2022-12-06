@@ -1,4 +1,4 @@
-import { Linking } from "react-native";
+import { Linking, Platform } from "react-native";
 import {
   faMapLocationDot,
   faStore,
@@ -10,7 +10,12 @@ import { FlatList, Modal, Pressable, StyleSheet, View } from "react-native";
 import { getNearbyStores } from "../../client/client";
 import { setLocation as updateLocationInStorage } from "../../storage";
 import { colors } from "../../style";
-import { BodyText, SmallHeader, TertiaryButton } from "../common/typography";
+import {
+  BodyText,
+  SecondaryButton,
+  SmallHeader,
+  TertiaryButton,
+} from "../common/typography";
 import SearchBar from "./searchBar";
 
 const styles = StyleSheet.create({
@@ -131,6 +136,8 @@ const StoreSelectorModal = ({
                 _distance,
                 _distanceuom,
                 comingsoon,
+                latitude,
+                longitude,
               } = i.item;
 
               const isSelected = selectedLocation?.clientkey === clientkey;
@@ -159,15 +166,29 @@ const StoreSelectorModal = ({
                       {_distance}{" "}
                       {_distanceuom === "mile" ? "mi" : _distanceuom}
                     </BodyText>
-                    <BodyText>
-                      <FontAwesomeIcon icon={faMapLocationDot} /> Map
-                    </BodyText>
+                    <Pressable
+                      onPress={() => {
+                        const domain =
+                          Platform.OS === "ios" ? "apple" : "android";
+                        Linking.openURL(
+                          `http://maps.${domain}.com/maps?q=${latitude},${longitude}`
+                        );
+                      }}
+                    >
+                      <BodyText style={{ color: colors.RED }}>
+                        <FontAwesomeIcon
+                          icon={faMapLocationDot}
+                          color={colors.RED}
+                        />{" "}
+                        Map
+                      </BodyText>
+                    </Pressable>
                     <BodyText>
                       <FontAwesomeIcon icon={faStore} /> More Info
                     </BodyText>
                   </View>
-                  <TertiaryButton
-                    title={
+                  <SecondaryButton
+                    name={
                       isComingSoon
                         ? "Coming soon!"
                         : isSelected
@@ -185,6 +206,7 @@ const StoreSelectorModal = ({
                           console.log(`Failed to set store with error: ${e}`)
                         )
                     }
+                    style={{ marginTop: 10 }}
                   />
                 </View>
               );
