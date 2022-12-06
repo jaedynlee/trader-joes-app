@@ -10,12 +10,7 @@ import { FlatList, Modal, Pressable, StyleSheet, View } from "react-native";
 import { getNearbyStores } from "../../client/client";
 import { setLocation as updateLocationInStorage } from "../../storage";
 import { colors } from "../../style";
-import {
-  BodyText,
-  SecondaryButton,
-  SmallHeader,
-  TertiaryButton,
-} from "../common/typography";
+import { BodyText, SecondaryButton, SmallHeader } from "../common/typography";
 import SearchBar from "./searchBar";
 
 const styles = StyleSheet.create({
@@ -183,9 +178,18 @@ const StoreSelectorModal = ({
                         Map
                       </BodyText>
                     </Pressable>
-                    <BodyText>
-                      <FontAwesomeIcon icon={faStore} /> More Info
-                    </BodyText>
+                    <Pressable
+                      onPress={() =>
+                        Linking.openURL(
+                          `https://locations.traderjoes.com/${state}/${city}/${clientkey}`
+                        )
+                      }
+                    >
+                      <BodyText style={{ color: colors.RED }}>
+                        <FontAwesomeIcon icon={faStore} color={colors.RED} />{" "}
+                        More Info
+                      </BodyText>
+                    </Pressable>
                   </View>
                   <SecondaryButton
                     name={
