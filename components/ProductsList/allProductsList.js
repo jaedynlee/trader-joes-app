@@ -8,9 +8,7 @@ import {
   Pressable,
   ActivityIndicator,
 } from "react-native";
-import categoryList from "../../api/foodCategoryList.json";
 import { colors } from "../../style.js";
-import { apiSettings } from "../../config.js";
 import { getProductCategories } from "../../client/client";
 import { BodyText, Header } from "../common/typography";
 import SearchBar from "./searchBar";

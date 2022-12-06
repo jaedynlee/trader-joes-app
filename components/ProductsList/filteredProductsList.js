@@ -16,11 +16,7 @@ import { BodyText } from "../common/typography.js";
 import DropDownPicker from "react-native-dropdown-picker";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import {
-  getShoppingList,
-  getShoppingListCount,
-  getShoppingListCounts,
-} from "../../storage.js";
+import { getShoppingListCounts } from "../../storage.js";
 import Item from "./productItem.js";
 import { useIsFocused } from "@react-navigation/native";
 
