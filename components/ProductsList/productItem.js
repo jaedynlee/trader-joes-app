@@ -1,10 +1,11 @@
-import React, { useState, memo, useEffect } from "react";
-import { StyleSheet, View, Image, StatusBar, Pressable } from "react-native";
+import React, { memo, useContext } from "react";
+import { StyleSheet, View, Image, Pressable } from "react-native";
 import { colors } from "../../style.js";
 import { BodyText } from "../common/typography.js";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { updateShoppingListCount } from "../../storage.js";
+import { ShoppingListContext } from "../../shoppingListContext";
+import { getShoppingListCount } from "../../util.js";
 
 const styles = StyleSheet.create({
   item: {
@@ -49,20 +50,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const AddRemoveListButton = ({ item, initialCount }) => {
-  const [count, setCount] = useState(undefined);
-
-  useEffect(() => {
-    setCount(initialCount);
-  }, [initialCount]);
-
-  const updateCount = (delta) => {
-    updateShoppingListCount(item, delta).then(() => setCount(count + delta));
-  };
-
-  if (count === undefined) {
-    return null;
-  }
+const AddRemoveListButton = ({ item }) => {
+  const { addProductToList, removeProductFromList, shoppingList } =
+    useContext(ShoppingListContext);
+  const count = getShoppingListCount(shoppingList, item);
 
   return (
     <View
@@ -88,7 +79,10 @@ const AddRemoveListButton = ({ item, initialCount }) => {
             alignContent: "center",
           }}
         >
-          <Pressable style={{ padding: 10 }} onPress={() => updateCount(-1)}>
+          <Pressable
+            style={{ padding: 10 }}
+            onPress={() => removeProductFromList(item)}
+          >
             <FontAwesomeIcon icon={faMinus} color={colors.WHITE} />
           </Pressable>
           <View style={{ paddingHorizontal: 5 }}>
@@ -96,12 +90,18 @@ const AddRemoveListButton = ({ item, initialCount }) => {
               {count}
             </BodyText>
           </View>
-          <Pressable style={{ padding: 10 }} onPress={() => updateCount(1)}>
+          <Pressable
+            style={{ padding: 10 }}
+            onPress={() => addProductToList(item)}
+          >
             <FontAwesomeIcon icon={faPlus} color={colors.WHITE} />
           </Pressable>
         </View>
       ) : (
-        <Pressable style={{ padding: 10 }} onPress={() => updateCount(1)}>
+        <Pressable
+          style={{ padding: 10 }}
+          onPress={() => addProductToList(item)}
+        >
           <FontAwesomeIcon icon={faPlus} color={colors.WHITE} />
         </Pressable>
       )}
