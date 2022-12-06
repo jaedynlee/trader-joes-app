@@ -1,3 +1,4 @@
+import { Linking } from "react-native";
 import {
   faMapLocationDot,
   faStore,
@@ -144,8 +145,9 @@ const StoreSelectorModal = ({
                   <BodyText>
                     {city}, {state} {postalcode}
                   </BodyText>
-                  <BodyText>{phone}</BodyText>
-
+                  <Pressable onPress={() => Linking.openURL(`tel:${phone}`)}>
+                    <BodyText style={{ color: colors.RED }}>{phone}</BodyText>
+                  </Pressable>
                   <View
                     style={{
                       flexDirection: "row",
