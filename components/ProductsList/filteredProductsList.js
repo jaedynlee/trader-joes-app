@@ -102,8 +102,8 @@ const FilteredProductsList = ({ route, navigation }) => {
       setCategoryOptions([
         {
           label: categoryId ? `All ${route.params.name}` : "All Categories",
-          value: categoryId ?? "all",
-          key: "all",
+          value: categoryId ?? "all-categories",
+          key: "all-categories",
         },
         ...cateoryAggregation.options.map((o) =>
           aggregationOptionToDropdownOption(o)
@@ -119,7 +119,7 @@ const FilteredProductsList = ({ route, navigation }) => {
         {
           label: `All Characteristics`,
           value: undefined,
-          key: "all",
+          key: "all-categories",
         },
         ...characteristicAggregation.options.map((o) =>
           aggregationOptionToDropdownOption(o)
@@ -135,7 +135,7 @@ const FilteredProductsList = ({ route, navigation }) => {
         {
           label: `All Tags`,
           value: undefined,
-          key: "all",
+          key: "all-tags",
         },
         ...funTagAggregation.options.map((o) =>
           aggregationOptionToDropdownOption(o)
