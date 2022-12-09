@@ -21,6 +21,7 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { ShoppingListContext } from "../../shoppingListContext";
+import { getTotalPrice } from "../../util";
 
 const getShareableProducts = (section) => {
   let ret = "";
@@ -126,6 +127,7 @@ const ShoppingList = ({ navigation }) => {
   }
 
   const listSections = shoppingListToSections(shoppingList);
+  const totalPrice = getTotalPrice(shoppingList);
 
   const onShare = async () => {
     try {
@@ -169,6 +171,18 @@ const ShoppingList = ({ navigation }) => {
             onPress={onShare}
             style={{ flex: 1, margin: 10, marginLeft: 0 }}
           />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            paddingHorizontal: 20,
+            paddingVertical: 10,
+          }}
+        >
+          <Header>Total</Header>
+          <Header>${totalPrice.toFixed(2)}</Header>
         </View>
         {listSections.map((s) => (
           <View key={s.name}>

@@ -39,7 +39,7 @@ export const addProductToShoppingList = async (product) =>
  *   categoryId: {
  *      products:{
  *        sku: {
- *          quantity,
+ *          count,
  *          name,
  *          price,
  *          etc.

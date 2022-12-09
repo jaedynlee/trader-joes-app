@@ -1,3 +1,22 @@
+export const getTotalPrice = (shoppingList) => {
+  const entries = Object.entries(shoppingList);
+
+  let price = 0;
+  for (const [key, value] of entries) {
+    if (key === "products") {
+      price += Object.values(value).reduce(
+        (acc, { count, price }) => acc + count * Number(price),
+        0
+      );
+      continue;
+    }
+
+    price += getTotalPrice(value);
+  }
+
+  return price;
+};
+
 const getShoppingListCountHelper = (
   product,
   category_hierarchy,
