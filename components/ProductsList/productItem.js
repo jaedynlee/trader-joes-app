@@ -145,6 +145,7 @@ const Item = ({ item, count, navigation }) => {
             resizeMode="contain"
             source={{
               uri: uri,
+              cache: "force-cache",
             }}
           />
         </View>
