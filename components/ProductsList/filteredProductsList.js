@@ -119,7 +119,7 @@ const FilteredProductsList = ({ route, navigation }) => {
         {
           label: `All Characteristics`,
           value: undefined,
-          key: "all-categories",
+          key: "all-characteristics",
         },
         ...characteristicAggregation.options.map((o) =>
           aggregationOptionToDropdownOption(o)
