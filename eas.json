@@ -1,5 +1,4 @@
 {
-  "channel": "trader-joes-app",
   "cli": {
     "version": ">= 2.4.1"
   },
