@@ -70,7 +70,7 @@ const Item = ({ id, title, navigation }) => {
   );
 };
 
-const AllProductsList = ({ navigation }) => {
+export const ProductCategoryList = ({ navigation }) => {
   const [products, setProducts] = useState([]);
   const [location, setLocation] = useState();
 
@@ -176,5 +176,3 @@ const AllProductsList = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
-export default AllProductsList;

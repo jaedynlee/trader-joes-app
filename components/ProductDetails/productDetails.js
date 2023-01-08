@@ -42,15 +42,13 @@ const ProductDetails = ({ route }) => {
 
   const [product, setProduct] = useState(undefined);
 
-  useEffect(
-    () =>
-      getLocation().then((location) =>
-        getProductBySku(location.clientkey, sku).then((response) =>
-          setProduct(response.data.products.items[0])
-        )
-      ),
-    []
-  );
+  useEffect(() => {
+    getLocation().then((location) =>
+      getProductBySku(location.clientkey, sku).then((response) =>
+        setProduct(response.data.products.items[0])
+      )
+    );
+  }, []);
 
   if (!product) {
     return (

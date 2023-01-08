@@ -1,11 +1,10 @@
 import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
-import AllProductsList from "./components/ProductsList/allProductsList";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { colors } from "./style";
 import ProductDetails from "./components/ProductDetails/productDetails.js";
-import FilteredProductsList from "./components/ProductsList/filteredProductsList";
+import FilteredProductsList from "./components/ProductList/productList";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCarrot, faListCheck } from "@fortawesome/free-solid-svg-icons";
 import ShoppingList from "./components/ShoppingList/shoppingList";
@@ -18,6 +17,7 @@ import {
   removeProductFromShoppingList,
 } from "./storage";
 import { getShoppingListItemCount } from "./util";
+import { ProductCategoryList } from "./components/ProductCategoryList/productCategoryList";
 
 const ProductStack = createNativeStackNavigator();
 
@@ -27,7 +27,7 @@ const ProductStackNavigator = () => (
   <ProductStack.Navigator>
     <ProductStack.Screen
       name="All Products List"
-      component={AllProductsList}
+      component={ProductCategoryList}
       options={{ title: "All Products" }}
     />
     <ProductStack.Screen
