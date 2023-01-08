@@ -120,6 +120,7 @@ export default App = () => {
                   />
                 ),
                 tabBarBadge: shoppingListItemCount,
+                tabBarBadgeStyle: { backgroundColor: colors.RED },
               }}
             />
           </Tab.Navigator>
