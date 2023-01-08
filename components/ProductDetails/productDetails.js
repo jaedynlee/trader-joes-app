@@ -13,8 +13,6 @@ import PriceDetails from "./priceDetails.js";
 import Ingredients from "./ingredients.js";
 import ProductCharacteristics from "./productCharacteristics.js";
 import Story from "./story.js";
-import { apiSettings } from "../../config.js";
-import productDetails from "../../api/product.json";
 import { Header, LegalText } from "../common/typography";
 import Nutrition from "./nutrition.js";
 import { getProductBySku } from "../../client/client";
@@ -44,19 +42,15 @@ const ProductDetails = ({ route }) => {
 
   const [product, setProduct] = useState(undefined);
 
-  useEffect(() => {
-    if (apiSettings.DISABLE_TJ_API_REQUESTS) {
-      console.log("TJ API requests disabled-- using static resource");
-      setProduct(productDetails.data.products.items[0]);
-      return;
-    }
-
-    getLocation().then((location) =>
-      getProductBySku(location.clientkey, sku).then((response) =>
-        setProduct(response.data.products.items[0])
-      )
-    );
-  }, []);
+  useEffect(
+    () =>
+      getLocation().then((location) =>
+        getProductBySku(location.clientkey, sku).then((response) =>
+          setProduct(response.data.products.items[0])
+        )
+      ),
+    []
+  );
 
   if (!product) {
     return (

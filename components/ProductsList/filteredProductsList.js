@@ -9,8 +9,6 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { colors } from "../../style.js";
-import { apiSettings } from "../../config.js";
-import bakeryProducts from "../../api/bakeryProducts.json";
 import { getProducts } from "../../client/client";
 import { BodyText } from "../common/typography.js";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -152,11 +150,6 @@ const FilteredProductsList = ({ route, navigation }) => {
   useEffect(() => {
     setLoading(true);
     setProducts([]);
-    if (apiSettings.DISABLE_TJ_API_REQUESTS) {
-      console.log("TJ API requests disabled-- using static resource");
-      setStates(bakeryProducts.data.products);
-      return;
-    }
 
     // Start at first page when new filter is applied
     page.current = 1;
