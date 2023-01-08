@@ -42,7 +42,7 @@ const FilteredProductsList = ({ route, navigation }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [category, setCategory] = useState(categoryId ?? "all");
+  const [category, setCategory] = useState(categoryId ?? "all-categories");
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [categoryOptions, setCategoryOptions] = useState([]);
 
@@ -140,7 +140,7 @@ const FilteredProductsList = ({ route, navigation }) => {
         ),
       ]);
 
-    //   Go to beginning of list
+    // Go to beginning of list
     if (products.total_count) {
       flatListRef.current.scrollToIndex({ animated: true, index: 0 });
     }
@@ -156,7 +156,7 @@ const FilteredProductsList = ({ route, navigation }) => {
 
     getProducts(
       storeCode,
-      category === "all" ? undefined : category,
+      category === "all-categories" ? undefined : category,
       page.current,
       searchTerm,
       characteristic ? [characteristic] : undefined,
@@ -165,9 +165,8 @@ const FilteredProductsList = ({ route, navigation }) => {
   }, [category, characteristic, funTag]);
 
   useEffect(() => {
-    if (!shouldFetch || fetchedAllPages) {
-      return;
-    }
+    if (!shouldFetch || fetchedAllPages) return;
+
     if (page.current === totalPages.current) {
       setFetchedAllPages(true);
       return;
