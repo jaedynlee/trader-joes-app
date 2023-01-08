@@ -187,9 +187,10 @@ export const getProducts = async (
     headers: {
       "User-Agent":
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0",
-      Accept: "*/*",
+      Accept: "application/json",
       "Accept-Language": "en-US,en;q=0.5",
       "Accept-Encoding": "gzip, deflate, br",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       operationName: "SearchProducts",
@@ -205,9 +206,10 @@ export const getProductBySku = async (storeCode, sku) =>
     headers: {
       "User-Agent":
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0",
-      Accept: "*/*",
+      Accept: "application/json",
       "Accept-Language": "en-US,en;q=0.5",
       "Accept-Encoding": "gzip, deflate, br",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       operationName: "SearchProduct",
@@ -225,19 +227,10 @@ export const getNearbyStores = (zipCode) =>
   fetch("https://alphaapi.brandify.com/rest/locatorsearch", {
     method: "POST",
     headers: {
-      // "User-Agent":
-      //   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0",
       Accept: "application/json, text/plain, */*",
       "Accept-Language": "en-US,en;q=0.5",
       "Accept-Encoding": "gzip, deflate, br",
       "Content-Type": "application/json;charset=utf-8",
-      // Origin: "https://www.traderjoes.com",
-      // Connection: "keep-alive",
-      // Referer: "https://www.traderjoes.com/",
-      // "Sec-Fetch-Dest": "empty",
-      // "Sec-Fetch-Mode": "cors",
-      // "Sec-Fetch-Site": "cross-site",
-      // TE: "trailers",
     },
     body: JSON.stringify({
       request: {

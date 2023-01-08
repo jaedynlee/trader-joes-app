@@ -196,7 +196,7 @@ const FilteredProductsList = ({ route, navigation }) => {
         ListFooterComponent={() => (
           <ActivityIndicator
             size="large"
-            animating={products.length && !fetchedAllPages}
+            animating={products.length > 0 && !fetchedAllPages}
           />
         )}
       />
