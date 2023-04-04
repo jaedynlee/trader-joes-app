@@ -1,40 +1,40 @@
 export const getTotalPrice = (shoppingList) => {
-  const entries = Object.entries(shoppingList);
+  const entries = Object.entries(shoppingList)
 
-  let price = 0;
+  let price = 0
   for (const [key, value] of entries) {
-    if (key === "products") {
+    if (key === 'products') {
       price += Object.values(value).reduce(
         (acc, { count, price }) => acc + count * Number(price),
         0
-      );
-      continue;
+      )
+      continue
     }
 
-    price += getTotalPrice(value);
+    price += getTotalPrice(value)
   }
 
-  return price;
-};
+  return price
+}
 
 const getShoppingListCountHelper = (
   product,
-  category_hierarchy,
+  categoryHierarchy,
   shoppingList
 ) => {
-  if (category_hierarchy.length === 0) {
-    const products = shoppingList.products ?? {};
-    const productEntry = products[product.sku] ?? {};
-    return productEntry.count ?? 0;
+  if (categoryHierarchy.length === 0) {
+    const products = shoppingList.products ?? {}
+    const productEntry = products[product.sku] ?? {}
+    return productEntry.count ?? 0
   }
 
-  const category = category_hierarchy.shift();
+  const category = categoryHierarchy.shift()
   return getShoppingListCountHelper(
     product,
-    category_hierarchy,
+    categoryHierarchy,
     shoppingList[category.name] ?? {}
-  );
-};
+  )
+}
 
 // GET COUNT OF SINGLE PRODUCT
 export const getShoppingListCount = (shoppingList, product) =>
@@ -45,21 +45,21 @@ export const getShoppingListCount = (shoppingList, product) =>
       Math.min(3, product.category_hierarchy.length)
     ), // Cut off "Product" category
     shoppingList
-  );
+  )
 
 // GET COUNT OF ALL PRODUCTS
 export const getShoppingListItemCount = (shoppingList) => {
-  const entries = Object.entries(shoppingList);
+  const entries = Object.entries(shoppingList)
 
-  let count = 0;
+  let count = 0
   for (const [key, value] of entries) {
-    if (key === "products") {
-      count += Object.values(value).reduce((acc, { count }) => acc + count, 0);
-      continue;
+    if (key === 'products') {
+      count += Object.values(value).reduce((acc, { count }) => acc + count, 0)
+      continue
     }
 
-    count += getShoppingListItemCount(value);
+    count += getShoppingListItemCount(value)
   }
 
-  return count;
-};
+  return count
+}

@@ -1,48 +1,48 @@
-import { useCallback } from "react";
-import { useFilter } from "./useFilter";
+import { useCallback } from 'react'
+import { useFilter } from './useFilter'
 
 export const useProductFilters = (aggregations, categoryId) => {
   const category = useFilter(
     aggregations,
-    "category_id",
-    "Categories",
+    'category_id',
+    'Categories',
     categoryId
-  );
+  )
   const characteristic = useFilter(
     aggregations,
-    "item_characteristics",
-    "Characteristics",
+    'item_characteristics',
+    'Characteristics',
     undefined
-  );
-  const funTag = useFilter(aggregations, "fun_tags", "Tags", undefined);
+  )
+  const funTag = useFilter(aggregations, 'fun_tags', 'Tags', undefined)
 
   const onCategoryOpen = useCallback(() => {
-    characteristic.setOpen(false);
-    funTag.setOpen(false);
-  }, []);
+    characteristic.setOpen(false)
+    funTag.setOpen(false)
+  }, [])
 
   const onCharacteristicOpen = useCallback(() => {
-    category.setOpen(false);
-    funTag.setOpen(false);
-  }, []);
+    category.setOpen(false)
+    funTag.setOpen(false)
+  }, [])
 
   const onFunTagOpen = useCallback(() => {
-    category.setOpen(false);
-    characteristic.setOpen(false);
-  }, []);
+    category.setOpen(false)
+    characteristic.setOpen(false)
+  }, [])
 
   return {
     categoryFilter: {
       onOpen: onCategoryOpen,
-      ...category,
+      ...category
     },
     characteristicFilter: {
       onOpen: onCharacteristicOpen,
-      ...characteristic,
+      ...characteristic
     },
     funTagFilter: {
       onOpen: onFunTagOpen,
-      ...funTag,
-    },
-  };
-};
+      ...funTag
+    }
+  }
+}

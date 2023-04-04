@@ -1,32 +1,32 @@
 import {
   faArrowUpRightFromSquare,
-  faCheckSquare,
-} from "@fortawesome/free-solid-svg-icons";
-import { faSquare } from "@fortawesome/free-regular-svg-icons";
+  faCheckSquare
+} from '@fortawesome/free-solid-svg-icons'
+import { faSquare } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import React, { memo, useState } from 'react'
+import { Pressable, StyleSheet, View } from 'react-native'
 
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { memo, useState } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
-import { colors } from "../../style";
-import { BodyText } from "../common/typography";
+import { colors } from '../../style'
+import { BodyText } from '../common/typography'
 
 const ShoppingListItem = ({ item, sku, navigation }) => {
-  const [checked, setChecked] = useState(item.checked);
+  const [checked, setChecked] = useState(item.checked)
 
   return (
     <View
       style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        paddingRight: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingRight: 20
       }}
     >
       <View
         style={{
           flex: 1,
-          flexDirection: "row",
-          alignItems: "center",
+          flexDirection: 'row',
+          alignItems: 'center'
         }}
       >
         <Pressable
@@ -50,13 +50,13 @@ const ShoppingListItem = ({ item, sku, navigation }) => {
       <BodyText style={{ ...styles.price, ...(checked ? styles.checked : {}) }}>
         {Number(item.price)
           ? `$${(parseFloat(item.price) * item.count).toFixed(2)}`
-          : ""}
+          : ''}
         <Pressable
           style={{ paddingLeft: 5, marginBottom: -1 }}
           onPress={() =>
-            navigation.navigate("List Product Details", {
+            navigation.navigate('List Product Details', {
               name: item.item_title,
-              sku: sku,
+              sku
             })
           }
         >
@@ -64,22 +64,22 @@ const ShoppingListItem = ({ item, sku, navigation }) => {
         </Pressable>
       </BodyText>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   productName: {
     flex: 1,
-    textOverflow: "ellipsis",
-    paddingRight: 10,
+    textOverflow: 'ellipsis',
+    paddingRight: 10
   },
   price: {},
   checked: {
-    color: colors.DARK_GRAY,
-  },
-});
+    color: colors.DARK_GRAY
+  }
+})
 
 export default memo(
   ShoppingListItem,
   (prev, next) => prev.item.count === next.item.count
-);
+)

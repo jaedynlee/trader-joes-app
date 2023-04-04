@@ -1,34 +1,36 @@
-import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { colors } from "./style";
-import ProductDetails from "./components/ProductDetails/productDetails.js";
-import FilteredProductsList from "./components/ProductList/productList";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCarrot, faListCheck } from "@fortawesome/free-solid-svg-icons";
-import ShoppingList from "./components/ShoppingList/shoppingList";
-import { ShoppingListContext } from "./shoppingListContext";
-import { useEffect, useState } from "react";
+import { StyleSheet, SafeAreaView, StatusBar } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import React, { useEffect, useState } from 'react'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
+import { colors } from './style'
+import ProductDetails from './components/ProductDetails/productDetails.js'
+import FilteredProductsList from './components/ProductList/productList'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faCarrot, faListCheck } from '@fortawesome/free-solid-svg-icons'
+import ShoppingList from './components/ShoppingList/shoppingList'
+import { ShoppingListContext } from './shoppingListContext'
+
 import {
   addProductToShoppingList,
   clearShoppingList,
   getShoppingList,
-  removeProductFromShoppingList,
-} from "./storage";
-import { getShoppingListItemCount } from "./util";
-import { ProductCategoryList } from "./components/ProductCategoryList/productCategoryList";
+  removeProductFromShoppingList
+} from './storage'
+import { getShoppingListItemCount } from './util'
+import { ProductCategoryList } from './components/ProductCategoryList/productCategoryList'
 
-const ProductStack = createNativeStackNavigator();
+const ProductStack = createNativeStackNavigator()
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 
 const ProductStackNavigator = () => (
   <ProductStack.Navigator>
     <ProductStack.Screen
       name="All Products List"
       component={ProductCategoryList}
-      options={{ title: "All Products" }}
+      options={{ title: 'All Products' }}
     />
     <ProductStack.Screen
       name="Filtered Products List"
@@ -41,7 +43,7 @@ const ProductStackNavigator = () => (
       options={({ route }) => ({ title: route.params.name })}
     />
   </ProductStack.Navigator>
-);
+)
 
 const ShoppingListStackNavigator = () => (
   <ProductStack.Navigator>
@@ -50,7 +52,7 @@ const ShoppingListStackNavigator = () => (
       component={ShoppingList}
       options={{
         unmountOnBlur: true,
-        title: "Shopping List",
+        title: 'Shopping List'
       }}
     />
     <ProductStack.Screen
@@ -59,28 +61,28 @@ const ShoppingListStackNavigator = () => (
       options={({ route }) => ({ title: route.params.name })}
     />
   </ProductStack.Navigator>
-);
+)
 
-export default App = () => {
-  const [shoppingList, setShoppingList] = useState({});
+export default function App () {
+  const [shoppingList, setShoppingList] = useState({})
 
   const addProductToList = (product) => {
-    addProductToShoppingList(product).then(setShoppingList);
-  };
+    addProductToShoppingList(product).then(setShoppingList)
+  }
 
   const clearList = () => {
-    clearShoppingList().then(setShoppingList);
-  };
+    clearShoppingList().then(setShoppingList)
+  }
 
   const removeProductFromList = (product) => {
-    removeProductFromShoppingList(product).then(setShoppingList);
-  };
+    removeProductFromShoppingList(product).then(setShoppingList)
+  }
 
-  const shoppingListItemCount = getShoppingListItemCount(shoppingList);
+  const shoppingListItemCount = getShoppingListItemCount(shoppingList)
 
   useEffect(() => {
-    getShoppingList().then((shoppingList) => setShoppingList(shoppingList));
-  }, []);
+    getShoppingList().then((shoppingList) => setShoppingList(shoppingList))
+  }, [])
 
   return (
     <ShoppingListContext.Provider
@@ -89,7 +91,7 @@ export default App = () => {
         clearList,
         removeProductFromList,
         shoppingList,
-        shoppingListItemCount,
+        shoppingListItemCount
       }}
     >
       <NavigationContainer>
@@ -103,7 +105,7 @@ export default App = () => {
                 headerShown: false,
                 tabBarIcon: ({ color, size }) => (
                   <FontAwesomeIcon icon={faCarrot} color={color} size={size} />
-                ),
+                )
               }}
             />
             <Tab.Screen
@@ -120,19 +122,19 @@ export default App = () => {
                   />
                 ),
                 tabBarBadge: shoppingListItemCount,
-                tabBarBadgeStyle: { backgroundColor: colors.RED },
+                tabBarBadgeStyle: { backgroundColor: colors.RED }
               }}
             />
           </Tab.Navigator>
         </SafeAreaView>
       </NavigationContainer>
     </ShoppingListContext.Provider>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.WHITE,
-  },
-});
+    backgroundColor: colors.WHITE
+  }
+})

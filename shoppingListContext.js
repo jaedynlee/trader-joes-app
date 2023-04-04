@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 export const ShoppingListContext = React.createContext({
   addProductToList: () => {},
@@ -6,5 +6,5 @@ export const ShoppingListContext = React.createContext({
   listLength: 0,
   removeProductFromList: () => {},
   shoppingList: {},
-  shoppingListItemCount: 0,
-});
+  shoppingListItemCount: 0
+})

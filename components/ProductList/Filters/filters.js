@@ -1,13 +1,14 @@
-import { View } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
+import { View } from 'react-native'
+import DropDownPicker from 'react-native-dropdown-picker'
+import React from 'react'
 
 export const Filters = ({
   expanded,
   categoryPickerProps,
   characteristicPickerProps,
-  funTagPickerProps,
+  funTagPickerProps
 }) => {
-  if (!expanded) return null;
+  if (!expanded) return null
 
   return (
     <View style={{ zIndex: 1000 }}>
@@ -18,14 +19,14 @@ export const Filters = ({
           zIndex={3000}
           zIndexInverse={1000}
           labelStyle={{
-            fontSize: 16,
+            fontSize: 16
           }}
           listItemLabelStyle={{
-            fontSize: 16,
+            fontSize: 16
           }}
           style={{
             borderWidth: 0,
-            borderBottomWidth: 1,
+            borderBottomWidth: 1
           }}
         />
       )}
@@ -37,15 +38,15 @@ export const Filters = ({
           zIndex={2000}
           zIndexInverse={2000}
           labelStyle={{
-            fontSize: 16,
+            fontSize: 16
           }}
           listItemLabelStyle={{
-            fontSize: 16,
+            fontSize: 16
           }}
           placeholderStyle={{ fontSize: 16 }}
           style={{
             borderWidth: 0,
-            borderBottomWidth: 1,
+            borderBottomWidth: 1
           }}
         />
       )}
@@ -57,18 +58,18 @@ export const Filters = ({
           zIndex={1000}
           zIndexInverse={3000}
           labelStyle={{
-            fontSize: 16,
+            fontSize: 16
           }}
           listItemLabelStyle={{
-            fontSize: 16,
+            fontSize: 16
           }}
           placeholderStyle={{ fontSize: 16 }}
           style={{
             borderWidth: 0,
-            borderBottomWidth: 1,
+            borderBottomWidth: 1
           }}
         />
       )}
     </View>
-  );
-};
+  )
+}

@@ -1,13 +1,15 @@
-import { StyleSheet, View } from "react-native";
-import Tag from "../common/tag";
+import { StyleSheet, View } from 'react-native'
+import React from 'react'
+
+import Tag from '../common/tag'
 
 const styles = StyleSheet.create({
   tagsWrapper: {
-    flexWrap: "wrap",
-    flexDirection: "row",
-    paddingVertical: 10,
-  },
-});
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    paddingVertical: 10
+  }
+})
 
 const ProductCharacteristics = ({ characteristics }) => {
   return (
@@ -16,7 +18,7 @@ const ProductCharacteristics = ({ characteristics }) => {
         <Tag label={c} key={c} />
       ))}
     </View>
-  );
-};
+  )
+}
 
-export default ProductCharacteristics;
+export default ProductCharacteristics

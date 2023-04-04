@@ -1,32 +1,32 @@
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { colors } from "../../style.js";
-import { BodyText } from "../common/typography";
+import React, { useState } from 'react'
+import { StyleSheet, View } from 'react-native'
+import { colors } from '../../style.js'
+import { BodyText } from '../common/typography'
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 10,
+    paddingTop: 10
   },
   tertiaryButton: {
     color: colors.RED,
-    textDecorationLine: "underline",
-  },
-});
+    textDecorationLine: 'underline'
+  }
+})
 
 const ProductSummary = ({ summary }) => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false)
 
   const summaryClean = summary
-    .replace(/<p>/g, "")
-    .replace(/<strong>/g, "")
-    .replace(/<\/strong>/g, "")
-    .replace(/<em>/g, "")
-    .replace(/<\/em>/g, "")
-    .replace(/&amp;/g, "&")
-    .replace(/&deg;/g, "º")
-    .replace(/<\/p>/g, "\n")
-    .replace(/<br \/>/g, "\n")
-    .trim();
+    .replace(/<p>/g, '')
+    .replace(/<strong>/g, '')
+    .replace(/<\/strong>/g, '')
+    .replace(/<em>/g, '')
+    .replace(/<\/em>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&deg;/g, 'º')
+    .replace(/<\/p>/g, '\n')
+    .replace(/<br \/>/g, '\n')
+    .trim()
 
   return (
     <View style={styles.container}>
@@ -37,10 +37,10 @@ const ProductSummary = ({ summary }) => {
         onPress={() => setExpanded(!expanded)}
         style={styles.tertiaryButton}
       >
-        Show {expanded ? "Less" : "More"}
+        Show {expanded ? 'Less' : 'More'}
       </BodyText>
     </View>
-  );
-};
+  )
+}
 
-export default ProductSummary;
+export default ProductSummary
