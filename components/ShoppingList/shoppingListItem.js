@@ -70,7 +70,6 @@ const ShoppingListItem = ({ item, sku, navigation }) => {
 const styles = StyleSheet.create({
   productName: {
     flex: 1,
-    textOverflow: 'ellipsis',
     paddingRight: 10
   },
   price: {},
