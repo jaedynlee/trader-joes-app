@@ -73,7 +73,7 @@ const FilteredProductsList = ({ route, navigation }) => {
     fetchProducts().then(({ data: { products } }) => {
       setProducts(products.items ?? [])
       totalPages.current = products.page_info.total_pages
-      if (products.page_info.total_pages === 1) {
+      if (products.page_info.total_pages <= 1) {
         setFetchedAllPages(true)
       }
       setShouldFetch(false)
@@ -91,7 +91,7 @@ const FilteredProductsList = ({ route, navigation }) => {
   useEffect(() => {
     if (!shouldFetch || fetchedAllPages) return
 
-    if (page.current === totalPages.current) {
+    if (page.current >= totalPages.current) {
       setFetchedAllPages(true)
       return
     }
@@ -180,19 +180,17 @@ const FilteredProductsList = ({ route, navigation }) => {
               alignItems: 'center'
             }}
           >
-            {loading
-              ? (
+            {loading ? (
               <ActivityIndicator
                 size="large"
                 animating={true}
                 style={{ flex: 1, alignSelf: 'center' }}
               />
-                )
-              : (
+            ) : (
               <BodyText style={{ flex: 1, alignSelf: 'center' }}>
                 {"Couldn't find any results."}
               </BodyText>
-                )}
+            )}
           </View>
         )}
         ListFooterComponent={() => (
