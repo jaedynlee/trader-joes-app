@@ -3,6 +3,7 @@
     "name": "trader-joes",
     "slug": "trader-joes",
     "version": "1.0.0",
+    "owner": "jaedynlee",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -15,9 +16,7 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/fc83b902-b241-4cf0-b439-1f432e0abfc4"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.jaedynlee.traderjoes"
