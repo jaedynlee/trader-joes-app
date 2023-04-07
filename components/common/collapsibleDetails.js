@@ -6,12 +6,14 @@ import {
   UIManager,
   View
 } from 'react-native'
-import { Header } from '../common/typography.js'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {
   faChevronDown,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components/native'
+
+import { Header } from '../common/typography.js'
 
 if (
   Platform.OS === 'android' &&
@@ -19,6 +21,11 @@ if (
 ) {
   UIManager.setLayoutAnimationEnabledExperimental(true)
 }
+
+const HeaderWrapper = styled(View)`
+  align-items: center;
+  flex-direction: row;
+`;
 
 const CollapsibleDetails = ({ label, children }) => {
   const [expanded, setExpanded] = useState(false)
@@ -31,7 +38,7 @@ const CollapsibleDetails = ({ label, children }) => {
           setExpanded(!expanded)
         }}
       >
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <HeaderWrapper>
           <Header>{label}</Header>
           {expanded
             ? (
@@ -48,7 +55,7 @@ const CollapsibleDetails = ({ label, children }) => {
               style={{ paddingLeft: 30 }}
             />
               )}
-        </View>
+        </HeaderWrapper>
       </Pressable>
       {expanded && children}
     </View>
