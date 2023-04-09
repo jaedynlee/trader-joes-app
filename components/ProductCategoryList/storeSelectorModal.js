@@ -186,7 +186,7 @@ const StoreSelectorModal = ({
                     >
                       <BodyText style={{ color: colors.RED }}>
                         <FontAwesomeIcon icon={faStore} color={colors.RED} />{' '}
-                        More Info
+                        Store Info
                       </BodyText>
                     </Pressable>
                   </View>
