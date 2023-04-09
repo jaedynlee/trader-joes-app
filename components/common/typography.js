@@ -1,33 +1,34 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { Button, Pressable, Text } from 'react-native'
 import React from 'react'
+import styled from 'styled-components/native'
 
 import { colors } from '../../style'
 
-export const BodyText = (props) => (
-  <Text {...props} style={{ ...props.style, fontSize: 16 }}>
-    {props.children}
-  </Text>
-)
+// TEXT
+export const BodyText = styled.Text`
+  font-size: 16px;
+`
 
-export const SmallHeader = (props) => (
-  <Text {...props} style={{ ...props.style, fontSize: 16, fontWeight: 'bold' }}>
-    {props.children}
-  </Text>
-)
+export const LegalText = styled.Text`
+  font-size: 12px;
+`
 
-export const Header = (props) => (
-  <Text {...props} style={{ ...props.style, fontSize: 20, fontWeight: 'bold' }}>
-    {props.children}
-  </Text>
-)
+export const Link = styled(BodyText)`
+  color: ${colors.RED};
+`
 
-export const LegalText = (props) => (
-  <Text {...props} style={{ ...props.style, fontSize: 12 }}>
-    {props.children}
-  </Text>
-)
+// HEADER
+export const SmallHeader = styled(BodyText)`
+  font-weight: bold;
+`
 
+export const Header = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+`
+
+// BUTTON
 export const TertiaryButton = (props) => (
   <Button {...props} style={{ ...props.style }} color={colors.RED}>
     {props.children}
@@ -76,12 +77,13 @@ export const SecondaryButton = (props) => (
     disabledProps={{ borderColor: colors.DARK_GRAY }}
     iconProps={{ color: colors.RED }}
     labelProps={{ textAlign: 'center', color: colors.RED, fontWeight: 'bold' }}
-    style={{
-      ...props.style,
-      backgroundColor: colors.WHITE,
-      borderColor: colors.RED,
-      borderWidth: 2
-    }}
+    style={
+      {
+        ...props.style,
+        backgroundColor: colors.WHITE,
+        borderColor: colors.RED,
+        borderWidth: 2
+      }}
   />
 )
 

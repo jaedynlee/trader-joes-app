@@ -1,26 +1,28 @@
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import React from 'react'
-import { Pressable, StyleSheet, TextInput, View } from 'react-native'
+import { Pressable } from 'react-native'
+import styled from 'styled-components/native'
+
 import { colors } from '../../style'
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderWidth: 1,
-    borderRadius: 10
-  },
-  input: {
-    fontSize: 16,
-    padding: 15,
-    lineHeight: 20
-  },
-  clearButton: {
-    padding: 15
-  }
-})
+const Container = styled.View`
+  align-items: center;
+  border-radius: 10px;
+  border-width: 1px;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+const StyledTextInput = styled.TextInput`
+  font-size: 16px;
+  line-height: 20px;
+  padding: 15px;
+`
+
+const ClearButton = styled(Pressable)`
+  padding: 15px;
+`
 
 const SearchBar = ({
   initialText,
@@ -31,9 +33,8 @@ const SearchBar = ({
   const [text, setText] = React.useState(initialText)
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
+    <Container>
+      <StyledTextInput
         onChangeText={setText}
         value={text}
         placeholder={placeholder}
@@ -43,15 +44,14 @@ const SearchBar = ({
         returnKeyType="search"
       />
       {text && (
-        <Pressable
-          style={styles.clearButton}
+        <ClearButton
           color={colors.RED}
           onPress={() => setText(undefined)}
         >
           <FontAwesomeIcon icon={faXmark} size={20} color={colors.RED} />
-        </Pressable>
+        </ClearButton>
       )}
-    </View>
+    </Container>
   )
 }
 

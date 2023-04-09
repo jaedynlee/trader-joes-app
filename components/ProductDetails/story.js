@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { colors } from '../../style.js'
+import styled from 'styled-components/native'
+
+import { colors } from '../../style'
 import { BodyText } from '../common/typography'
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 10
-  },
-  tertiaryButton: {
-    color: colors.RED,
-    textDecorationLine: 'underline'
-  }
-})
+const Wrapper = styled.View`
+  padding-top: 10px;
+`
+
+const ShowMoreButton = styled(BodyText)`
+  color: ${colors.RED};
+  text-decoration-line: underline;
+`
 
 const ProductSummary = ({ summary }) => {
   const [expanded, setExpanded] = useState(false)
@@ -29,17 +29,14 @@ const ProductSummary = ({ summary }) => {
     .trim()
 
   return (
-    <View style={styles.container}>
+    <Wrapper>
       <BodyText numberOfLines={expanded ? Number.MAX_SAFE_INTEGER : 7}>
         {summaryClean}
       </BodyText>
-      <BodyText
-        onPress={() => setExpanded(!expanded)}
-        style={styles.tertiaryButton}
-      >
+      <ShowMoreButton onPress={() => setExpanded(!expanded)}>
         Show {expanded ? 'Less' : 'More'}
-      </BodyText>
-    </View>
+      </ShowMoreButton>
+    </Wrapper>
   )
 }
 

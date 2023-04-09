@@ -4,13 +4,12 @@ import {
   faTrashCan
 } from '@fortawesome/free-solid-svg-icons'
 import {
-  SafeAreaView,
   ScrollView,
   Share,
   StatusBar,
-  StyleSheet,
   View
 } from 'react-native'
+import styled from 'styled-components/native'
 
 import { colors } from '../../style'
 import {
@@ -21,58 +20,46 @@ import {
   SmallHeader
 } from '../common/typography'
 import ShoppingListItem from './shoppingListItem'
-
 import { ShoppingListContext } from '../../shoppingListContext'
 import { getTotalPrice } from '../../util'
+import {CenteredView} from '../common/layout'
+import { getShareableListSections, shoppingListToSections } from './utils'
 
-const getShareableProducts = (section) => {
-  let ret = ''
+const Container = styled.SafeAreaView`
+  flex: 1;
+  padding-top: ${StatusBar.currentHeight ?? 0}px;
+  background-color: ${colors.WHITE};
+`
 
-  const products = Object.entries(section.products)
-  if (products.length > 0) {
-    products.forEach(
-      ([, item]) => (ret += `${item.count}x ${item.item_title}\n`)
-    )
-  }
-  if (section.subsections) {
-    section.subsections.forEach(
-      (subsection) => (ret += getShareableProducts(subsection))
-    )
-  }
+const headerPadding = `
+  padding: 10px;
+  padding-left: 20px;
+`
 
-  return ret
-}
+const SubHeader = styled(SmallHeader)`
+  ${headerPadding}
+  background-color: ${colors.LIGHT_GRAY};
+`
 
-const getShareableListSections = (listSections) => {
-  let ret = ''
+const SectionHeader = styled(Header)`
+  ${headerPadding}
+  background-color: ${colors.GRAY};
+`
 
-  listSections.forEach((section) => {
-    ret += `--- ${section.name.toUpperCase()} ---\n`
-    ret += getShareableProducts(section)
-  })
+const TotalPriceWrapper = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 10px;
+`
 
-  return ret
-}
+const ButtonsWrapper = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+`
 
-const shoppingListToSections = (shoppingList) => {
-  const sections = []
-  for (const [key, value] of Object.entries(shoppingList)) {
-    if (key === 'products') {
-      continue
-    }
-
-    const item = {}
-    item.name = key
-    item.products = value.products ?? {}
-    item.subsections = shoppingListToSections(value)
-
-    sections.push(item)
-  }
-
-  return sections
-}
-
-const ShoppingListSection = ({ products, subsections, navigation }) => (
+export const ShoppingListSection = ({ products, subsections, navigation }) => (
   <View>
     {products &&
       Object.entries(products).map(([sku, item]) => (
@@ -86,7 +73,7 @@ const ShoppingListSection = ({ products, subsections, navigation }) => (
     {subsections &&
       subsections.map((s) => (
         <View key={s.name}>
-          <SmallHeader style={styles.subHeader}>{s.name}</SmallHeader>
+          <SubHeader>{s.name}</SubHeader>
           <ShoppingListSection
             products={s.products}
             subsections={s.subsections}
@@ -97,19 +84,13 @@ const ShoppingListSection = ({ products, subsections, navigation }) => (
   </View>
 )
 
-const ShoppingList = ({ navigation }) => {
+export const ShoppingList = ({ navigation }) => {
   const { clearList, shoppingList, shoppingListItemCount } =
     useContext(ShoppingListContext)
 
   if (shoppingListItemCount === 0) {
     return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
+      <CenteredView>
         <BodyText style={{ textAlign: 'center', padding: 20 }}>
           You have not added any items to your shopping list yet. The great news
           is you can start it now!
@@ -124,7 +105,7 @@ const ShoppingList = ({ navigation }) => {
             paddingHorizontal: 20
           }}
         />
-      </View>
+      </CenteredView>
     )
   }
 
@@ -152,15 +133,9 @@ const ShoppingList = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <ScrollView>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-between'
-          }}
-        >
+        <ButtonsWrapper>
           <SecondaryButton
             icon={faTrashCan}
             name="Clear"
@@ -173,22 +148,14 @@ const ShoppingList = ({ navigation }) => {
             onPress={onShare}
             style={{ flex: 1, margin: 10, marginLeft: 0 }}
           />
-        </View>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingHorizontal: 20,
-            paddingVertical: 10
-          }}
-        >
+        </ButtonsWrapper>
+        <TotalPriceWrapper>
           <Header>Total</Header>
           <Header>${totalPrice.toFixed(2)}</Header>
-        </View>
+        </TotalPriceWrapper>
         {listSections.map((s) => (
           <View key={s.name}>
-            <Header style={styles.header}>{s.name}</Header>
+            <SectionHeader>{s.name}</SectionHeader>
             <ShoppingListSection
               products={s.products}
               subsections={s.subsections}
@@ -197,26 +164,6 @@ const ShoppingList = ({ navigation }) => {
           </View>
         ))}
       </ScrollView>
-    </SafeAreaView>
+    </Container>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    backgroundColor: colors.WHITE
-  },
-  subHeader: {
-    padding: 10,
-    paddingLeft: 20,
-    backgroundColor: colors.LIGHT_GRAY
-  },
-  header: {
-    backgroundColor: colors.GRAY,
-    padding: 10,
-    paddingLeft: 20
-  }
-})
-
-export default ShoppingList

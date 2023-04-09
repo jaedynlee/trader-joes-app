@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingRight: 10
   },
-  price: {},
   checked: {
     color: colors.DARK_GRAY
   }

@@ -1,7 +1,9 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
+import styled from 'styled-components/native'
+
 import { colors } from '../../style.js'
-import CollapsibleDetails from '../common/collapsibleDetails.js'
+import {CollapsibleDetails} from '../common/collapsibleDetails.js'
 import { BodyText } from '../common/typography.js'
 
 const styles = StyleSheet.create({
@@ -17,35 +19,34 @@ const styles = StyleSheet.create({
     minHeight: 24,
     alignItems: 'center'
   },
-  bold: {
-    fontWeight: 'bold'
-  }
 })
+
+const BoldText = styled(BodyText)`
+  font-weight: bold;
+`
 
 const Nutrition = ({ nutrition }) => {
   return (
     <View style={styles.container}>
       <CollapsibleDetails label="Nutrition Facts">
         <BodyText>
-          <BodyText style={styles.bold}>Serving size:</BodyText>{' '}
+          <BoldText>Serving size:</BoldText>{' '}
           {nutrition.serving_size}
         </BodyText>
         <BodyText>
-          <BodyText style={styles.bold}>Calories per serving:</BodyText>{' '}
+          <BoldText>Calories per serving:</BoldText>{' '}
           {nutrition.calories_per_serving}
         </BodyText>
 
         <View style={styles.tableWrapper}>
           <View style={styles.tableRow}>
-            <BodyText style={{ fontWeight: 'bold', flex: 4 }}>
+            <BoldText style={{ flex: 4 }}>
               {nutrition.servings_per_container}
-            </BodyText>
-            <BodyText style={{ fontWeight: 'bold', flex: 2 }}>Amount</BodyText>
-            <BodyText
-              style={{ fontWeight: 'bold', flex: 1, textAlign: 'right' }}
-            >
+            </BoldText>
+            <BoldText style={{ flex: 2 }}>Amount</BoldText>
+            <BoldText style={{ flex: 1, textAlign: 'right' }}>
               %DV
-            </BodyText>
+            </BoldText>
           </View>
           <View
             style={{

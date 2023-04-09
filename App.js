@@ -1,15 +1,16 @@
-import { StyleSheet, SafeAreaView, StatusBar } from 'react-native'
+import { StatusBar } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import styled from 'styled-components/native'
 
 import { colors } from './style'
 import ProductDetails from './components/ProductDetails/productDetails.js'
 import FilteredProductsList from './components/ProductList/productList'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCarrot, faListCheck } from '@fortawesome/free-solid-svg-icons'
-import ShoppingList from './components/ShoppingList/shoppingList'
+import {ShoppingList} from './components/ShoppingList/shoppingList'
 import { ShoppingListContext } from './shoppingListContext'
 
 import {
@@ -20,6 +21,11 @@ import {
 } from './storage'
 import { getShoppingListItemCount } from './util'
 import { ProductCategoryList } from './components/ProductCategoryList/productCategoryList'
+
+const StyledSafeAreaView = styled.SafeAreaView`
+  background-color: ${colors.WHITE};
+  flex: 1;
+`
 
 const ProductStack = createNativeStackNavigator()
 
@@ -95,7 +101,7 @@ export default function App () {
       }}
     >
       <NavigationContainer>
-        <SafeAreaView style={styles.container}>
+        <StyledSafeAreaView>
           <StatusBar barStyle="dark-content" />
           <Tab.Navigator>
             <Tab.Screen
@@ -126,15 +132,9 @@ export default function App () {
               }}
             />
           </Tab.Navigator>
-        </SafeAreaView>
+        </StyledSafeAreaView>
       </NavigationContainer>
     </ShoppingListContext.Provider>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.WHITE
-  }
-})

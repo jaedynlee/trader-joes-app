@@ -1,24 +1,16 @@
-import { StyleSheet, View } from 'react-native'
 import React from 'react'
+import styled from 'styled-components/native'
 
-import Tag from '../common/tag'
+import { Tag } from '../common/tag'
 
-const styles = StyleSheet.create({
-  tagsWrapper: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    paddingVertical: 10
-  }
-})
+const TagsWrapper = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px 0px;
+`
 
-const ProductCharacteristics = ({ characteristics }) => {
-  return (
-    <View style={styles.tagsWrapper}>
-      {characteristics.map((c) => (
-        <Tag label={c} key={c} />
-      ))}
-    </View>
-  )
-}
-
-export default ProductCharacteristics
+export const ProductCharacteristics = ({ characteristics }) => (
+  <TagsWrapper>
+    {characteristics?.map((c) => <Tag label={c} key={c} />)}
+  </TagsWrapper>
+)

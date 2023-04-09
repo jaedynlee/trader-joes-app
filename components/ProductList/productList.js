@@ -1,31 +1,29 @@
 import React, { useEffect, useState, useRef } from 'react'
 import {
-  StyleSheet,
   View,
-  SafeAreaView,
   FlatList,
   StatusBar,
   Pressable,
   ActivityIndicator
 } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faFilter } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components/native'
+
 import { colors } from '../../style.js'
 import { getProducts } from '../../client/client'
 import { BodyText } from '../common/typography.js'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faFilter } from '@fortawesome/free-solid-svg-icons'
 import { getShoppingListCounts } from '../../storage.js'
 import Item from './productItem.js'
-import { useIsFocused } from '@react-navigation/native'
 import { Filters } from './Filters/filters.js'
 import { useProductFilters } from './hooks/useProductFilters.js'
+import { CenteredView } from '../common/layout.js'
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    backgroundColor: colors.WHITE
-  }
-})
+const Container = styled.SafeAreaView`
+  flex: 1;
+  padding-top: ${StatusBar.currentHeight ?? 0}px;
+`
 
 const FilteredProductsList = ({ route, navigation }) => {
   const { searchTerm, categoryId, storeCode } = route.params
@@ -125,7 +123,7 @@ const FilteredProductsList = ({ route, navigation }) => {
   }, [isFocused])
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <Filters
         categoryPickerProps={categoryFilter}
         characteristicPickerProps={characteristicFilter}
@@ -168,30 +166,16 @@ const FilteredProductsList = ({ route, navigation }) => {
         numColumns={2}
         keyExtractor={(item, index) => `${item.sku}-${index}`}
         onEndReachedThreshold={1}
-        onEndReached={() => {
-          setShouldFetch(true)
-        }}
+        onEndReached={() => setShouldFetch(true)}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
         ListEmptyComponent={() => (
-          <View
-            style={{
-              flex: 1,
-              marginTop: 240,
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
+          <CenteredView>
             {loading ? (
-              <ActivityIndicator
-                size="large"
-                animating={true}
-                style={{ flex: 1, alignSelf: 'center' }}
-              />
+              <ActivityIndicator size="large" animating={true}/>
             ) : (
-              <BodyText style={{ flex: 1, alignSelf: 'center' }}>
-                {"Couldn't find any results."}
-              </BodyText>
+              <BodyText>Couldn't find any results.</BodyText>
             )}
-          </View>
+          </CenteredView>
         )}
         ListFooterComponent={() => (
           <ActivityIndicator
@@ -200,7 +184,7 @@ const FilteredProductsList = ({ route, navigation }) => {
           />
         )}
       />
-    </SafeAreaView>
+    </Container>
   )
 }
 

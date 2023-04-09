@@ -1,13 +1,17 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import CollapsibleDetails from '../common/collapsibleDetails.js'
+import { View } from 'react-native'
+import styled from 'styled-components/native'
+
+import {CollapsibleDetails} from '../common/collapsibleDetails.js'
 import { BodyText } from '../common/typography.js'
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 20
-  }
-})
+const Container = styled.View`
+  padding-top: 20px;
+`
+
+const BoldText = styled(BodyText)`
+  font-weight: bold;
+`
 
 const Ingredients = ({ ingredients, allergens }) => {
   // Ensure ingredients list ends in a period `.`
@@ -20,20 +24,20 @@ const Ingredients = ({ ingredients, allergens }) => {
     ingredients.push(lastIngredient)
   }
   return (
-    <View style={styles.container}>
+    <Container>
       <CollapsibleDetails label="Ingredients">
         <BodyText>
           {ingredients
             .map((i) => i.ingredient.trim())
             .join(', ')
             .trim()}
-          <BodyText style={{ fontWeight: 'bold' }}>
+          <BoldText>
             {allergens &&
               ` ${allergens.map((a) => a.ingredient.trim()).join(' ')}`}
-          </BodyText>
+          </BoldText>
         </BodyText>
       </CollapsibleDetails>
-    </View>
+    </Container>
   )
 }
 

@@ -1,17 +1,25 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import styled from 'styled-components/native'
+
 import { Header, BodyText } from '../common/typography'
 
-const styles = StyleSheet.create({
-  amount: {
-    fontWeight: 'bold',
-    textAlign: 'right'
-  },
-  perUnit: {
-    fontWeight: 'normal',
-    fontSize: 18
-  }
-})
+const Amount = styled(Header)`
+  font-weight: bold;
+  text-align: right;
+`
+
+const PerUnit = styled(BodyText)`
+  font-weight: normal;
+  font-size: 14px;
+`
+
+const PriceUnavailable = styled(BodyText)`
+  font-style: italic;
+`
+
+const Wrapper = styled.View`
+  padding: 24px;
+`
 
 const PriceDetails = ({ product }) => {
   let amount = product.sales_uom_description.toLowerCase()
@@ -22,35 +30,21 @@ const PriceDetails = ({ product }) => {
   }
 
   return (
-    <View>
-      <View
-        style={{
-          borderBottomColor: 'black',
-          borderBottomWidth: StyleSheet.hairlineWidth,
-          marginVertical: 6
-        }}
-      />
+    <Wrapper>
       {Number(product.retail_price)
         ? (
-        <Header style={styles.amount}>
+        <Amount>
           ${product.retail_price}
-          <BodyText style={styles.perUnit}>
+          <PerUnit>
             {' '}
             {amount === 'each' ? amount : `/ ${amount}`}
-          </BodyText>
-        </Header>
+          </PerUnit>
+        </Amount>
           )
         : (
-        <BodyText style={{ fontStyle: 'italic' }}>Price unavailable.</BodyText>
+        <PriceUnavailable>Price unavailable.</PriceUnavailable>
           )}
-      <View
-        style={{
-          borderBottomColor: 'black',
-          borderBottomWidth: StyleSheet.hairlineWidth,
-          marginVertical: 6
-        }}
-      />
-    </View>
+    </Wrapper>
   )
 }
 

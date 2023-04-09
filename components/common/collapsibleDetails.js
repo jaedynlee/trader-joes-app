@@ -22,12 +22,16 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true)
 }
 
-const HeaderWrapper = styled(View)`
+const HeaderWrapper = styled.View`
   align-items: center;
   flex-direction: row;
-`;
+`
 
-const CollapsibleDetails = ({ label, children }) => {
+const StyledIcon = styled(FontAwesomeIcon)`
+  padding-left: 30px;
+`
+
+export const CollapsibleDetails = ({ label, children }) => {
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -42,24 +46,20 @@ const CollapsibleDetails = ({ label, children }) => {
           <Header>{label}</Header>
           {expanded
             ? (
-            <FontAwesomeIcon
+            <StyledIcon
               icon={faChevronDown}
               size={20}
-              style={{ paddingLeft: 30 }}
             />
               )
             : (
-            <FontAwesomeIcon
+            <StyledIcon
               icon={faChevronRight}
               size={20}
-              style={{ paddingLeft: 30 }}
             />
-              )}
+            )}
         </HeaderWrapper>
       </Pressable>
       {expanded && children}
     </View>
   )
 }
-
-export default CollapsibleDetails
