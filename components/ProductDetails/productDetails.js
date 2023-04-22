@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react'
 
-import {
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native'
+import { StyleSheet, ActivityIndicator } from 'react-native'
 import styled from 'styled-components/native'
 
 import { colors } from '../../style.js'
 import PriceDetails from './priceDetails.js'
 import Ingredients from './ingredients.js'
-import {ProductCharacteristics} from './productCharacteristics'
+import { ProductCharacteristics } from './productCharacteristics'
 import Story from './story.js'
 import { Header, LegalText } from '../common/typography'
 import Nutrition from './nutrition.js'
 import { getProductBySku } from '../../client/client'
-import {ShoppingListButton} from './shoppingListButton.js'
+import { ShoppingListButton } from './shoppingListButton.js'
 import { getLocation } from '../../storage.js'
 
 const StyledScrollView = styled.ScrollView`
@@ -51,9 +48,11 @@ const HorizontalRule = styled.View`
   margin-bottom: 10px;
 `
 
-const ProductDetails = ({ route }) => {
-  const { sku } = route.params
-
+const ProductDetails = ({
+  route: {
+    params: { sku }
+  }
+}) => {
   const [product, setProduct] = useState(undefined)
 
   useEffect(() => {
@@ -106,7 +105,9 @@ const ProductDetails = ({ route }) => {
         )}
         <HorizontalRule />
         <LegalText style={{ paddingBottom: 120 }}>
-          {"NOTE: The details of this item may have changed since posting. Contact your local Trader Joe's for current price and availability."}
+          {
+            "NOTE: The details of this item may have changed since posting. Contact your local Trader Joe's for current price and availability."
+          }
         </LegalText>
       </StyledScrollView>
       <Footer>

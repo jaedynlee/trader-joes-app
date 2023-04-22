@@ -13,10 +13,8 @@ const ShowMoreButton = styled(BodyText)`
   text-decoration-line: underline;
 `
 
-const ProductSummary = ({ summary }) => {
-  const [expanded, setExpanded] = useState(false)
-
-  const summaryClean = summary
+const cleanSummary = (summary) =>
+  summary
     .replace(/<p>/g, '')
     .replace(/<strong>/g, '')
     .replace(/<\/strong>/g, '')
@@ -27,6 +25,11 @@ const ProductSummary = ({ summary }) => {
     .replace(/<\/p>/g, '\n')
     .replace(/<br \/>/g, '\n')
     .trim()
+
+const ProductSummary = ({ summary }) => {
+  const [expanded, setExpanded] = useState(false)
+
+  const summaryClean = cleanSummary(summary)
 
   return (
     <Wrapper>
