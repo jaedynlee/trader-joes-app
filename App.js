@@ -10,7 +10,7 @@ import ProductDetails from './components/ProductDetails/productDetails.js'
 import FilteredProductsList from './components/ProductList/productList'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCarrot, faListCheck } from '@fortawesome/free-solid-svg-icons'
-import {ShoppingList} from './components/ShoppingList/shoppingList'
+import { ShoppingList } from './components/ShoppingList/shoppingList'
 import { ShoppingListContext } from './shoppingListContext'
 
 import {
@@ -137,4 +137,3 @@ export default function App () {
     </ShoppingListContext.Provider>
   )
 }
-

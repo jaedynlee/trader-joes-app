@@ -3,12 +3,7 @@ import {
   faArrowUpFromBracket,
   faTrashCan
 } from '@fortawesome/free-solid-svg-icons'
-import {
-  ScrollView,
-  Share,
-  StatusBar,
-  View
-} from 'react-native'
+import { ScrollView, Share, StatusBar, View } from 'react-native'
 import styled from 'styled-components/native'
 
 import { colors } from '../../style'
@@ -22,7 +17,7 @@ import {
 import ShoppingListItem from './shoppingListItem'
 import { ShoppingListContext } from '../../shoppingListContext'
 import { getTotalPrice } from '../../util'
-import {CenteredView} from '../common/layout'
+import { CenteredView } from '../common/layout'
 import { getShareableListSections, shoppingListToSections } from './utils'
 
 const Container = styled.SafeAreaView`

@@ -14,7 +14,7 @@ import { getProductCategories } from '../../client/client'
 import { BodyText, Header } from '../common/typography'
 import SearchBar from './searchBar'
 import { getLocation } from '../../storage'
-import {StoreSelectorModal} from './StoreSelector/storeSelectorModal'
+import { StoreSelectorModal } from './StoreSelector/storeSelectorModal'
 import { SetStoreButton } from './StoreSelector/setStoreButton'
 import { CenteredView } from '../common/layout'
 
@@ -124,10 +124,7 @@ export const ProductCategoryList = ({ navigation }) => {
           }
           return (
             <CenteredView>
-              <ActivityIndicator
-                size="large"
-                animating={true}
-              />
+              <ActivityIndicator size="large" animating={true} />
             </CenteredView>
           )
         }}

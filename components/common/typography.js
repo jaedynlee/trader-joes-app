@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { Button, Pressable, Text } from 'react-native'
+import { Button, Pressable } from 'react-native'
 import React from 'react'
 import styled from 'styled-components/native'
 
@@ -77,13 +77,12 @@ export const SecondaryButton = (props) => (
     disabledProps={{ borderColor: colors.DARK_GRAY }}
     iconProps={{ color: colors.RED }}
     labelProps={{ textAlign: 'center', color: colors.RED, fontWeight: 'bold' }}
-    style={
-      {
-        ...props.style,
-        backgroundColor: colors.WHITE,
-        borderColor: colors.RED,
-        borderWidth: 2
-      }}
+    style={{
+      ...props.style,
+      backgroundColor: colors.WHITE,
+      borderColor: colors.RED,
+      borderWidth: 2
+    }}
   />
 )
 

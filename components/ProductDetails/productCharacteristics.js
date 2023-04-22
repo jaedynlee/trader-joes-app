@@ -11,6 +11,8 @@ const TagsWrapper = styled.View`
 
 export const ProductCharacteristics = ({ characteristics }) => (
   <TagsWrapper>
-    {characteristics?.map((c) => <Tag label={c} key={c} />)}
+    {characteristics?.map((c) => (
+      <Tag label={c} key={c} />
+    ))}
   </TagsWrapper>
 )

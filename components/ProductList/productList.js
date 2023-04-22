@@ -170,11 +170,13 @@ const FilteredProductsList = ({ route, navigation }) => {
         contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
         ListEmptyComponent={() => (
           <CenteredView>
-            {loading ? (
-              <ActivityIndicator size="large" animating={true}/>
-            ) : (
-              <BodyText>Couldn't find any results.</BodyText>
-            )}
+            {loading
+              ? (
+              <ActivityIndicator size="large" animating={true} />
+                )
+              : (
+              <BodyText>{"Couldn't find any results."}</BodyText>
+                )}
           </CenteredView>
         )}
         ListFooterComponent={() => (

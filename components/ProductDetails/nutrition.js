@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 
 import { colors } from '../../style.js'
-import {CollapsibleDetails} from '../common/collapsibleDetails.js'
+import { CollapsibleDetails } from '../common/collapsibleDetails.js'
 import { BodyText } from '../common/typography.js'
 
 const styles = StyleSheet.create({
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     flex: 7,
     minHeight: 24,
     alignItems: 'center'
-  },
+  }
 })
 
 const BoldText = styled(BodyText)`
@@ -30,8 +30,7 @@ const Nutrition = ({ nutrition }) => {
     <View style={styles.container}>
       <CollapsibleDetails label="Nutrition Facts">
         <BodyText>
-          <BoldText>Serving size:</BoldText>{' '}
-          {nutrition.serving_size}
+          <BoldText>Serving size:</BoldText> {nutrition.serving_size}
         </BodyText>
         <BodyText>
           <BoldText>Calories per serving:</BoldText>{' '}
@@ -44,9 +43,7 @@ const Nutrition = ({ nutrition }) => {
               {nutrition.servings_per_container}
             </BoldText>
             <BoldText style={{ flex: 2 }}>Amount</BoldText>
-            <BoldText style={{ flex: 1, textAlign: 'right' }}>
-              %DV
-            </BoldText>
+            <BoldText style={{ flex: 1, textAlign: 'right' }}>%DV</BoldText>
           </View>
           <View
             style={{

@@ -1,7 +1,5 @@
-import { FlatList, Modal, Pressable, StyleSheet, View } from 'react-native'
-import {
-  faXmark
-} from '@fortawesome/free-solid-svg-icons'
+import { Modal, Pressable, StyleSheet, View } from 'react-native'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components/native'
@@ -10,7 +8,7 @@ import { getNearbyStores } from '../../../client/client'
 import { colors } from '../../../style'
 import { BodyText, Link } from '../../common/typography'
 import SearchBar from '../searchBar'
-import {CenteredView} from '../../common/layout'
+import { CenteredView } from '../../common/layout'
 import { StoreDetails } from './storeDetails'
 
 const ModalView = styled.View`
@@ -74,9 +72,7 @@ export const StoreSelectorModal = ({
             onPress={() => setModalVisible(false)}
           >
             <FontAwesomeIcon icon={faXmark} size={16} color={colors.RED} />
-            <Link style={[{ paddingLeft: 3 }]}>
-              Close
-            </Link>
+            <Link style={[{ paddingLeft: 3 }]}>Close</Link>
           </Pressable>
           <StyledFlatList
             ListHeaderComponent={() => (
@@ -96,8 +92,21 @@ export const StoreSelectorModal = ({
                 }}
               />
             )}
-            ListEmptyComponent={() => <CenteredView><BodyText>{errorMessage}</BodyText></CenteredView>}
-            renderItem={(i) => <StoreDetails store={i.item} selectedLocation={selectedLocation} onSelectLocation={(location) => {setLocation(location); setModalVisible(false);}} />}
+            ListEmptyComponent={() => (
+              <CenteredView>
+                <BodyText>{errorMessage}</BodyText>
+              </CenteredView>
+            )}
+            renderItem={(i) => (
+              <StoreDetails
+                store={i.item}
+                selectedLocation={selectedLocation}
+                onSelectLocation={(location) => {
+                  setLocation(location)
+                  setModalVisible(false)
+                }}
+              />
+            )}
           />
         </ModalView>
       </CenteredView>

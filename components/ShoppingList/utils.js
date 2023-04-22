@@ -1,47 +1,46 @@
-
 const getShareableProducts = (section) => {
-    let ret = ''
+  let ret = ''
 
-    const products = Object.entries(section.products)
-    if (products.length > 0) {
-      products.forEach(
-        ([, item]) => (ret += `${item.count}x ${item.item_title}\n`)
-      )
-    }
-    if (section.subsections) {
-      section.subsections.forEach(
-        (subsection) => (ret += getShareableProducts(subsection))
-      )
-    }
-
-    return ret
+  const products = Object.entries(section.products)
+  if (products.length > 0) {
+    products.forEach(
+      ([, item]) => (ret += `${item.count}x ${item.item_title}\n`)
+    )
+  }
+  if (section.subsections) {
+    section.subsections.forEach(
+      (subsection) => (ret += getShareableProducts(subsection))
+    )
   }
 
-  export const getShareableListSections = (listSections) => {
-    let ret = ''
+  return ret
+}
 
-    listSections.forEach((section) => {
-      ret += `--- ${section.name.toUpperCase()} ---\n`
-      ret += getShareableProducts(section)
-    })
+export const getShareableListSections = (listSections) => {
+  let ret = ''
 
-    return ret
-  }
+  listSections.forEach((section) => {
+    ret += `--- ${section.name.toUpperCase()} ---\n`
+    ret += getShareableProducts(section)
+  })
 
-  export const shoppingListToSections = (shoppingList) => {
-    const sections = []
-    for (const [key, value] of Object.entries(shoppingList)) {
-      if (key === 'products') {
-        continue
-      }
+  return ret
+}
 
-      const item = {}
-      item.name = key
-      item.products = value.products ?? {}
-      item.subsections = shoppingListToSections(value)
-
-      sections.push(item)
+export const shoppingListToSections = (shoppingList) => {
+  const sections = []
+  for (const [key, value] of Object.entries(shoppingList)) {
+    if (key === 'products') {
+      continue
     }
 
-    return sections
+    const item = {}
+    item.name = key
+    item.products = value.products ?? {}
+    item.subsections = shoppingListToSections(value)
+
+    sections.push(item)
   }
+
+  return sections
+}

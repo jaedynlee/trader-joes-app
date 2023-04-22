@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "prepare": "husky install",
-    "lint": "eslint ."
+    "lint": "eslint . --fix"
   },
   "lint-staged": {
     "*.{js,jsx}": [

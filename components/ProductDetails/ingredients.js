@@ -1,8 +1,7 @@
 import React from 'react'
-import { View } from 'react-native'
 import styled from 'styled-components/native'
 
-import {CollapsibleDetails} from '../common/collapsibleDetails.js'
+import { CollapsibleDetails } from '../common/collapsibleDetails.js'
 import { BodyText } from '../common/typography.js'
 
 const Container = styled.View`

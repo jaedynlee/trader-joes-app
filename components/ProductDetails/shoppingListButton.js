@@ -70,15 +70,12 @@ export const ShoppingListButton = ({ product }) => {
         <FontAwesomeIcon icon={faPlus} color={colors.WHITE} />
       </AddButton>
     </>
-    ) : (
+      )
+    : (
     <AddToListButton onPress={() => addProductToList(product)}>
       <ButtonText>Add to list</ButtonText>
     </AddToListButton>
-    )
+      )
 
-  return (
-    <ButtonWrapper>
-      {button}
-    </ButtonWrapper>
-  )
+  return <ButtonWrapper>{button}</ButtonWrapper>
 }

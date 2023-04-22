@@ -46,17 +46,11 @@ export const CollapsibleDetails = ({ label, children }) => {
           <Header>{label}</Header>
           {expanded
             ? (
-            <StyledIcon
-              icon={faChevronDown}
-              size={20}
-            />
+            <StyledIcon icon={faChevronDown} size={20} />
               )
             : (
-            <StyledIcon
-              icon={faChevronRight}
-              size={20}
-            />
-            )}
+            <StyledIcon icon={faChevronRight} size={20} />
+              )}
         </HeaderWrapper>
       </Pressable>
       {expanded && children}
