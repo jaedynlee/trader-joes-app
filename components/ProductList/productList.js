@@ -13,7 +13,7 @@ import styled from 'styled-components/native'
 
 import { colors } from '../../style.js'
 import { getProducts } from '../../client/client'
-import { BodyText } from '../common/typography.js'
+import { BodyText, PrimaryButton } from '../common/typography.js'
 import { getShoppingListCounts } from '../../storage.js'
 import Item from './productItem.js'
 import { Filters } from './Filters/filters.js'
@@ -126,32 +126,41 @@ const FilteredProductsList = ({ route, navigation }) => {
     )
   }, [isFocused])
 
+  const filterable =
+    !!categoryFilter.items.length ||
+    !!characteristicFilter.items.length ||
+    !!funTagFilter.items.length
+
   return (
     <Container>
-      <Filters
-        categoryPickerProps={categoryFilter}
-        characteristicPickerProps={characteristicFilter}
-        expanded={filtersExpanded}
-        funTagPickerProps={funTagFilter}
-      />
+      {filterable && (
+        <Filters
+          categoryPickerProps={categoryFilter}
+          characteristicPickerProps={characteristicFilter}
+          expanded={filtersExpanded}
+          funTagPickerProps={funTagFilter}
+        />
+      )}
       <FlatList
         ref={flatListRef}
         data={products}
-        ListHeaderComponent={() => (
-          <Pressable
-            style={{ flexDirection: 'row', padding: 15 }}
-            onPress={() => setFiltersExpanded(!filtersExpanded)}
-          >
-            <FontAwesomeIcon
-              icon={faFilter}
-              color={colors.RED}
-              style={{ marginRight: 8 }}
-            />
-            <BodyText style={{ fontWeight: 'bold', color: colors.RED }}>
-              {filtersExpanded ? 'Hide' : 'Show'} filters
-            </BodyText>
-          </Pressable>
-        )}
+        ListHeaderComponent={() =>
+          filterable && (
+            <Pressable
+              style={{ flexDirection: 'row', padding: 15 }}
+              onPress={() => setFiltersExpanded(!filtersExpanded)}
+            >
+              <FontAwesomeIcon
+                icon={faFilter}
+                color={colors.RED}
+                style={{ marginRight: 8 }}
+              />
+              <BodyText style={{ fontWeight: 'bold', color: colors.RED }}>
+                {filtersExpanded ? 'Hide' : 'Show'} filters
+              </BodyText>
+            </Pressable>
+          )
+        }
         renderItem={({ item }) => (
           <View
             style={{
@@ -179,7 +188,18 @@ const FilteredProductsList = ({ route, navigation }) => {
               <ActivityIndicator size="large" animating={true} />
                 )
               : (
-              <BodyText>{`No results found for "${searchTerm}". Please try a different search term!`}</BodyText>
+              <>
+                <BodyText>{`No results found for "${searchTerm}". Please try a different search term!`}</BodyText>
+                <PrimaryButton
+                  style={{ marginTop: 20 }}
+                  name="Back to all products"
+                  onPress={() =>
+                    navigation.navigate('Products', {
+                      screen: 'All Products List'
+                    })
+                  }
+                />
+              </>
                 )}
           </EmptyListWrapper>
         )}
