@@ -6,7 +6,6 @@ import { Tag } from '../common/tag'
 const TagsWrapper = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 10px 0px;
 `
 
 export const ProductCharacteristics = ({ characteristics }) => (

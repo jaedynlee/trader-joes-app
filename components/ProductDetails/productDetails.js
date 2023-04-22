@@ -8,7 +8,7 @@ import PriceDetails from './priceDetails.js'
 import Ingredients from './ingredients.js'
 import { ProductCharacteristics } from './productCharacteristics'
 import Story from './story.js'
-import { Header, LegalText } from '../common/typography'
+import { LegalText } from '../common/typography'
 import Nutrition from './nutrition.js'
 import { getProductBySku } from '../../client/client'
 import { ShoppingListButton } from './shoppingListButton.js'
@@ -17,10 +17,11 @@ import { getLocation } from '../../storage.js'
 const StyledScrollView = styled.ScrollView`
   background-color: ${colors.WHITE};
   flex: 1;
-  padding: 24px;
+  padding: 10px 24px;
 `
 
 const ImageWrapper = styled.View`
+  margin-bottom: 10px;
   max-height: 150px;
   width: 100%;
 `
@@ -76,12 +77,6 @@ const ProductDetails = ({
   return (
     <>
       <StyledScrollView>
-        <Header>{product.item_title}</Header>
-        {product.item_characteristics && (
-          <ProductCharacteristics
-            characteristics={product.item_characteristics}
-          />
-        )}
         <ImageWrapper>
           <ProductImage
             resizeMode="contain"
@@ -90,7 +85,11 @@ const ProductDetails = ({
             }}
           />
         </ImageWrapper>
-
+        {product.item_characteristics && (
+          <ProductCharacteristics
+            characteristics={product.item_characteristics}
+          />
+        )}
         {product.item_story_marketing && (
           <Story summary={product.item_story_marketing} />
         )}
