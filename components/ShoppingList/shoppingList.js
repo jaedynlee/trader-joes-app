@@ -45,7 +45,7 @@ const TotalPriceWrapper = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
-  padding: 20px 10px;
+  padding: 10px 20px;
 `
 
 const ButtonsWrapper = styled.View`
@@ -90,6 +90,7 @@ export const ShoppingList = ({ navigation }) => {
           You have not added any items to your shopping list yet.
         </BodyText>
         <PrimaryButton
+          accessbilityLabel="Browse products"
           name="Browse products"
           onPress={() =>
             navigation.navigate('Products', { screen: 'All Products List' })
@@ -131,12 +132,14 @@ export const ShoppingList = ({ navigation }) => {
       <ScrollView>
         <ButtonsWrapper>
           <SecondaryButton
+            accessbilityLabel="Clear list"
             icon={faTrashCan}
             name="Clear"
             onPress={clearList}
             style={{ flex: 1, margin: 10 }}
           />
           <PrimaryButton
+            accessbilityLabel="Share list"
             icon={faArrowUpFromBracket}
             name="Share"
             onPress={onShare}

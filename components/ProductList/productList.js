@@ -191,6 +191,7 @@ const FilteredProductsList = ({ route, navigation }) => {
               <>
                 <BodyText>{`No results found for "${searchTerm}". Please try a different search term!`}</BodyText>
                 <PrimaryButton
+                  accessibilityLabel="Back to all products"
                   style={{ marginTop: 20 }}
                   name="Back to all products"
                   onPress={() =>

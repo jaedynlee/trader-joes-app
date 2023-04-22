@@ -36,8 +36,13 @@ const ProductSummary = ({ summary }) => {
       <BodyText numberOfLines={expanded ? Number.MAX_SAFE_INTEGER : 7}>
         {summaryClean}
       </BodyText>
-      <ShowMoreButton onPress={() => setExpanded(!expanded)}>
-        Show {expanded ? 'Less' : 'More'}
+      <ShowMoreButton
+        accessibilityLabel={`Show ${
+          expanded ? 'less' : 'more'
+        } of the product story`}
+        onPress={() => setExpanded(!expanded)}
+      >
+        Show {expanded ? 'less' : 'more'}
       </ShowMoreButton>
     </Wrapper>
   )

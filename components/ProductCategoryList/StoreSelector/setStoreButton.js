@@ -12,7 +12,10 @@ const SetStoreButtonWrapper = styled.Pressable`
 `
 
 export const SetStoreButton = ({ setModalVisible, label }) => (
-  <SetStoreButtonWrapper onPress={() => setModalVisible(true)}>
+  <SetStoreButtonWrapper
+    accessibilityLabel="Set store location"
+    onPress={() => setModalVisible(true)}
+  >
     <FontAwesomeIcon icon={faLocationDot} color={colors.RED} />
     <Link> {label}</Link>
   </SetStoreButtonWrapper>

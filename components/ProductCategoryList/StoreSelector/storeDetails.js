@@ -36,6 +36,11 @@ export const StoreDetails = ({ store, selectedLocation, onSelectLocation }) => {
 
   const isSelected = selectedLocation?.clientkey === clientkey
   const isComingSoon = comingsoon === 'Yes'
+  const storeButtonLabel = isComingSoon
+    ? 'Coming soon!'
+    : isSelected
+      ? 'My store'
+      : 'Set as my store'
   return (
     <ItemView>
       <SmallHeader>{name}</SmallHeader>
@@ -84,13 +89,8 @@ export const StoreDetails = ({ store, selectedLocation, onSelectLocation }) => {
         </Pressable>
       </View>
       <SecondaryButton
-        name={
-          isComingSoon
-            ? 'Coming soon!'
-            : isSelected
-              ? 'My store'
-              : 'Set as my store'
-        }
+        accessibilityLabel={storeButtonLabel}
+        name={storeButtonLabel}
         disabled={isSelected || isComingSoon}
         onPress={() =>
           updateLocationInStorage(clientkey, name)

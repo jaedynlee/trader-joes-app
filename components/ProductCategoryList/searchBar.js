@@ -45,6 +45,7 @@ const SearchBar = ({
       />
       {text && (
         <ClearButton
+          accessibilityLabel="Clear search bar"
           color={colors.RED}
           onPress={() => setText(undefined)}
         >

@@ -60,19 +60,28 @@ export const ShoppingListButton = ({ product }) => {
   const button = listCount
     ? (
     <>
-      <RemoveButton onPress={() => removeProductFromList(product)}>
+      <RemoveButton
+        accessibilityLabel="Remove one from list"
+        onPress={() => removeProductFromList(product)}
+      >
         <FontAwesomeIcon icon={faMinus} color={colors.WHITE} />
       </RemoveButton>
       <View style={{ flex: 1, backgroundColor: colors.DARK_RED }}>
         <ButtonText>{listCount}</ButtonText>
       </View>
-      <AddButton onPress={() => addProductToList(product)}>
+      <AddButton
+        accessibilityLabel="Add one to list"
+        onPress={() => addProductToList(product)}
+      >
         <FontAwesomeIcon icon={faPlus} color={colors.WHITE} />
       </AddButton>
     </>
       )
     : (
-    <AddToListButton onPress={() => addProductToList(product)}>
+    <AddToListButton
+      accessibilityLabel="Add to list"
+      onPress={() => addProductToList(product)}
+    >
       <ButtonText>Add to list</ButtonText>
     </AddToListButton>
       )

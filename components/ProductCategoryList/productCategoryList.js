@@ -131,6 +131,7 @@ export const ProductCategoryList = ({ navigation }) => {
         ListHeaderComponent={() => (
           <View style={{ padding: 10 }}>
             <SetStoreButton
+              accessibilityLabel={!!location && location.name}
               setModalVisible={setModalVisible}
               label={!!location && location.name}
             />
