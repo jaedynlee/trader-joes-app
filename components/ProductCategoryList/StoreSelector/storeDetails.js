@@ -51,7 +51,10 @@ export const StoreDetails = ({ store, selectedLocation, onSelectLocation }) => {
       <BodyText>
         {city}, {state} {postalcode}
       </BodyText>
-      <Pressable onPress={() => Linking.openURL(`tel:${phone}`)}>
+      <Pressable
+        accessibilityLabel="Call store"
+        onPress={() => Linking.openURL(`tel:${phone}`)}
+      >
         <Link>{phone}</Link>
       </Pressable>
       <View
@@ -65,6 +68,7 @@ export const StoreDetails = ({ store, selectedLocation, onSelectLocation }) => {
           {_distance} {_distanceuom === 'mile' ? 'mi' : _distanceuom}
         </BodyText>
         <Pressable
+          accessibilityLabel="View on map"
           onPress={() => {
             const domain = Platform.OS === 'ios' ? 'apple' : 'android'
             Linking.openURL(
@@ -83,7 +87,7 @@ export const StoreDetails = ({ store, selectedLocation, onSelectLocation }) => {
             )
           }
         >
-          <Link>
+          <Link accessibilityLabel="Store info">
             <FontAwesomeIcon icon={faStore} color={colors.RED} /> Store Info
           </Link>
         </Pressable>

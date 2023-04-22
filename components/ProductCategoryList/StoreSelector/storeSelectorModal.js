@@ -72,7 +72,12 @@ export const StoreSelectorModal = ({
             onPress={() => setModalVisible(false)}
           >
             <FontAwesomeIcon icon={faXmark} size={16} color={colors.RED} />
-            <Link style={[{ paddingLeft: 3 }]}>Close</Link>
+            <Link
+              accessibilityLabel="Close store selection view"
+              style={[{ paddingLeft: 3 }]}
+            >
+              Close
+            </Link>
           </Pressable>
           <StyledFlatList
             ListHeaderComponent={() => (
