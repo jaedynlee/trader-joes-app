@@ -143,6 +143,7 @@ const Item = ({ item, count, navigation }) => {
         <AddRemoveListButton item={item} initialCount={count} />
         <View style={styles.imageWrapper}>
           <Image
+            alt={item.item_title}
             style={styles.image}
             resizeMode="contain"
             source={{

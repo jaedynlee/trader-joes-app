@@ -79,6 +79,7 @@ const ProductDetails = ({
       <StyledScrollView>
         <ImageWrapper>
           <ProductImage
+            alt={product.item_title}
             resizeMode="contain"
             source={{
               uri: `https://www.traderjoes.com${product.primary_image}`
