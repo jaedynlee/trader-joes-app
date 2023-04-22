@@ -87,8 +87,7 @@ export const ShoppingList = ({ navigation }) => {
     return (
       <CenteredView>
         <BodyText style={{ textAlign: 'center', padding: 20 }}>
-          You have not added any items to your shopping list yet. The great news
-          is you can start it now!
+          You have not added any items to your shopping list yet.
         </BodyText>
         <PrimaryButton
           name="Browse products"

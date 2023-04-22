@@ -25,6 +25,10 @@ const Container = styled.SafeAreaView`
   padding-top: ${StatusBar.currentHeight ?? 0}px;
 `
 
+const EmptyListWrapper = styled(CenteredView)`
+  padding: 36px;
+`
+
 const FilteredProductsList = ({ route, navigation }) => {
   const { searchTerm, categoryId, storeCode } = route.params
   const [loading, setLoading] = useState(false)
@@ -169,15 +173,15 @@ const FilteredProductsList = ({ route, navigation }) => {
         onEndReached={() => setShouldFetch(true)}
         contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
         ListEmptyComponent={() => (
-          <CenteredView>
+          <EmptyListWrapper>
             {loading
               ? (
               <ActivityIndicator size="large" animating={true} />
                 )
               : (
-              <BodyText>{"Couldn't find any results."}</BodyText>
+              <BodyText>{`No results found for "${searchTerm}". Please try a different search term!`}</BodyText>
                 )}
-          </CenteredView>
+          </EmptyListWrapper>
         )}
         ListFooterComponent={() => (
           <ActivityIndicator
