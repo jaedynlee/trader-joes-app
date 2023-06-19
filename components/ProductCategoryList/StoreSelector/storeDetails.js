@@ -1,4 +1,4 @@
-import { Linking, Platform, Pressable, View } from 'react-native'
+import { Linking, Platform, Pressable } from 'react-native'
 import { faMapLocationDot, faStore } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import React from 'react'
@@ -15,6 +15,12 @@ import {
 
 const ItemView = styled.View`
   padding: 12px 0px;
+`
+
+const DetailButtonsView = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px 0;
 `
 
 export const StoreDetails = ({ store, selectedLocation, onSelectLocation }) => {
@@ -57,13 +63,7 @@ export const StoreDetails = ({ store, selectedLocation, onSelectLocation }) => {
       >
         <Link>{phone}</Link>
       </Pressable>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingTop: 8
-        }}
-      >
+      <DetailButtonsView>
         <BodyText>
           {_distance} {_distanceuom === 'mile' ? 'mi' : _distanceuom}
         </BodyText>
@@ -91,7 +91,7 @@ export const StoreDetails = ({ store, selectedLocation, onSelectLocation }) => {
             <FontAwesomeIcon icon={faStore} color={colors.RED} /> Store Info
           </Link>
         </Pressable>
-      </View>
+      </DetailButtonsView>
       <SecondaryButton
         accessibilityLabel={storeButtonLabel}
         name={storeButtonLabel}
@@ -101,7 +101,6 @@ export const StoreDetails = ({ store, selectedLocation, onSelectLocation }) => {
             .then(onSelectLocation)
             .catch((e) => console.log(`Failed to set store with error: ${e}`))
         }
-        style={[{ marginTop: 10 }]}
       />
     </ItemView>
   )
