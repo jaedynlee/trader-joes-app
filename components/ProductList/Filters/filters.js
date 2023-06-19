@@ -9,7 +9,7 @@ import { FilterTag } from './FilterTag.js'
 import { FilterModal } from './FilterModal.js'
 
 const FilterBar = styled.View`
-  zindex: 1000;
+  zindex: 1000px;
   flex-direction: row;
   flex-wrap: wrap;
   margin: 10px 15px;

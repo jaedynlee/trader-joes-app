@@ -11,16 +11,15 @@ import SearchBar from '../searchBar'
 import { CenteredView } from '../../common/layout'
 import { StoreDetails } from './storeDetails'
 
-const ModalView = styled.View`
+const ModalView = styled.SafeAreaView`
   height: 100%;
   width: 100%;
   background-color: ${colors.WHITE};
-  padding: 20px;
   align-items: center;
 `
 
 const StyledFlatList = styled.FlatList`
-  padding: 5px;
+  padding: 16px;
   width: 100%;
 `
 
@@ -67,7 +66,8 @@ export const StoreSelectorModal = ({
             style={{
               flexDirection: 'row',
               alignSelf: 'flex-end',
-              alignItems: 'center'
+              alignItems: 'center',
+              paddingRight: 18
             }}
             onPress={() => setModalVisible(false)}
           >
@@ -101,6 +101,9 @@ export const StoreSelectorModal = ({
               <CenteredView>
                 <BodyText>{errorMessage}</BodyText>
               </CenteredView>
+            )}
+            ListFooterComponent={() => (
+              <View style={{ marginBottom: 10 }}></View>
             )}
             renderItem={(i) => (
               <StoreDetails

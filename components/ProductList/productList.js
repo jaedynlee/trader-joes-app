@@ -75,7 +75,7 @@ const FilteredProductsList = ({ route, navigation }) => {
       setAggregations(products.aggregations)
 
       // Go to beginning of list
-      if (products.total_count) {
+      if (products.total_count && flatListRef.current) {
         flatListRef.current.scrollToIndex({ animated: true, index: 0 })
       }
       setLoading(false)
