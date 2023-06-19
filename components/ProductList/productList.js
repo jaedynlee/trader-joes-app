@@ -12,12 +12,15 @@ import { useProductFilters } from './hooks/useProductFilters.js'
 import { CenteredView } from '../common/layout.js'
 
 const Container = styled.SafeAreaView`
-  flex: 1;
   padding-top: ${StatusBar.currentHeight ?? 0}px;
 `
 
 const EmptyListWrapper = styled(CenteredView)`
   padding: 36px;
+`
+
+const StyledActivityIndicator = styled(ActivityIndicator)`
+  padding: 20px 0 60px 0;
 `
 
 const FilteredProductsList = ({ route, navigation }) => {
@@ -176,12 +179,18 @@ const FilteredProductsList = ({ route, navigation }) => {
                 )}
           </EmptyListWrapper>
         )}
-        ListFooterComponent={() => (
-          <ActivityIndicator
-            size="large"
-            animating={products.length > 0 && !fetchedAllPages}
-          />
-        )}
+        ListFooterComponent={() =>
+          fetchedAllPages
+            ? (
+            <View style={{ marginBottom: 60 }}></View>
+              )
+            : (
+            <StyledActivityIndicator
+              size="large"
+              animating={products.length > 0 && !fetchedAllPages}
+            />
+              )
+        }
       />
     </Container>
   )
