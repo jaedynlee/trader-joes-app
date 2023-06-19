@@ -1,17 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
-import {
-  View,
-  FlatList,
-  StatusBar,
-  Pressable,
-  ActivityIndicator
-} from 'react-native'
+import { View, FlatList, StatusBar, ActivityIndicator } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faFilter } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components/native'
 
-import { colors } from '../../style.js'
 import { getProducts } from '../../client/client'
 import { BodyText, PrimaryButton } from '../common/typography.js'
 import { getShoppingListCounts } from '../../storage.js'
@@ -46,7 +37,6 @@ const FilteredProductsList = ({ route, navigation }) => {
   const [products, setProducts] = useState([])
   const [aggregations, setAggregations] = useState()
 
-  const [filtersExpanded, setFiltersExpanded] = useState(false)
   const { categoryFilter, characteristicFilter, funTagFilter } =
     useProductFilters(aggregations, categoryId)
 
@@ -137,30 +127,12 @@ const FilteredProductsList = ({ route, navigation }) => {
         <Filters
           categoryPickerProps={categoryFilter}
           characteristicPickerProps={characteristicFilter}
-          expanded={filtersExpanded}
           funTagPickerProps={funTagFilter}
         />
       )}
       <FlatList
         ref={flatListRef}
         data={products}
-        ListHeaderComponent={() =>
-          filterable && (
-            <Pressable
-              style={{ flexDirection: 'row', padding: 15 }}
-              onPress={() => setFiltersExpanded(!filtersExpanded)}
-            >
-              <FontAwesomeIcon
-                icon={faFilter}
-                color={colors.RED}
-                style={{ marginRight: 8 }}
-              />
-              <BodyText style={{ fontWeight: 'bold', color: colors.RED }}>
-                {filtersExpanded ? 'Hide' : 'Show'} filters
-              </BodyText>
-            </Pressable>
-          )
-        }
         renderItem={({ item }) => (
           <View
             style={{
