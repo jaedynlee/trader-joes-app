@@ -17,9 +17,10 @@ import {
   addProductToShoppingList,
   clearShoppingList,
   getShoppingList,
-  removeProductFromShoppingList
-} from './storage'
-import { getShoppingListItemCount } from './util'
+  getShoppingListCounts,
+  removeProductFromShoppingList,
+  updateShoppingListProductChecked
+} from './storage/shoppingList'
 import { ProductCategoryList } from './components/ProductCategoryList/productCategoryList'
 
 const StyledSafeAreaView = styled.SafeAreaView`
@@ -71,23 +72,49 @@ const ShoppingListStackNavigator = () => (
 
 export default function App () {
   const [shoppingList, setShoppingList] = useState({})
+  const [shoppingListCounts, setShoppingListCounts] = useState({})
+  const [shoppingListTotalCount, setShoppingListTotalCount] = useState(0)
 
   const addProductToList = (product) => {
-    addProductToShoppingList(product).then(setShoppingList)
+    addProductToShoppingList(product).then(({ counts, list }) => {
+      setShoppingListCounts(counts)
+      setShoppingList(list)
+      setShoppingListTotalCount(shoppingListTotalCount + 1)
+    })
   }
 
   const clearList = () => {
-    clearShoppingList().then(setShoppingList)
+    clearShoppingList().then(({ counts, list }) => {
+      setShoppingListTotalCount(0)
+      setShoppingListCounts(counts)
+      setShoppingList(list)
+    })
   }
 
   const removeProductFromList = (product) => {
-    removeProductFromShoppingList(product).then(setShoppingList)
+    removeProductFromShoppingList(product).then(({ counts, list }) => {
+      setShoppingListCounts(counts)
+      setShoppingList(list)
+      setShoppingListTotalCount(shoppingListTotalCount - 1)
+    })
   }
 
-  const shoppingListItemCount = getShoppingListItemCount(shoppingList)
+  const updateProductChecked = (sku, isChecked) =>
+    updateShoppingListProductChecked(sku, isChecked).then(
+      setShoppingListCounts
+    )
 
   useEffect(() => {
-    getShoppingList().then((shoppingList) => setShoppingList(shoppingList))
+    getShoppingListCounts().then((shoppingListCounts) => {
+      setShoppingListCounts(shoppingListCounts)
+      getShoppingList().then((shoppingList) => setShoppingList(shoppingList))
+      setShoppingListTotalCount(
+        Object.values(shoppingListCounts).reduce(
+          (acc, { count }) => acc + count,
+          0
+        )
+      )
+    })
   }, [])
 
   return (
@@ -97,7 +124,9 @@ export default function App () {
         clearList,
         removeProductFromList,
         shoppingList,
-        shoppingListItemCount
+        shoppingListCounts,
+        shoppingListTotalCount,
+        updateProductChecked
       }}
     >
       <NavigationContainer>
@@ -127,7 +156,7 @@ export default function App () {
                     size={size}
                   />
                 ),
-                tabBarBadge: shoppingListItemCount,
+                tabBarBadge: shoppingListTotalCount,
                 tabBarBadgeStyle: { backgroundColor: colors.RED }
               }}
             />

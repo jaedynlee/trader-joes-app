@@ -11,8 +11,8 @@ import Story from './story.js'
 import { LegalText } from '../common/typography'
 import Nutrition from './nutrition.js'
 import { getProductBySku } from '../../client/client'
-import { ShoppingListButton } from './shoppingListButton.js'
-import { getLocation } from '../../storage.js'
+import { ShoppingListButton } from './shoppingListButton'
+import { getLocation } from '../../storage/location'
 
 const StyledScrollView = styled.ScrollView`
   background-color: ${colors.WHITE};

@@ -7,7 +7,6 @@ import styled from 'styled-components/native'
 
 import { colors } from '../../style'
 import { ShoppingListContext } from '../../shoppingListContext'
-import { getShoppingListCount } from '../../util'
 
 const addRemoveButton = `
   padding: 16px;
@@ -52,11 +51,12 @@ const ButtonText = styled(BodyText)`
 `
 
 export const ShoppingListButton = ({ product }) => {
-  const { addProductToList, removeProductFromList, shoppingList } =
+  const { addProductToList, removeProductFromList, shoppingListCounts } =
     useContext(ShoppingListContext)
 
-  const listCount = getShoppingListCount(shoppingList, product)
-
+  const listCount = shoppingListCounts[product.sku]
+    ? shoppingListCounts[product.sku].count
+    : 0
   const button = listCount
     ? (
     <>

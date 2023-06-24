@@ -6,5 +6,7 @@ export const ShoppingListContext = React.createContext({
   listLength: 0,
   removeProductFromList: () => {},
   shoppingList: {},
-  shoppingListItemCount: 0
+  shoppingListCounts: {},
+  shoppingListTotalCount: 0,
+  updateProductChecked: () => {}
 })

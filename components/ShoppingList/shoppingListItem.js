@@ -4,14 +4,18 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { faSquare } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import React, { memo, useState } from 'react'
+import React, { useContext } from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
 
 import { colors } from '../../style'
 import { BodyText } from '../common/typography'
+import { ShoppingListContext } from '../../shoppingListContext'
 
-const ShoppingListItem = ({ item, sku, navigation }) => {
-  const [checked, setChecked] = useState(item.checked)
+export const ShoppingListItem = ({ item, sku, navigation }) => {
+  const { updateProductChecked, shoppingListCounts } =
+    useContext(ShoppingListContext)
+  const checked = shoppingListCounts[sku].checked
+  const count = shoppingListCounts[sku].count
 
   return (
     <View
@@ -30,7 +34,7 @@ const ShoppingListItem = ({ item, sku, navigation }) => {
         }}
       >
         <Pressable
-          onPress={() => setChecked(!checked)}
+          onPress={() => updateProductChecked(sku, !checked)}
           style={{ paddingVertical: 10, paddingLeft: 20, paddingRight: 10 }}
         >
           <FontAwesomeIcon
@@ -43,13 +47,13 @@ const ShoppingListItem = ({ item, sku, navigation }) => {
           style={{ ...styles.productName, ...(checked ? styles.checked : {}) }}
           numberOfLines={2}
         >
-          {item.count > 1 && `[${item.count}] `}
+          {count > 1 && `[${count}] `}
           {item.item_title}
         </BodyText>
       </View>
       <BodyText style={{ ...styles.price, ...(checked ? styles.checked : {}) }}>
         {Number(item.price)
-          ? `$${(parseFloat(item.price) * item.count).toFixed(2)}`
+          ? `$${(parseFloat(item.price) * count).toFixed(2)}`
           : ''}
         <Pressable
           style={{ paddingLeft: 5, marginBottom: -1 }}
@@ -76,8 +80,3 @@ const styles = StyleSheet.create({
     color: colors.DARK_GRAY
   }
 })
-
-export default memo(
-  ShoppingListItem,
-  (prev, next) => prev.item.count === next.item.count
-)

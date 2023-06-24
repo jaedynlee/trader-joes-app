@@ -14,7 +14,7 @@ import {
   SecondaryButton,
   SmallHeader
 } from '../common/typography'
-import ShoppingListItem from './shoppingListItem'
+import { ShoppingListItem } from './shoppingListItem'
 import { ShoppingListContext } from '../../shoppingListContext'
 import { getTotalPrice } from '../../util'
 import { CenteredView } from '../common/layout'
@@ -54,7 +54,12 @@ const ButtonsWrapper = styled.View`
   justify-content: space-between;
 `
 
-export const ShoppingListSection = ({ products, subsections, navigation }) => (
+const ShoppingListSection = ({
+  products,
+  subsections,
+  navigation,
+  shoppingListCounts
+}) => (
   <View>
     {products &&
       Object.entries(products).map(([sku, item]) => (
@@ -73,6 +78,7 @@ export const ShoppingListSection = ({ products, subsections, navigation }) => (
             products={s.products}
             subsections={s.subsections}
             navigation={navigation}
+            shoppingListCounts={shoppingListCounts}
           />
         </View>
       ))}
@@ -80,10 +86,14 @@ export const ShoppingListSection = ({ products, subsections, navigation }) => (
 )
 
 export const ShoppingList = ({ navigation }) => {
-  const { clearList, shoppingList, shoppingListItemCount } =
-    useContext(ShoppingListContext)
+  const {
+    clearList,
+    shoppingList,
+    shoppingListTotalCount,
+    shoppingListCounts
+  } = useContext(ShoppingListContext)
 
-  if (shoppingListItemCount === 0) {
+  if (!shoppingListTotalCount) {
     return (
       <CenteredView>
         <BodyText style={{ textAlign: 'center', padding: 20 }}>
@@ -105,7 +115,7 @@ export const ShoppingList = ({ navigation }) => {
   }
 
   const listSections = shoppingListToSections(shoppingList)
-  const totalPrice = getTotalPrice(shoppingList)
+  const totalPrice = getTotalPrice(shoppingList, shoppingListCounts)
 
   const onShare = async () => {
     try {
@@ -157,6 +167,7 @@ export const ShoppingList = ({ navigation }) => {
               products={s.products}
               subsections={s.subsections}
               navigation={navigation}
+              shoppingListCounts={shoppingListCounts}
             />
           </View>
         ))}

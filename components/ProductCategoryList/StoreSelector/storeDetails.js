@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import React from 'react'
 import styled from 'styled-components/native'
 
-import { setLocation as updateLocationInStorage } from '../../../storage'
+import { setLocation as updateLocationInStorage } from '../../../storage/location'
 import { colors } from '../../../style'
 import {
   BodyText,

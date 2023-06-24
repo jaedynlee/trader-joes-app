@@ -4,8 +4,8 @@ import { colors } from '../../style.js'
 import { BodyText } from '../common/typography.js'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+
 import { ShoppingListContext } from '../../shoppingListContext'
-import { getShoppingListCount } from '../../util.js'
 
 const styles = StyleSheet.create({
   item: {
@@ -50,10 +50,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const AddRemoveListButton = ({ item }) => {
-  const { addProductToList, removeProductFromList, shoppingList } =
+const AddRemoveListButton = ({ item, count }) => {
+  const { addProductToList, removeProductFromList } =
     useContext(ShoppingListContext)
-  const count = getShoppingListCount(shoppingList, item)
 
   return (
     <View
@@ -140,16 +139,13 @@ const Item = ({ item, count, navigation }) => {
           }
         ]}
       >
-        <AddRemoveListButton item={item} initialCount={count} />
+        <AddRemoveListButton item={item} count={count} />
         <View style={styles.imageWrapper}>
           <Image
             alt={item.item_title}
             style={styles.image}
             resizeMode="contain"
-            source={{
-              uri,
-              cache: 'force-cache'
-            }}
+            source={{ uri, cache: 'force-cache' }}
           />
         </View>
         <View style={styles.labelWrapper}>

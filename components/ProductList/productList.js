@@ -1,15 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import { View, FlatList, StatusBar, ActivityIndicator } from 'react-native'
-import { useIsFocused } from '@react-navigation/native'
 import styled from 'styled-components/native'
 
 import { getProducts } from '../../client/client'
 import { BodyText, PrimaryButton } from '../common/typography.js'
-import { getShoppingListCounts } from '../../storage.js'
 import Item from './productItem.js'
 import { Filters } from './Filters/filters.js'
 import { useProductFilters } from './hooks/useProductFilters.js'
 import { CenteredView } from '../common/layout.js'
+import { ShoppingListContext } from '../../shoppingListContext'
 
 const Container = styled.SafeAreaView`
   padding-top: ${StatusBar.currentHeight ?? 0}px;
@@ -24,13 +23,11 @@ const StyledActivityIndicator = styled(ActivityIndicator)`
 `
 
 const FilteredProductsList = ({ route, navigation }) => {
+  const { shoppingListCounts } = useContext(ShoppingListContext)
   const { searchTerm, categoryId, storeCode } = route.params
   const [loading, setLoading] = useState(false)
 
   const flatListRef = useRef()
-
-  const isFocused = useIsFocused()
-  const [shoppingListCounts, setShoppingListCounts] = useState({})
 
   const [shouldFetch, setShouldFetch] = useState(true)
   const [fetchedAllPages, setFetchedAllPages] = useState(false)
@@ -112,13 +109,6 @@ const FilteredProductsList = ({ route, navigation }) => {
     setProducts([...products, {}])
   }, [products])
 
-  // Refetch counts when coming back to the page
-  useEffect(() => {
-    getShoppingListCounts().then((shoppingListCounts) =>
-      setShoppingListCounts(shoppingListCounts)
-    )
-  }, [isFocused])
-
   const filterable =
     !!categoryFilter.items.length ||
     !!characteristicFilter.items.length ||
@@ -146,7 +136,11 @@ const FilteredProductsList = ({ route, navigation }) => {
           >
             <Item
               item={item}
-              count={shoppingListCounts[item.sku] ?? 0}
+              count={
+                shoppingListCounts[item.sku]
+                  ? shoppingListCounts[item.sku].count
+                  : 0
+              }
               navigation={navigation}
             />
           </View>
