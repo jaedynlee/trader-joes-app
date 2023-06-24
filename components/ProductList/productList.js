@@ -23,7 +23,7 @@ const StyledActivityIndicator = styled(ActivityIndicator)`
 `
 
 const FilteredProductsList = ({ route, navigation }) => {
-  const { shoppingListCounts } = useContext(ShoppingListContext)
+  const { shoppingList } = useContext(ShoppingListContext)
   const { searchTerm, categoryId, storeCode } = route.params
   const [loading, setLoading] = useState(false)
 
@@ -137,8 +137,8 @@ const FilteredProductsList = ({ route, navigation }) => {
             <Item
               item={item}
               count={
-                shoppingListCounts[item.sku]
-                  ? shoppingListCounts[item.sku].count
+                shoppingList && shoppingList[item.sku]
+                  ? shoppingList[item.sku].count
                   : 0
               }
               navigation={navigation}

@@ -51,8 +51,7 @@ const styles = StyleSheet.create({
 })
 
 const AddRemoveListButton = ({ item, count }) => {
-  const { addProductToList, removeProductFromList } =
-    useContext(ShoppingListContext)
+  const { updateShoppingListCount } = useContext(ShoppingListContext)
 
   return (
     <View
@@ -81,7 +80,7 @@ const AddRemoveListButton = ({ item, count }) => {
         >
           <Pressable
             style={{ padding: 10 }}
-            onPress={() => removeProductFromList(item)}
+            onPress={() => updateShoppingListCount(item, -1)}
           >
             <FontAwesomeIcon icon={faMinus} color={colors.WHITE} />
           </Pressable>
@@ -92,7 +91,7 @@ const AddRemoveListButton = ({ item, count }) => {
           </View>
           <Pressable
             style={{ padding: 10 }}
-            onPress={() => addProductToList(item)}
+            onPress={() => updateShoppingListCount(item, 1)}
           >
             <FontAwesomeIcon icon={faPlus} color={colors.WHITE} />
           </Pressable>
@@ -101,7 +100,7 @@ const AddRemoveListButton = ({ item, count }) => {
         : (
         <Pressable
           style={{ padding: 10 }}
-          onPress={() => addProductToList(item)}
+          onPress={() => updateShoppingListCount(item, 1)}
         >
           <FontAwesomeIcon icon={faPlus} color={colors.WHITE} />
         </Pressable>

@@ -1,6 +1,7 @@
 import {
   faArrowUpRightFromSquare,
-  faCheckSquare
+  faCheckSquare,
+  faTrash
 } from '@fortawesome/free-solid-svg-icons'
 import { faSquare } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -11,11 +12,10 @@ import { colors } from '../../style'
 import { BodyText } from '../common/typography'
 import { ShoppingListContext } from '../../shoppingListContext'
 
-export const ShoppingListItem = ({ item, sku, navigation }) => {
-  const { updateProductChecked, shoppingListCounts } =
+export const ShoppingListItem = ({ item, navigation }) => {
+  const { updateProductChecked, removeProductFromList } =
     useContext(ShoppingListContext)
-  const checked = shoppingListCounts[sku].checked
-  const count = shoppingListCounts[sku].count
+  const { checked, count, sku } = item
 
   return (
     <View
@@ -48,24 +48,38 @@ export const ShoppingListItem = ({ item, sku, navigation }) => {
           numberOfLines={2}
         >
           {count > 1 && `[${count}] `}
-          {item.item_title}
+          {item.name}
         </BodyText>
       </View>
       <BodyText style={{ ...styles.price, ...(checked ? styles.checked : {}) }}>
         {Number(item.price)
           ? `$${(parseFloat(item.price) * count).toFixed(2)}`
           : ''}
-        <Pressable
-          style={{ paddingLeft: 5, marginBottom: -1 }}
-          onPress={() =>
-            navigation.navigate('List Product Details', {
-              name: item.item_title,
-              sku
-            })
-          }
-        >
-          <FontAwesomeIcon icon={faArrowUpRightFromSquare} color={colors.RED} />
-        </Pressable>
+        {sku.startsWith('custom')
+          ? (
+          <Pressable
+            style={{ paddingLeft: 5, marginBottom: -1 }}
+            onPress={() => removeProductFromList(sku)}
+          >
+            <FontAwesomeIcon icon={faTrash} color={colors.RED} />
+          </Pressable>
+            )
+          : (
+          <Pressable
+            style={{ paddingLeft: 5, marginBottom: -1 }}
+            onPress={() =>
+              navigation.navigate('List Product Details', {
+                name: item.name,
+                sku
+              })
+            }
+          >
+            <FontAwesomeIcon
+              icon={faArrowUpRightFromSquare}
+              color={colors.RED}
+            />
+          </Pressable>
+            )}
       </BodyText>
     </View>
   )

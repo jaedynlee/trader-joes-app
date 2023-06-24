@@ -1,3 +1,4 @@
+import 'react-native-get-random-values'
 import { StatusBar } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
@@ -14,12 +15,11 @@ import { ShoppingList } from './components/ShoppingList/shoppingList'
 import { ShoppingListContext } from './shoppingListContext'
 
 import {
-  addProductToShoppingList,
   clearShoppingList,
   getShoppingList,
-  getShoppingListCounts,
   removeProductFromShoppingList,
-  updateShoppingListProductChecked
+  updateShoppingListProductChecked,
+  updateShoppingListCount as updateShoppingListCountStorage
 } from './storage/shoppingList'
 import { ProductCategoryList } from './components/ProductCategoryList/productCategoryList'
 
@@ -70,61 +70,53 @@ const ShoppingListStackNavigator = () => (
   </ProductStack.Navigator>
 )
 
+const getTotalCount = (shoppingList) =>
+  Object.values(shoppingList).reduce((acc, { count }) => acc + count, 0)
+
 export default function App () {
   const [shoppingList, setShoppingList] = useState({})
-  const [shoppingListCounts, setShoppingListCounts] = useState({})
   const [shoppingListTotalCount, setShoppingListTotalCount] = useState(0)
 
-  const addProductToList = (product) => {
-    addProductToShoppingList(product).then(({ counts, list }) => {
-      setShoppingListCounts(counts)
-      setShoppingList(list)
-      setShoppingListTotalCount(shoppingListTotalCount + 1)
-    })
+  const updateShoppingListCount = (product, delta) => {
+    updateShoppingListCountStorage(product, delta).then(
+      (updatedShoppingList) => {
+        setShoppingList(updatedShoppingList)
+        setShoppingListTotalCount(getTotalCount(updatedShoppingList))
+      }
+    )
   }
 
   const clearList = () => {
-    clearShoppingList().then(({ counts, list }) => {
+    clearShoppingList().then((updatedShoppingList) => {
       setShoppingListTotalCount(0)
-      setShoppingListCounts(counts)
-      setShoppingList(list)
+      setShoppingList(updatedShoppingList)
     })
   }
 
-  const removeProductFromList = (product) => {
-    removeProductFromShoppingList(product).then(({ counts, list }) => {
-      setShoppingListCounts(counts)
-      setShoppingList(list)
-      setShoppingListTotalCount(shoppingListTotalCount - 1)
+  const removeProductFromList = (sku) => {
+    removeProductFromShoppingList(sku).then((updatedShoppingList) => {
+      setShoppingList(updatedShoppingList)
+      setShoppingListTotalCount(getTotalCount(updatedShoppingList))
     })
   }
 
   const updateProductChecked = (sku, isChecked) =>
-    updateShoppingListProductChecked(sku, isChecked).then(
-      setShoppingListCounts
-    )
+    updateShoppingListProductChecked(sku, isChecked).then(setShoppingList)
 
   useEffect(() => {
-    getShoppingListCounts().then((shoppingListCounts) => {
-      setShoppingListCounts(shoppingListCounts)
-      getShoppingList().then((shoppingList) => setShoppingList(shoppingList))
-      setShoppingListTotalCount(
-        Object.values(shoppingListCounts).reduce(
-          (acc, { count }) => acc + count,
-          0
-        )
-      )
+    getShoppingList().then((shoppingList) => {
+      setShoppingList(shoppingList)
+      setShoppingListTotalCount(getTotalCount(shoppingList))
     })
   }, [])
 
   return (
     <ShoppingListContext.Provider
       value={{
-        addProductToList,
+        updateShoppingListCount,
         clearList,
         removeProductFromList,
         shoppingList,
-        shoppingListCounts,
         shoppingListTotalCount,
         updateProductChecked
       }}

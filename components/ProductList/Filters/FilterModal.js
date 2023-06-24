@@ -1,23 +1,7 @@
-import { Modal } from 'react-native'
 import React from 'react'
-import styled from 'styled-components/native'
 
-import { colors } from '../../../style'
-import { CenteredView } from '../../common/layout'
+import { Modal } from '../../common/Modal'
 import { DropDown } from './DropDown'
-import { PrimaryButton, Header } from '../../common/typography'
-
-const ModalView = styled.View`
-  height: 100%;
-  width: 100%;
-  background-color: ${colors.WHITE};
-  padding: 50px 20px;
-`
-
-const ButtonsWrapper = styled.View`
-  flex: 1;
-  justify-content: flex-end;
-`
 
 export const FilterModal = ({
   setModalVisible,
@@ -28,16 +12,12 @@ export const FilterModal = ({
 }) => {
   return (
     <Modal
-      animationType="slide"
-      transparent={true}
+      title="Filter results"
       visible={visible}
-      onRequestClose={() => {
-        setModalVisible(false)
-      }}
-    >
-      <CenteredView>
-        <ModalView>
-          <Header style={{ marginTop: 30 }}>Filter results</Header>
+      onRequestClose={() => setModalVisible(false)}
+      onSave={() => setModalVisible(false)}
+      content={
+        <>
           <DropDown
             label="Category"
             pickerProps={categoryPickerProps}
@@ -56,16 +36,8 @@ export const FilterModal = ({
             zIndex={1000}
             zIndexInverse={3000}
           />
-
-          <ButtonsWrapper>
-            <PrimaryButton
-              accessbilityLabel="Apply filters"
-              name="Apply filters"
-              onPress={() => setModalVisible(false)}
-            />
-          </ButtonsWrapper>
-        </ModalView>
-      </CenteredView>
-    </Modal>
+        </>
+      }
+    />
   )
 }

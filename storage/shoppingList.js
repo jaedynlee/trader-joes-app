@@ -5,14 +5,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 /**
  * @shoppingList = {
- *   categoryId: {
- *      products:{
- *        sku: {
- *          name,
- *          price,
- *          etc.
- *        }
- *     }
+ *   [sku]: {
+ *      price: 4.99,
+ *      hierarchy: [Food, Snacks]
+ *      count: 1,
+ *      checked: false,
  *   }
  * }
  */
@@ -25,129 +22,62 @@ export const getShoppingList = async () => {
   }
 }
 
-/**
- * @shoppingListCounts = {
- *   [sku]: {
- *      count: 1,
- *      checked: false,
- *   }
- * }
- */
-export const getShoppingListCounts = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem('@shoppingListCounts')
-    return jsonValue !== null ? JSON.parse(jsonValue) : {}
-  } catch (e) {
-    throw e
-  }
-}
-
 export const clearShoppingList = async () => {
   try {
     await AsyncStorage.setItem('@shoppingList', JSON.stringify({}))
-    await AsyncStorage.setItem('@shoppingListCounts', JSON.stringify({}))
-    return { counts: {}, list: {} }
+    return {}
   } catch (e) {
     throw e
   }
 }
 
-export const removeProductFromShoppingList = async (product) =>
-  await updateShoppingListCount(product, -1)
-
-export const addProductToShoppingList = async (product) =>
-  await updateShoppingListCount(product, 1)
+export const removeProductFromShoppingList = async (sku) => {
+  try {
+    const shoppingList = await getShoppingList()
+    delete shoppingList[sku]
+    await AsyncStorage.setItem('@shoppingList', JSON.stringify(shoppingList))
+    return shoppingList
+  } catch (e) {
+    throw e
+  }
+}
 
 export const updateShoppingListCount = async (product, delta) => {
   try {
-    const counts = await getShoppingListCounts()
-    const isAlreadyInList = Object.keys(counts).includes(product.sku)
-    const existingValue = isAlreadyInList
-      ? counts[product.sku]
-      : { checked: false, count: 0 }
-    const count = existingValue.count + delta
-    const newShoppingListCounts = {
-      ...counts,
-      [product.sku]: { ...existingValue, count }
-    }
-    await AsyncStorage.setItem(
-      '@shoppingListCounts',
-      JSON.stringify(newShoppingListCounts)
-    )
-
     const shoppingList = await getShoppingList()
-
-    if (isAlreadyInList && count !== 0) {
-      return { counts: newShoppingListCounts, list: shoppingList }
+    const isAlreadyInList = Object.keys(shoppingList).includes(product.sku)
+    const existingValue = isAlreadyInList
+      ? shoppingList[product.sku]
+      : {
+          checked: false,
+          count: 0,
+          hierarchy: product.category_hierarchy
+            .map(({ name }) => name)
+            .slice(1),
+          price: product.retail_price,
+          name: product.item_title
+        }
+    const count = existingValue.count + delta
+    const updatedShoppingList = { ...shoppingList }
+    if (count) {
+      updatedShoppingList[product.sku] = { ...existingValue, count }
+    } else {
+      delete updatedShoppingList[product.sku]
     }
-
-    const newShoppingList = addProductToShoppingListHelper(
-      product,
-      product.category_hierarchy.slice(
-        1,
-        Math.min(3, product.category_hierarchy.length)
-      ), // Cut off "Product" category
-      shoppingList,
-      count
-    )
     await AsyncStorage.setItem(
       '@shoppingList',
-      JSON.stringify(newShoppingList)
+      JSON.stringify(updatedShoppingList)
     )
-    return { counts: newShoppingListCounts, list: newShoppingList }
+    return updatedShoppingList
   } catch (e) {
     throw e
   }
-}
-
-const addProductToShoppingListHelper = (
-  product,
-  categoryHierarchy,
-  shoppingList,
-  count
-) => {
-  if (categoryHierarchy.length === 0) {
-    const products = shoppingList.products ?? {}
-    const productEntry = products[product.sku] ?? {
-      item_title: product.item_title,
-      price: product.retail_price
-    }
-
-    if (count === 0) {
-      delete shoppingList.products[product.sku]
-      if (Object.keys(shoppingList.products).length === 0) {
-        delete shoppingList.products
-      }
-      return shoppingList
-    }
-    return {
-      ...shoppingList,
-      products: {
-        ...products,
-        [product.sku]: productEntry
-      }
-    }
-  }
-
-  const category = categoryHierarchy.shift()
-  const sublist = addProductToShoppingListHelper(
-    product,
-    categoryHierarchy,
-    shoppingList[category.name] ?? {},
-    count
-  )
-  if (Object.keys(sublist).length === 0) {
-    delete shoppingList[category.name]
-  } else {
-    shoppingList[category.name] = sublist
-  }
-  return shoppingList
 }
 
 export const getShoppingListCount = async (sku) => {
   try {
-    const shoppingListCounts = await getShoppingListCounts()
-    return shoppingListCounts[sku].count
+    const shoppingList = await getShoppingList()
+    return shoppingList[sku].count
   } catch (e) {
     throw e
   }
@@ -161,19 +91,19 @@ export const getShoppingListCount = async (sku) => {
  */
 export const updateShoppingListProductChecked = async (sku, isChecked) => {
   try {
-    const shoppingListCounts = await getShoppingListCounts()
-    const newShoppingListCounts = {
-      ...shoppingListCounts,
+    const shoppingList = await getShoppingList()
+    const newShoppingList = {
+      ...shoppingList,
       [sku]: {
-        ...shoppingListCounts[sku],
+        ...shoppingList[sku],
         checked: isChecked
       }
     }
     await AsyncStorage.setItem(
-      '@shoppingListCounts',
-      JSON.stringify(newShoppingListCounts)
+      '@shoppingList',
+      JSON.stringify(newShoppingList)
     )
-    return newShoppingListCounts
+    return newShoppingList
   } catch (e) {
     throw e
   }

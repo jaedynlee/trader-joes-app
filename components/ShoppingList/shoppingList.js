@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   faArrowUpFromBracket,
+  faPlus,
   faTrashCan
 } from '@fortawesome/free-solid-svg-icons'
 import { ScrollView, Share, StatusBar, View } from 'react-native'
@@ -19,11 +20,19 @@ import { ShoppingListContext } from '../../shoppingListContext'
 import { getTotalPrice } from '../../util'
 import { CenteredView } from '../common/layout'
 import { getShareableListSections, shoppingListToSections } from './utils'
+import { AddCustomItemModal } from './AddCustomItemModal'
+
+const ADD_BUTTON_HEIGHT = 60
+const ADD_BUTTON_MARGIN = 12
 
 const Container = styled.SafeAreaView`
   flex: 1;
   padding-top: ${StatusBar.currentHeight ?? 0}px;
   background-color: ${colors.WHITE};
+`
+
+const AddButtonSpacer = styled.View`
+  height: ${ADD_BUTTON_HEIGHT + ADD_BUTTON_MARGIN}px;
 `
 
 const headerPadding = `
@@ -54,44 +63,37 @@ const ButtonsWrapper = styled.View`
   justify-content: space-between;
 `
 
-const ShoppingListSection = ({
-  products,
-  subsections,
-  navigation,
-  shoppingListCounts
-}) => (
+const ShoppingListSection = ({ section, navigation }) => (
   <View>
-    {products &&
-      Object.entries(products).map(([sku, item]) => (
-        <ShoppingListItem
-          key={sku}
-          sku={sku}
-          item={item}
-          navigation={navigation}
-        />
-      ))}
-    {subsections &&
-      subsections.map((s) => (
-        <View key={s.name}>
-          <SubHeader>{s.name}</SubHeader>
-          <ShoppingListSection
-            products={s.products}
-            subsections={s.subsections}
-            navigation={navigation}
-            shoppingListCounts={shoppingListCounts}
-          />
+    {Object.entries(section).map(([name, value]) => {
+      if (name.toLowerCase() === 'products') {
+        return value.map((p) => (
+          <ShoppingListItem key={p.sku} item={p} navigation={navigation} />
+        ))
+      }
+      return (
+        <View key={name}>
+          <SubHeader>{name}</SubHeader>
+          <ShoppingListSection section={value} navigation={navigation} />
         </View>
-      ))}
+      )
+    })}
   </View>
 )
 
 export const ShoppingList = ({ navigation }) => {
-  const {
-    clearList,
-    shoppingList,
-    shoppingListTotalCount,
-    shoppingListCounts
-  } = useContext(ShoppingListContext)
+  const { clearList, shoppingListTotalCount, shoppingList } =
+    useContext(ShoppingListContext)
+
+  const [modalVisible, setModalVisible] = useState(false)
+
+  const [listSections, setListSections] = useState({})
+  const [totalPrice, setTotalPrice] = useState(0)
+
+  useEffect(() => {
+    setListSections(shoppingListToSections(shoppingList))
+    setTotalPrice(getTotalPrice(shoppingList))
+  }, [shoppingList])
 
   if (!shoppingListTotalCount) {
     return (
@@ -113,9 +115,6 @@ export const ShoppingList = ({ navigation }) => {
       </CenteredView>
     )
   }
-
-  const listSections = shoppingListToSections(shoppingList)
-  const totalPrice = getTotalPrice(shoppingList, shoppingListCounts)
 
   const onShare = async () => {
     try {
@@ -139,6 +138,10 @@ export const ShoppingList = ({ navigation }) => {
 
   return (
     <Container>
+      <AddCustomItemModal
+        visible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
       <ScrollView>
         <ButtonsWrapper>
           <SecondaryButton
@@ -148,7 +151,7 @@ export const ShoppingList = ({ navigation }) => {
             onPress={clearList}
             style={{ flex: 1, margin: 10 }}
           />
-          <PrimaryButton
+          <SecondaryButton
             accessbilityLabel="Share list"
             icon={faArrowUpFromBracket}
             name="Share"
@@ -157,21 +160,38 @@ export const ShoppingList = ({ navigation }) => {
           />
         </ButtonsWrapper>
         <TotalPriceWrapper>
-          <Header>Total</Header>
+          <Header>Estimated Total</Header>
           <Header>${totalPrice.toFixed(2)}</Header>
         </TotalPriceWrapper>
-        {listSections.map((s) => (
-          <View key={s.name}>
-            <SectionHeader>{s.name}</SectionHeader>
+        {Object.entries(listSections).map(([name, s]) => (
+          <View key={name}>
+            {name.toLowerCase() !== 'products' &&
+              (s.products.length > 0 || Object.keys(s).length > 1) && (
+                <SectionHeader>{name}</SectionHeader>
+            )}
             <ShoppingListSection
-              products={s.products}
-              subsections={s.subsections}
+              section={s}
               navigation={navigation}
-              shoppingListCounts={shoppingListCounts}
+              shoppingList={shoppingList}
             />
           </View>
         ))}
+        <AddButtonSpacer />
       </ScrollView>
+      <PrimaryButton
+        name="New item"
+        accessbilityLabel="New item"
+        icon={faPlus}
+        onPress={() => setModalVisible(true)}
+        style={{
+          bottom: 0,
+          margin: ADD_BUTTON_MARGIN,
+          position: 'absolute',
+          right: 0,
+          paddingVertical: 14,
+          paddingHorizontal: 20
+        }}
+      />
     </Container>
   )
 }

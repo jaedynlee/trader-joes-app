@@ -51,11 +51,15 @@ const ButtonText = styled(BodyText)`
 `
 
 export const ShoppingListButton = ({ product }) => {
-  const { addProductToList, removeProductFromList, shoppingListCounts } =
+  const { updateShoppingListCount, shoppingList } =
     useContext(ShoppingListContext)
 
-  const listCount = shoppingListCounts[product.sku]
-    ? shoppingListCounts[product.sku].count
+  const addProductToList = (product) => updateShoppingListCount(product, 1)
+  const removeProductFromList = (product) =>
+    updateShoppingListCount(product, -1)
+
+  const listCount = shoppingList[product.sku]
+    ? shoppingList[product.sku].count
     : 0
   const button = listCount
     ? (
