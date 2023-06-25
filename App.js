@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import styled from 'styled-components/native'
+import { RootSiblingParent } from 'react-native-root-siblings'
 
 import { colors } from './style'
 import ProductDetails from './components/ProductDetails/productDetails.js'
@@ -121,40 +122,46 @@ export default function App () {
         updateProductChecked
       }}
     >
-      <NavigationContainer>
-        <StyledSafeAreaView>
-          <StatusBar barStyle="dark-content" />
-          <Tab.Navigator>
-            <Tab.Screen
-              name="Products"
-              component={ProductStackNavigator}
-              options={{
-                headerShown: false,
-                tabBarIcon: ({ color, size }) => (
-                  <FontAwesomeIcon icon={faCarrot} color={color} size={size} />
-                )
-              }}
-            />
-            <Tab.Screen
-              name="Shopping List"
-              component={ShoppingListStackNavigator}
-              options={{
-                headerShown: false,
-                unmountOnBlur: true,
-                tabBarIcon: ({ color, size }) => (
-                  <FontAwesomeIcon
-                    icon={faListCheck}
-                    color={color}
-                    size={size}
-                  />
-                ),
-                tabBarBadge: shoppingListTotalCount,
-                tabBarBadgeStyle: { backgroundColor: colors.RED }
-              }}
-            />
-          </Tab.Navigator>
-        </StyledSafeAreaView>
-      </NavigationContainer>
+      <RootSiblingParent>
+        <NavigationContainer>
+          <StyledSafeAreaView>
+            <StatusBar barStyle="dark-content" />
+            <Tab.Navigator>
+              <Tab.Screen
+                name="Products"
+                component={ProductStackNavigator}
+                options={{
+                  headerShown: false,
+                  tabBarIcon: ({ color, size }) => (
+                    <FontAwesomeIcon
+                      icon={faCarrot}
+                      color={color}
+                      size={size}
+                    />
+                  )
+                }}
+              />
+              <Tab.Screen
+                name="Shopping List"
+                component={ShoppingListStackNavigator}
+                options={{
+                  headerShown: false,
+                  unmountOnBlur: true,
+                  tabBarIcon: ({ color, size }) => (
+                    <FontAwesomeIcon
+                      icon={faListCheck}
+                      color={color}
+                      size={size}
+                    />
+                  ),
+                  tabBarBadge: shoppingListTotalCount,
+                  tabBarBadgeStyle: { backgroundColor: colors.RED }
+                }}
+              />
+            </Tab.Navigator>
+          </StyledSafeAreaView>
+        </NavigationContainer>
+      </RootSiblingParent>
     </ShoppingListContext.Provider>
   )
 }

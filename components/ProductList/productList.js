@@ -3,12 +3,17 @@ import { View, FlatList, StatusBar, ActivityIndicator } from 'react-native'
 import styled from 'styled-components/native'
 
 import { getProducts } from '../../client/client'
-import { BodyText, PrimaryButton } from '../common/typography.js'
+import {
+  BodyText,
+  PrimaryButton,
+  SecondaryButton
+} from '../common/typography.js'
 import Item from './productItem.js'
 import { Filters } from './Filters/filters.js'
 import { useProductFilters } from './hooks/useProductFilters.js'
 import { CenteredView } from '../common/layout.js'
 import { ShoppingListContext } from '../../shoppingListContext'
+import { AddCustomItemModal } from '../common/AddCustomItemModal'
 
 const Container = styled.SafeAreaView`
   padding-top: ${StatusBar.currentHeight ?? 0}px;
@@ -26,6 +31,8 @@ const FilteredProductsList = ({ route, navigation }) => {
   const { shoppingList } = useContext(ShoppingListContext)
   const { searchTerm, categoryId, storeCode } = route.params
   const [loading, setLoading] = useState(false)
+  const [isAddCustomItemModalVisible, setIsAddCustomItemModalVisible] =
+    useState(false)
 
   const flatListRef = useRef()
 
@@ -116,6 +123,11 @@ const FilteredProductsList = ({ route, navigation }) => {
 
   return (
     <Container>
+      <AddCustomItemModal
+        visible={isAddCustomItemModalVisible}
+        setModalVisible={setIsAddCustomItemModalVisible}
+        initialItemName={searchTerm}
+      />
       {filterable && (
         <Filters
           categoryPickerProps={categoryFilter}
@@ -136,11 +148,7 @@ const FilteredProductsList = ({ route, navigation }) => {
           >
             <Item
               item={item}
-              count={
-                shoppingList && shoppingList[item.sku]
-                  ? shoppingList[item.sku].count
-                  : 0
-              }
+              count={shoppingList[item.sku] ? shoppingList[item.sku].count : 0}
               navigation={navigation}
             />
           </View>
@@ -158,8 +166,19 @@ const FilteredProductsList = ({ route, navigation }) => {
                 )
               : (
               <>
-                <BodyText>{`No results found for "${searchTerm}". Please try a different search term!`}</BodyText>
+                <BodyText>{`No results found for "${searchTerm}".`}</BodyText>
+
+                <BodyText style={{ paddingTop: 10 }}>
+                  Please try a different search term or add this item to your
+                  shopping list manually.
+                </BodyText>
                 <PrimaryButton
+                  accessibilityLabel="Add to list"
+                  name="Add to list"
+                  onPress={() => setIsAddCustomItemModalVisible(true)}
+                  style={{ marginTop: 20 }}
+                />
+                <SecondaryButton
                   accessibilityLabel="Back to all products"
                   style={{ marginTop: 20 }}
                   name="Back to all products"

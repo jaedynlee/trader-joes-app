@@ -20,7 +20,7 @@ import { ShoppingListContext } from '../../shoppingListContext'
 import { getTotalPrice } from '../../util'
 import { CenteredView } from '../common/layout'
 import { getShareableListSections, shoppingListToSections } from './utils'
-import { AddCustomItemModal } from './AddCustomItemModal'
+import { AddCustomItemModal } from '../common/AddCustomItemModal'
 
 const ADD_BUTTON_HEIGHT = 60
 const ADD_BUTTON_MARGIN = 12
