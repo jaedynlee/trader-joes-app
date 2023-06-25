@@ -74,15 +74,6 @@ export const updateShoppingListCount = async (product, delta) => {
   }
 }
 
-export const getShoppingListCount = async (sku) => {
-  try {
-    const shoppingList = await getShoppingList()
-    return shoppingList[sku].count
-  } catch (e) {
-    throw e
-  }
-}
-
 /**
  * Updates whether a product is checked or not in the shopping list.
  * @param {string} sku: The SKU of the product to update
