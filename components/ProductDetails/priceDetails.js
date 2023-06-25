@@ -35,10 +35,7 @@ const PriceDetails = ({ product }) => {
         ? (
         <Amount>
           ${product.retail_price}
-          <PerUnit>
-            {' '}
-            {amount === 'each' ? amount : `/ ${amount}`}
-          </PerUnit>
+          <PerUnit> {amount === 'each' ? amount : `/ ${amount}`}</PerUnit>
         </Amount>
           )
         : (
