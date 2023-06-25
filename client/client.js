@@ -118,6 +118,47 @@ export const getProductCategories = () =>
     })
   }).then((response) => response.json())
 
+export const getAllProducts = async (storeCode) => {
+  const variables = { storeCode }
+  const query = `
+  query SearchProducts(
+    $storeCode: String,
+  ) {\n
+      products(\n
+        filter: {
+          store_code: {eq: $storeCode},
+          published: {eq: "1"},
+          availability: {match: "1"},
+          category_id: {eq: "2"},
+        }\n
+        currentPage: 1\n
+        pageSize: 10000\n
+      )
+      {\n
+        items {\n
+          sku\n
+          primary_image\n
+        }\n
+      }\n
+    }\n`
+
+  return fetch('https://www.traderjoes.com/api/graphql', {
+    method: 'POST',
+    headers: {
+      'User-Agent':
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0',
+      Accept: 'application/json',
+      'Accept-Language': 'en-US,en;q=0.5',
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      operationName: 'SearchProducts',
+      variables,
+      query
+    })
+  }).then((response) => response.json())
+}
 export const getProducts = async (
   storeCode,
   categoryId,

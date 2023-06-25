@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import styled from 'styled-components/native'
 import { RootSiblingParent } from 'react-native-root-siblings'
+import { Image } from 'expo-image'
 
 import { colors } from './style'
 import ProductDetails from './components/ProductDetails/productDetails.js'
@@ -14,6 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCarrot, faListCheck } from '@fortawesome/free-solid-svg-icons'
 import { ShoppingList } from './components/ShoppingList/shoppingList'
 import { ShoppingListContext } from './shoppingListContext'
+import { getAllProducts } from './client/client'
 
 import {
   clearShoppingList,
@@ -23,6 +25,7 @@ import {
   updateShoppingListCount as updateShoppingListCountStorage
 } from './storage/shoppingList'
 import { ProductCategoryList } from './components/ProductCategoryList/productCategoryList'
+import { getLocation } from './storage/location'
 
 const StyledSafeAreaView = styled.SafeAreaView`
   background-color: ${colors.WHITE};
@@ -108,6 +111,14 @@ export default function App () {
     getShoppingList().then((shoppingList) => {
       setShoppingList(shoppingList)
       setShoppingListTotalCount(getTotalCount(shoppingList))
+    })
+    // Preload product images
+    getLocation().then(({ clientkey }) => {
+      getAllProducts(clientkey).then(({ data: { products } }) => {
+        const items = products.items ?? []
+        const images = items.map(({ primary_image: img }) => img)
+        Image.prefetch(images)
+      })
     })
   }, [])
 

@@ -1,11 +1,13 @@
 import React, { memo, useContext } from 'react'
-import { StyleSheet, View, Image, Pressable } from 'react-native'
+import { StyleSheet, View, Pressable } from 'react-native'
 import { colors } from '../../style.js'
 import { BodyText } from '../common/typography.js'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { Image } from 'expo-image'
 
 import { ShoppingListContext } from '../../shoppingListContext'
+import { BLUR_HASH } from '../common/images.js/constants.js'
 
 const styles = StyleSheet.create({
   item: {
@@ -142,9 +144,10 @@ const Item = ({ item, count, navigation }) => {
         <View style={styles.imageWrapper}>
           <Image
             alt={item.item_title}
+            placeholder={BLUR_HASH}
+            contentFit="contain"
+            source={uri}
             style={styles.image}
-            resizeMode="contain"
-            source={{ uri, cache: 'force-cache' }}
           />
         </View>
         <View style={styles.labelWrapper}>
